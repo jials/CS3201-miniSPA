@@ -66,7 +66,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\TestSimpleParser.cpp" />
+    <ClCompile Include="source\TestSimpleValidator.cpp" />
     <ClCompile Include="source\UnitTest.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\TestSimpleParser.h" />
+    <ClInclude Include="source\TestSimpleValidator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

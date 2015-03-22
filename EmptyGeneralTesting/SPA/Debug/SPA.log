@@ -1,0 +1,29 @@
+﻿Build started 22/3/2015 2:49:25 PM.
+     1>Project "C:\Users\SiongLeng\Desktop\GitCS3201\CS3201-miniSPA\EmptyGeneralTesting\SPA\SPA.vcxproj" on node 2 (build target(s)).
+     1>PrepareForBuild:
+         Creating directory "C:\Users\SiongLeng\Desktop\GitCS3201\CS3201-miniSPA\EmptyGeneralTesting\Debug\".
+       InitializeBuildStatus:
+         Creating "Debug\SPA.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\source\DesignExtractor.cpp ..\source\SimpleParser.cpp ..\source\PKB.cpp ..\source\SimpleValidator.cpp ..\source\TNode.cpp
+         TNode.cpp
+         SimpleValidator.cpp
+         PKB.cpp
+         SimpleParser.cpp
+         DesignExtractor.cpp
+         Generating Code...
+       Lib:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:"C:\Users\SiongLeng\Desktop\GitCS3201\CS3201-miniSPA\EmptyGeneralTesting\Debug\SPA.lib" /NOLOGO Debug\DesignExtractor.obj
+         Debug\SimpleParser.obj
+         Debug\PKB.obj
+         Debug\SimpleValidator.obj
+         Debug\TNode.obj
+         SPA.vcxproj -> C:\Users\SiongLeng\Desktop\GitCS3201\CS3201-miniSPA\EmptyGeneralTesting\Debug\SPA.lib
+       FinalizeBuildStatus:
+         Deleting file "Debug\SPA.unsuccessfulbuild".
+         Touching "Debug\SPA.lastbuildstate".
+     1>Done Building Project "C:\Users\SiongLeng\Desktop\GitCS3201\CS3201-miniSPA\EmptyGeneralTesting\SPA\SPA.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.65
