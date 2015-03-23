@@ -1,7 +1,7 @@
-#include "PQLPreProcessor.h"
-#include "QueryTreeRoot.h"
 #include <vector>
 #include <string>
+#include "PQLPreProcessor.h"
+#include "QueryTreeRoot.h"
 using namespace std;
 
 	PQLPreProcessor::PQLPreProcessor(){

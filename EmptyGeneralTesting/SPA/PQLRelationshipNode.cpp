@@ -7,14 +7,14 @@ PQLRelationshipNode::PQLRelationshipNode(string name) : QueryTreeNode(name){
 	_next = NULL;
 }
 
-		vector<PQLAttributeNode*> getChildren(){
-			return children;
-		}
+vector<PQLAttributeNode*> PQLRelationshipNode::getChildren(){
+		return children;
+}
 
-		PQLRelationshipNode* getNext(){
-			return _next;
-		}
+PQLRelationshipNode* PQLRelationshipNode::getNext(){
+	return _next;
+}
 
 
-		vector<PQLAttributeNode*> children;
-		PQLRelationshipNode* _next;
+vector<PQLAttributeNode*> children;
+PQLRelationshipNode* _next;
