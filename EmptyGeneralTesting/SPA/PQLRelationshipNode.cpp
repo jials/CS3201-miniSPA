@@ -7,8 +7,8 @@ public: PQLRelationshipNode(string name) : QueryTreeNode(name){
 			next = NULL;
 		}
 
-		vector<PQLAttributeNode*> getChild(){
-			return child;
+		vector<PQLAttributeNode*> getChildren(){
+			return children;
 		}
 
 		PQLRelationshipNode* getNext(){
@@ -16,6 +16,6 @@ public: PQLRelationshipNode(string name) : QueryTreeNode(name){
 		}
 
 private:
-		vector<PQLAttributeNode*> child;
+		vector<PQLAttributeNode*> children;
 		PQLRelationshipNode* next;
 };

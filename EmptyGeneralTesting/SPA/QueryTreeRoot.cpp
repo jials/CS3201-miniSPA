@@ -72,4 +72,4 @@ private:
 	PQLSpecialNode* with;
 	PQLSpecialNode* pattern;
 	vector<vector<string>> symbolTable;
-}
+};
