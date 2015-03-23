@@ -1,10 +1,19 @@
-#include "CFHnode.h"
+#pragma once
+
+#include<stdio.h>
+#include <string>
+#include <vector>
+
+#include "CFGNode.h"
+
+using namespace std;
+
 class CFG{
 public:
 
 private:
-	std::vector<CFGnode> statmentNodeList;
-	std::vector<CFGnode> dummyNodeList;
-	CFGnode rootNode;
+	std::vector<CFGNode> statmentNodeList;
+	std::vector<CFGNode> dummyNodeList;
+	CFGNode rootNode;
 
 };

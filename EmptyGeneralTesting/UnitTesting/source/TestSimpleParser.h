@@ -9,6 +9,7 @@ class TestSimpleParser : public CppUnit::TestFixture
 {
     CPPUNIT_TEST_SUITE(TestSimpleParser);
     CPPUNIT_TEST(testParse);
+	CPPUNIT_TEST(testAppendWhiteSpace);
     CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -17,6 +18,7 @@ public:
 
 protected:
     void testParse(void);
+	void testAppendWhiteSpace(void);
 
 private:
 
