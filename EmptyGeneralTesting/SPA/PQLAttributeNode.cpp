@@ -1,7 +1,5 @@
-#include "QueryTreeNode.h"
+#include "PQLAttributeNode.h"
 
-class PQLAttributeNode: public QueryTreeNode {
+PQLAttributeNode::PQLAttributeNode(string name) : QueryTreeNode(name){
 
-public: PQLAttributeNode(string name) : QueryTreeNode(name){
-		}
-};
+}

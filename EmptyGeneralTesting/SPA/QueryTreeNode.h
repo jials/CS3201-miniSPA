@@ -1,5 +1,6 @@
+#ifndef QueryTreeNode_H
+#define QueryTreeNode_H 
 #include<string>
-#define QUERYTREENODE_H
 using namespace std;
 
 class QueryTreeNode{
@@ -8,12 +9,9 @@ public:
 	QueryTreeNode(string name);
 	string getName();
 	QueryTreeNode* getNext();
-private:
+protected:
 	string _name;
 	QueryTreeNode* _next;
 };
 
-class PQLRelationshipNode: public QueryTreeNode {};
-class PQLAttributeNode: public QueryTreeNode {};
-class PQLSpecialNode : QueryTreeNode{};
-class QueryTreeRoot{};
+#endif

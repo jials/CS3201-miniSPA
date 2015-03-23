@@ -1,17 +1,16 @@
 #include "PQLPreProcessor.h"
-#include "QueryTreeNode.h"
+#include "QueryTreeRoot.h"
 #include <vector>
+#include <string>
+using namespace std;
 
-class PQLPreProcessor{
-public:
-	PQLPreProcessor(){
+	PQLPreProcessor::PQLPreProcessor(){
 	}
 
-	QueryTreeRoot parse(vector<string> strs,string name){
+	QueryTreeRoot PQLPreProcessor::parse(vector<string> strs, string name){
 		QueryTreeRoot result(name);
 		
 		
 		
 		return result;
 	}
-};
