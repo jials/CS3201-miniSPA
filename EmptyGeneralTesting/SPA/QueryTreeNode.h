@@ -16,3 +16,4 @@ private:
 class PQLRelationshipNode: public QueryTreeNode {};
 class PQLAttributeNode: public QueryTreeNode {};
 class PQLSpecialNode : QueryTreeNode{};
+class QueryTreeRoot{};

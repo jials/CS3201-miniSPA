@@ -1,5 +1,6 @@
 #include "QueryTreeNode.h"
 #include <string>
+#include <vector>
 using namespace std;
 
 class QueryTreeRoot{
@@ -56,10 +57,19 @@ public:
 		pattern = node;
 	}
 
+	vector<vector<string>> getSymbolTable(){
+		return symbolTable;
+	}
+
+	void insertToSymbol(vector<string> symbol){
+		symbolTable.push_back(symbol);
+	}
+
 private:
 	string _name;
 	PQLSpecialNode* result;
 	PQLSpecialNode* suchThat;
 	PQLSpecialNode* with;
 	PQLSpecialNode* pattern;
+	vector<vector<string>> symbolTable;
 }

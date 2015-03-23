@@ -27,10 +27,29 @@
     <ClCompile Include="..\source\TNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Follows.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Parent.cpp">
+=======
+    <ClCompile Include="PQLAttributeNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PQLRelationshipNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PQLSpecialNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QueryTreeNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QueryTreeRoot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PQLPreProcessor.cpp">
+>>>>>>> Kexin-QueryPreprocessor
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,10 +60,17 @@
     <ClInclude Include="..\source\TNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Follows.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Parent.h">
+=======
+    <ClInclude Include="QueryTreeNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PQLPreProcessor.h">
+>>>>>>> Kexin-QueryPreprocessor
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
