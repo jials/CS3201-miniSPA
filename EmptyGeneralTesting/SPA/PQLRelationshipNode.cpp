@@ -1,21 +1,20 @@
-#include "QueryTreeNode.h"
+#include "PQLRelationshipNode.h"
 #include <vector>
+using namespace std;
 
-class PQLRelationshipNode: public QueryTreeNode {
 
-public: PQLRelationshipNode(string name) : QueryTreeNode(name){
-			next = NULL;
-		}
+PQLRelationshipNode::PQLRelationshipNode(string name) : QueryTreeNode(name){
+	_next = NULL;
+}
 
-		vector<PQLAttributeNode*> getChild(){
-			return child;
-		}
+vector<PQLAttributeNode*> PQLRelationshipNode::getChildren(){
+		return children;
+}
 
-		PQLRelationshipNode* getNext(){
-			return next;
-		}
+PQLRelationshipNode* PQLRelationshipNode::getNext(){
+	return _next;
+}
 
-private:
-		vector<PQLAttributeNode*> child;
-		PQLRelationshipNode* next;
-};
+
+vector<PQLAttributeNode*> children;
+PQLRelationshipNode* _next;

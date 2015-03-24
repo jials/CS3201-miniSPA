@@ -1,19 +1,16 @@
-#include "QueryTreeNode.h"
+#include "QueryTreeRoot.h"
 #include <string>
 #include <vector>
 using namespace std;
 
-class QueryTreeRoot{
-public:
-
-	QueryTreeRoot(){
+	QueryTreeRoot::QueryTreeRoot(){
 		result=NULL;
 		suchThat=NULL; 
 		with=NULL;
 		pattern=NULL;
 	}
 
-	QueryTreeRoot(string name)  {
+	QueryTreeRoot::QueryTreeRoot(string name)  {
 		_name = name;
 		result=NULL;
 		suchThat=NULL; 
@@ -21,55 +18,53 @@ public:
 		pattern=NULL;
 	}
 
-	string getName(){
+	string QueryTreeRoot::getName(){
 		return _name;
 	}
 
-	PQLSpecialNode* getResult(){
+	PQLSpecialNode* QueryTreeRoot::getResult(){
 		return result;
 	}
 
-	PQLSpecialNode* getSuchThat(){
+	PQLSpecialNode* QueryTreeRoot::getSuchThat(){
 		return suchThat;
 	}
 
-	PQLSpecialNode* getWith(){
+	PQLSpecialNode* QueryTreeRoot::getWith(){
 		return with;
 	}
 
-	PQLSpecialNode* getPatten(){
+	PQLSpecialNode* QueryTreeRoot::getPatten(){
 		return pattern;
 	}
 
-	void setResult(PQLSpecialNode* node){
+	void QueryTreeRoot::setResult(PQLSpecialNode* node){
 		result = node;
 	}
 
-	void setWith(PQLSpecialNode* node){
+	void QueryTreeRoot::setWith(PQLSpecialNode* node){
 		with = node;
 	}
 
-	void setSuchThat(PQLSpecialNode* node){
+	void QueryTreeRoot::setSuchThat(PQLSpecialNode* node){
 		suchThat = node;
 	}
 
-	void setPattern(PQLSpecialNode* node){
+	void QueryTreeRoot::setPattern(PQLSpecialNode* node){
 		pattern = node;
 	}
 
-	vector<vector<string>> getSymbolTable(){
+	vector<vector<string>> QueryTreeRoot::getSymbolTable(){
 		return symbolTable;
 	}
 
-	void insertToSymbol(vector<string> symbol){
+	void QueryTreeRoot::insertToSymbol(vector<string> symbol){
 		symbolTable.push_back(symbol);
 	}
 
-private:
 	string _name;
 	PQLSpecialNode* result;
 	PQLSpecialNode* suchThat;
 	PQLSpecialNode* with;
 	PQLSpecialNode* pattern;
 	vector<vector<string>> symbolTable;
-}
