@@ -1,14 +1,11 @@
-#include "QueryTreeNode.h"
+#include "PQLSpecialNode.h"
 
-class PQLSpecialNode: public QueryTreeNode {
 
-public: PQLSpecialNode(string name) : QueryTreeNode(name){
-		}
+PQLSpecialNode::PQLSpecialNode(string name) : QueryTreeNode(name){
+}
 
-		PQLRelationshipNode* getChild(){
-			return child;
-		}
+PQLRelationshipNode* PQLSpecialNode::getChild(){
+	return child;
+}
 
-private:
-		PQLRelationshipNode* child;
-};
+PQLRelationshipNode* child;
