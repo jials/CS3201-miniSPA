@@ -9,6 +9,10 @@ public:
 	}
 
 	void getResult(QueryTreeRoot* root){
+		root.getSuchThat();
+		root.getWith();
+		root.getPattern();
 		//
+		root.setResult(PQLSpecialNode* res);
 	}
 };
