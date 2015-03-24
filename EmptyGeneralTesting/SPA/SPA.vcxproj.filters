@@ -73,5 +73,17 @@
 >>>>>>> Kexin-QueryPreprocessor
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PQLAttributeNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PQLRelationshipNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PQLSpecialNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QueryTreeRoot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

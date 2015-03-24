@@ -15,28 +15,22 @@
     <ClCompile Include="..\source\Parser.cpp" />
     <ClCompile Include="..\source\PKB.cpp" />
     <ClCompile Include="..\source\TNode.cpp" />
-<<<<<<< HEAD
-    <ClCompile Include="Follows.cpp" />
-    <ClCompile Include="Parent.cpp" />
-=======
     <ClCompile Include="PQLAttributeNode.cpp" />
     <ClCompile Include="PQLPreProcessor.cpp" />
     <ClCompile Include="PQLRelationshipNode.cpp" />
     <ClCompile Include="PQLSpecialNode.cpp" />
     <ClCompile Include="QueryTreeNode.cpp" />
     <ClCompile Include="QueryTreeRoot.cpp" />
->>>>>>> Kexin-QueryPreprocessor
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\PKB.h" />
     <ClInclude Include="..\source\TNode.h" />
-<<<<<<< HEAD
-    <ClInclude Include="Follows.h" />
-    <ClInclude Include="Parent.h" />
-=======
+    <ClInclude Include="PQLAttributeNode.h" />
     <ClInclude Include="PQLPreProcessor.h" />
+    <ClInclude Include="PQLRelationshipNode.h" />
+    <ClInclude Include="PQLSpecialNode.h" />
     <ClInclude Include="QueryTreeNode.h" />
->>>>>>> Kexin-QueryPreprocessor
+    <ClInclude Include="QueryTreeRoot.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}</ProjectGuid>
