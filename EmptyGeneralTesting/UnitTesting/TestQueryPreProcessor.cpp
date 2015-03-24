@@ -24,9 +24,8 @@ void QueryPreProcessorTest::testParse() {
 	vector<string> strs;
 	PQLPreProcessor processor;
 	QueryTreeRoot res = processor.parse(strs,"");
-	int num;
 	string str;
 
-	CPPUNIT_ASSERT_EQUAL("1",str);
 
+	CPPUNIT_ASSERT_EQUAL(str.compare("1"),0);
 }
