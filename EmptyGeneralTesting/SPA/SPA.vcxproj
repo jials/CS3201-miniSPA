@@ -25,8 +25,12 @@
   <ItemGroup>
     <ClInclude Include="..\source\PKB.h" />
     <ClInclude Include="..\source\TNode.h" />
+    <ClInclude Include="PQLAttributeNode.h" />
     <ClInclude Include="PQLPreProcessor.h" />
+    <ClInclude Include="PQLRelationshipNode.h" />
+    <ClInclude Include="PQLSpecialNode.h" />
     <ClInclude Include="QueryTreeNode.h" />
+    <ClInclude Include="QueryTreeRoot.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}</ProjectGuid>
