@@ -10,7 +10,7 @@ using namespace std;
 
 class QueryTreeRoot{
 public:
-
+	string getSymbol(string str);
 	QueryTreeRoot();
 	QueryTreeRoot(string name);
 	string getName();

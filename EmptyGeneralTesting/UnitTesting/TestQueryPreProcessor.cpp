@@ -22,11 +22,12 @@ void QueryPreProcessorTest::testConstructor() {
 // method to test the assigning and retrieval of grades
 void QueryPreProcessorTest::testParse() {
 	vector<string> strs;
+	strs.push_back("stmt s;");
+	strs.push_back("Select a pattern a(_,_\"i\"_)");
+
 	PQLPreProcessor processor;
 	QueryTreeRoot res = processor.parse(strs,"");
-	int num;
-	string str;
 
-	CPPUNIT_ASSERT_EQUAL("1",str);
-
+	string expectedAns = "stmt";
+	CPPUNIT_ASSERT_EQUAL(0,expectedAns.compare(res.getSymbol("s")));
 }
