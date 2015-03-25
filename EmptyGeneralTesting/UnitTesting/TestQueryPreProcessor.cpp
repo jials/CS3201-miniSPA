@@ -27,14 +27,7 @@ void QueryPreProcessorTest::testParse() {
 
 	PQLPreProcessor processor;
 	QueryTreeRoot res = processor.parse(strs,"");
-<<<<<<< HEAD
 
 	string expectedAns = "stmt";
 	CPPUNIT_ASSERT_EQUAL(0,expectedAns.compare(res.getSymbol("s")));
-=======
-	string str;
-
-
-	CPPUNIT_ASSERT_EQUAL(str.compare("1"),0);
->>>>>>> Kexin-QueryPreprocessor
 }
