@@ -27,6 +27,8 @@ void QueryPreProcessorTest::testParse() {
 
 	PQLPreProcessor processor;
 	QueryTreeRoot res = processor.parse(strs,"");
+	cout<<"printing"<<endl;
+	cout<<(res.getSymbol("s"));
 
 	string expectedAns = "stmt";
 	CPPUNIT_ASSERT_EQUAL(0,expectedAns.compare(res.getSymbol("s")));
