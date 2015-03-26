@@ -1,6 +1,7 @@
 #include "QueryTreeRoot.h"
 #include <string>
 #include <vector>
+#include <iostream>
 using namespace std;
 
 	QueryTreeRoot::QueryTreeRoot(){
@@ -11,11 +12,18 @@ using namespace std;
 	}
 
 	string QueryTreeRoot::getSymbol(string str){
+		cout << str << endl;
 		for(unsigned int i=0;i<symbolTable.size();i++){
+			cout << ":" << symbolTable[i][0] << "   " << symbolTable[i][1];
+			
 			if (symbolTable[i][1].compare(str)==0)
 				return symbolTable[i][0];
 		}
 		return "";
+	}
+
+	void QueryTreeRoot::insertSymbol(vector<string> toAdd){
+		symbolTable.push_back(toAdd);
 	}
 
 	QueryTreeRoot::QueryTreeRoot(string name)  {
