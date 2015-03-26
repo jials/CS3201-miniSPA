@@ -11,7 +11,7 @@ using namespace std;
 	}
 
 	string QueryTreeRoot::getSymbol(string str){
-		for(int i=0;i<symbolTable.size();i++){
+		for(unsigned int i=0;i<symbolTable.size();i++){
 			if (symbolTable[i][1].compare(str)==0)
 				return symbolTable[i][0];
 		}
@@ -60,6 +60,10 @@ using namespace std;
 
 	void QueryTreeRoot::setPattern(PQLSpecialNode* node){
 		pattern = node;
+	}
+
+	void QueryTreeRoot::setName(string name){
+		_name = name;
 	}
 
 	vector<vector<string>> QueryTreeRoot::getSymbolTable(){

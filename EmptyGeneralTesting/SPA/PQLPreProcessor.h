@@ -7,7 +7,9 @@
 using namespace std;
 
 class PQLPreProcessor{
+
 public:
+	int findKeyword(string str);
 	PQLPreProcessor();
 	QueryTreeRoot parse(vector<string> strs, string name);
 };
