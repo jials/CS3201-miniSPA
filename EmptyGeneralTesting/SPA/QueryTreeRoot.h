@@ -34,6 +34,7 @@ public:
 	vector<vector<string>> getSymbolTable();
 
 	void insertToSymbol(vector<string> symbol);
+	void setName(string name);
 
 private:
 	string _name;
