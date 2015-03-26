@@ -10,6 +10,14 @@ using namespace std;
 		pattern=NULL;
 	}
 
+	string QueryTreeRoot::getSymbol(string str){
+		for(int i=0;i<symbolTable.size();i++){
+			if (symbolTable[i][1].compare(str)==0)
+				return symbolTable[i][0];
+		}
+		return "";
+	}
+
 	QueryTreeRoot::QueryTreeRoot(string name)  {
 		_name = name;
 		result=NULL;
