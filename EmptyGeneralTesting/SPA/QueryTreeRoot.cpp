@@ -3,6 +3,8 @@
 #include <vector>
 #include <iostream>
 using namespace std;
+	
+	
 
 	QueryTreeRoot::QueryTreeRoot(){
 		result=NULL;
@@ -74,6 +76,10 @@ using namespace std;
 		_name = name;
 	}
 
+	void QueryTreeRoot::setSelect(string str){
+		select = str;
+	}
+
 	vector<vector<string>> QueryTreeRoot::getSymbolTable(){
 		return symbolTable;
 	}
@@ -82,6 +88,7 @@ using namespace std;
 		symbolTable.push_back(symbol);
 	}
 
+	string select;
 	string _name;
 	PQLSpecialNode* result;
 	PQLSpecialNode* suchThat;

@@ -36,8 +36,10 @@ public:
 	void insertToSymbol(vector<string> symbol);
 	void setName(string name);
 	void insertSymbol(vector<string>);
+	void setSelect(string);
 
 protected:
+	string select;
 	string _name;
 	PQLSpecialNode* result;
 	PQLSpecialNode* suchThat;

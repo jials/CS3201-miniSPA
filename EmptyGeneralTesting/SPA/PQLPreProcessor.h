@@ -10,6 +10,8 @@ class PQLPreProcessor{
 private:
 	vector<string> process(string str);
 	string currentKeyword;
+	void processPattern();
+	void processSuchThat();
 public:
 	string trim(string str);
 	int findKeyword(string str);
