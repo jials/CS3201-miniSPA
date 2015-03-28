@@ -1,5 +1,6 @@
 #include <vector>
 #include <string>
+#include <algorithm> 
 #include "PQLPreProcessor.h"
 #include "QueryTreeRoot.h"
 using namespace std;
@@ -8,11 +9,43 @@ PQLPreProcessor::PQLPreProcessor(){
 	PQLPreProcessor::currentKeyword = "";
 }
 
+//equals ignoring case
+static bool iequals(const string& a, const string& b)
+{
+    unsigned int sz = a.size();
+    if (b.size() != sz)
+        return false;
+    for (unsigned int i = 0; i < sz; ++i)
+        if (tolower(a[i]) != tolower(b[i]))
+            return false;
+    return true;
+}
+
+static string getNextToken(string str,int index){
+	unsigned int i=0,j=0;
+	for (i=index;i<str.length();i++){
+		if (str[i]!= ' ')
+			break;
+	}
+	for (j=i;j<str.length();j++){
+		if (str[j]==' ')
+			break;
+	}
+	return str.substr(i,j-i);
+}
+
+void PQLPreProcessor::processSuchThat(){
+
+}
+
+void PQLPreProcessor::processPattern(){
+
+}
 
 QueryTreeRoot PQLPreProcessor::parse(vector<string> strs, string name){
 	string keyword[] = {"assign","stmt","while","variable"};
 	QueryTreeRoot result(name);
-	if (strs.size()<2){
+	if (strs.size()!=2){
 		result.setName("Error");
 		return result;
 	}
@@ -28,6 +61,23 @@ QueryTreeRoot PQLPreProcessor::parse(vector<string> strs, string name){
 		}
 		current = trim(current.substr(pos+1));
 		pos = current.find(";");
+	}
+
+	string query = strs[1];
+	string queryLowerCase = query;
+	std::transform(queryLowerCase.begin(), queryLowerCase.end(), queryLowerCase.begin(), ::tolower);
+
+	if (iequals(query.substr(0,6),"select"))
+		result.setName(getNextToken(query,6));
+	else
+		result.setName("Error");
+
+	if (queryLowerCase.find("such that")!=string::npos){
+		processSuchThat(); //to be implemented
+	}
+
+	if (queryLowerCase.find("pattern")!=string::npos){
+		processPattern(); //to be implemented
 	}
 
 	return result;
