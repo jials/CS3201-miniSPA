@@ -3,18 +3,21 @@
 using namespace std;
 
 
-PQLRelationshipNode::PQLRelationshipNode(string name) : QueryTreeNode(name){
-	_next = NULL;
+PQLRelationshipNode::PQLRelationshipNode(string name){
+	R_next = NULL;
 }
 
 vector<PQLAttributeNode*> PQLRelationshipNode::getChildren(){
 		return children;
 }
 
-PQLRelationshipNode* PQLRelationshipNode::getNext(){
-	return _next;
+PQLRelationshipNode* PQLRelationshipNode::getNextRel(){
+	return R_next;
 }
 
+void PQLRelationshipNode::setNext(PQLRelationshipNode* node){
+	R_next=node;
+}
 
 vector<PQLAttributeNode*> children;
-PQLRelationshipNode* _next;
+PQLRelationshipNode* R_next;

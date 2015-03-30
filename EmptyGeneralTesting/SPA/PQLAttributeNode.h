@@ -3,7 +3,7 @@
 
 #include "QueryTreeNode.h"
 
-class PQLAttributeNode: public QueryTreeNode {
+class PQLAttributeNode {
 	PQLAttributeNode(string str);
 };
 

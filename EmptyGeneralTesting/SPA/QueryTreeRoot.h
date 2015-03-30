@@ -13,7 +13,7 @@ public:
 	string getSymbol(string str);
 	QueryTreeRoot();
 	QueryTreeRoot(string name);
-	string getName();
+	string getR_Name();
 
 	PQLSpecialNode* getResult();
 
@@ -40,7 +40,7 @@ public:
 
 protected:
 	string select;
-	string _name;
+	string rootName;
 	PQLSpecialNode* result;
 	PQLSpecialNode* suchThat;
 	PQLSpecialNode* with;

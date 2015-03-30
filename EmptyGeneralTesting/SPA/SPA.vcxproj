@@ -20,7 +20,6 @@
     <ClCompile Include="PQLRelationshipNode.cpp" />
     <ClCompile Include="PQLResultNode.cpp" />
     <ClCompile Include="PQLSpecialNode.cpp" />
-    <ClCompile Include="QueryTreeNode.cpp" />
     <ClCompile Include="QueryTreeRoot.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -31,7 +30,6 @@
     <ClInclude Include="PQLRelationshipNode.h" />
     <ClInclude Include="PQLResultNode.h" />
     <ClInclude Include="PQLSpecialNode.h" />
-    <ClInclude Include="QueryTreeNode.h" />
     <ClInclude Include="QueryTreeRoot.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

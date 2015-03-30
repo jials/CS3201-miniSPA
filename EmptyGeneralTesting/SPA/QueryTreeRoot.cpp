@@ -29,15 +29,15 @@ using namespace std;
 	}
 
 	QueryTreeRoot::QueryTreeRoot(string name)  {
-		_name = name;
+		rootName = name;
 		result=NULL;
 		suchThat=NULL; 
 		with=NULL;
 		pattern=NULL;
 	}
 
-	string QueryTreeRoot::getName(){
-		return _name;
+	string QueryTreeRoot::getR_Name(){
+		return rootName;
 	}
 
 	PQLSpecialNode* QueryTreeRoot::getResult(){
@@ -73,7 +73,7 @@ using namespace std;
 	}
 
 	void QueryTreeRoot::setName(string name){
-		_name = name;
+		rootName = name;
 	}
 
 	void QueryTreeRoot::setSelect(string str){
@@ -89,7 +89,7 @@ using namespace std;
 	}
 
 	string select;
-	string _name;
+	string rootName;
 	PQLSpecialNode* result;
 	PQLSpecialNode* suchThat;
 	PQLSpecialNode* with;

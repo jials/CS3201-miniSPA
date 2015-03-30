@@ -1,6 +1,6 @@
 #include "PQLResultNode.h"
 
-PQLResultNode::PQLResultNode(string name) : QueryTreeNode(name){
+PQLResultNode::PQLResultNode(string name){
 }
 
 void PQLResultNode::setResult(vector<string> evaluated) {
@@ -15,7 +15,7 @@ void PQLResultNode::insert(string str){
 	result.push_back(str);
 }
 
-PQLResultNode* PQLResultNode::getNext(){
+PQLResultNode* PQLResultNode::getNextRes(){
 	return next;
 }
 

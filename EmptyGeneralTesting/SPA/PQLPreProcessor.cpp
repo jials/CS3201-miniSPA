@@ -37,9 +37,19 @@ static string getNextToken(string str,int index){
 void PQLPreProcessor::processSuchThat(){
 
 }
-
-void PQLPreProcessor::processPattern(){
-
+	void PQLPreProcessor::processPattern(QueryTreeRoot* root,string str){
+	unsigned int firstIndex = str.find("("),
+		secondIndex = str.find(")");	
+	if (firstIndex!=string::npos&&secondIndex!=string::npos&&secondIndex>firstIndex){
+		unsigned int saperate = str.find(",",firstIndex+1);
+		if (saperate!=string::npos&&saperate<secondIndex){
+			PQLRelationshipNode attrib1(str.substr(firstIndex+1,saperate-firstIndex-1));
+			PQLRelationshipNode attrib2(str.substr(saperate+1,secondIndex-saperate-1));
+			(&attrib1)->setNext(&attrib2);
+			(root->getPattern())->setName(trim(str.substr(0,firstIndex)));
+			(root->getPattern())->setChild(&attrib1);
+		}
+	}
 }
 
 QueryTreeRoot PQLPreProcessor::parse(vector<string> strs, string name){
@@ -77,7 +87,7 @@ QueryTreeRoot PQLPreProcessor::parse(vector<string> strs, string name){
 	}
 
 	if (queryLowerCase.find("pattern")!=string::npos){
-		processPattern(); //to be implemented
+		//processPattern(); //to be implemented
 	}
 
 	return result;
