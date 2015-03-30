@@ -21,7 +21,7 @@ public:
 
 	PQLSpecialNode* getWith();
 
-	PQLSpecialNode* getPatten();
+	PQLSpecialNode* getPattern();
 
 	void setResult(PQLSpecialNode* node);
 

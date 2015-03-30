@@ -18,6 +18,7 @@
     <ClCompile Include="PQLAttributeNode.cpp" />
     <ClCompile Include="PQLPreProcessor.cpp" />
     <ClCompile Include="PQLRelationshipNode.cpp" />
+    <ClCompile Include="PQLResultNode.cpp" />
     <ClCompile Include="PQLSpecialNode.cpp" />
     <ClCompile Include="QueryTreeNode.cpp" />
     <ClCompile Include="QueryTreeRoot.cpp" />
@@ -28,6 +29,7 @@
     <ClInclude Include="PQLAttributeNode.h" />
     <ClInclude Include="PQLPreProcessor.h" />
     <ClInclude Include="PQLRelationshipNode.h" />
+    <ClInclude Include="PQLResultNode.h" />
     <ClInclude Include="PQLSpecialNode.h" />
     <ClInclude Include="QueryTreeNode.h" />
     <ClInclude Include="QueryTreeRoot.h" />

@@ -52,7 +52,7 @@ using namespace std;
 		return with;
 	}
 
-	PQLSpecialNode* QueryTreeRoot::getPatten(){
+	PQLSpecialNode* QueryTreeRoot::getPattern(){
 		return pattern;
 	}
 
