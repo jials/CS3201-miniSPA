@@ -45,15 +45,15 @@
     <ClCompile Include="PQLPreProcessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PQLEvaluator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\PKB.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\TNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Follows.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="QueryTreeNode.h">
@@ -72,6 +72,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="QueryTreeRoot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PQLEvaluator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

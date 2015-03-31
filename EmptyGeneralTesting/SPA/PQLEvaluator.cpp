@@ -15,15 +15,24 @@ public:
 		QueryTreeRoot root = *rootPtr;
 		vector<vector<string>> symbols = root.getSymbolTable();
         vector<string> result;
-		root.getSuchThat();
-		root.getWith();
-		root.getPattern();
-		//result get!
+		PQLSpecialNode suchThat = *root.getSuchThat();
+		
+		PQLRelationshipNode rel = *suchThat.getChild();
+		do {
+			string relName = rel.getName();
+			vector<PQLAttributeNode*> children = rel.getChildren();
+			PQLAttributeNode* a = children.at(0);
+			PQLAttributeNode* b = children.at(1);
+			if(relName == "follows") {
+				
+			}
+		
 
-		PQLResultNode res = PQLResultNode(root._name);
-		res.setResult(result);
-		root.setResult(*res);
-	
+		}
+		while(rel.getNext() != NULL);
+
+		//PQLSpecialNode with = *root.getWith();
+		//PQLSpecialNode pattern = *root.getPattern();
 	}
 
 

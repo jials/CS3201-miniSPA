@@ -16,6 +16,7 @@
     <ClCompile Include="..\source\PKB.cpp" />
     <ClCompile Include="..\source\TNode.cpp" />
     <ClCompile Include="PQLAttributeNode.cpp" />
+    <ClCompile Include="PQLEvaluator.cpp" />
     <ClCompile Include="PQLPreProcessor.cpp" />
     <ClCompile Include="PQLRelationshipNode.cpp" />
     <ClCompile Include="PQLSpecialNode.cpp" />
@@ -26,6 +27,7 @@
     <ClInclude Include="..\source\PKB.h" />
     <ClInclude Include="..\source\TNode.h" />
     <ClInclude Include="PQLAttributeNode.h" />
+    <ClInclude Include="PQLEvaluator.h" />
     <ClInclude Include="PQLPreProcessor.h" />
     <ClInclude Include="PQLRelationshipNode.h" />
     <ClInclude Include="PQLSpecialNode.h" />
