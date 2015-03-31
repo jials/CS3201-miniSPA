@@ -32,6 +32,9 @@ VAR VarTable::insertVar(string varName) {
 	return current_index-1;
 }
 
+//addUses(varname, stmtNo)
+//addModifies(varname stmtNo)
+
 void VarTable::draw(){
 	map<VAR, VARROW>::iterator it;
 	cout << "\n---------------------------------------------------------\n";
