@@ -13,7 +13,7 @@ public:
 	void setParent(int, int);
 	bool isParent(int, int);
 	int getParent(int);
-	int getParentOf(int);
+	vector<int> getChildren(int);
 	vector<int> getParentStar(int);
 	vector<int> getParentStarOf(int);
 

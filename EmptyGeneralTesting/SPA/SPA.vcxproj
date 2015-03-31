@@ -15,6 +15,8 @@
     <ClCompile Include="..\source\Parser.cpp" />
     <ClCompile Include="..\source\PKB.cpp" />
     <ClCompile Include="..\source\TNode.cpp" />
+    <ClCompile Include="Follows.cpp" />
+    <ClCompile Include="Parent.cpp" />
     <ClCompile Include="PQLAttributeNode.cpp" />
     <ClCompile Include="PQLPreProcessor.cpp" />
     <ClCompile Include="PQLRelationshipNode.cpp" />
@@ -25,6 +27,8 @@
   <ItemGroup>
     <ClInclude Include="..\source\PKB.h" />
     <ClInclude Include="..\source\TNode.h" />
+    <ClInclude Include="Follows.h" />
+    <ClInclude Include="Parent.h" />
     <ClInclude Include="PQLAttributeNode.h" />
     <ClInclude Include="PQLPreProcessor.h" />
     <ClInclude Include="PQLRelationshipNode.h" />
