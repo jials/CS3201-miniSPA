@@ -3,9 +3,9 @@ public:
 	PQLEvaluator();
 
 
-	void getResult(QueryTreeRoot*);
+	void evaluateResult(QueryTreeRoot*);
 
-	vector<string> evaluateSuchThat();
+	vector<string> evaluateSuchThat(PQLSpecialNode*, vector<string>);
 	vector<string> evaluateWith();
 	vector<string> evaluatePattern();
 };
