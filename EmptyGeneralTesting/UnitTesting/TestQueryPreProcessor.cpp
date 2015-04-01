@@ -28,8 +28,14 @@ void QueryPreProcessorTest::testParse() {
 	PQLPreProcessor processor;
 	QueryTreeRoot res = processor.parse(strs,"");
 	cout<<"printing"<<endl;
-	cout<<(res.getSymbol("s"));
-
-	string expectedAns = "stmt";
-	CPPUNIT_ASSERT_EQUAL(0,expectedAns.compare(res.getSymbol("s")));
+	cout<<(res.getSymbol("s")) << endl;
+	string expectedSymbol = "stmt";
+	string expectedPattern = "_\"i\"_"; 
+	cout << "TC1" << endl;
+	CPPUNIT_ASSERT_EQUAL(0,expectedSymbol.compare(res.getSymbol("s")));
+	cout << "TC2" << endl;
+	if (res.getPattern()->getChild()->getNextRel() == NULL)
+		cout << "NULL found"  << endl;
+	else cout << "Correct"  << endl;
+	CPPUNIT_ASSERT_EQUAL(0,expectedPattern.compare(res.getPattern()->getChild()->getNextRel()->getName()));
 }

@@ -13,5 +13,5 @@
 		return _next;
 	}
 
-	string _name;
+	string rootName;
 	QueryTreeNode* _next;
