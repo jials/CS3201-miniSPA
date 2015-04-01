@@ -11,9 +11,12 @@ public:
 	PQLRelationshipNode* getNextRel();
 	vector<PQLAttributeNode*> getChildren();
 	void setNext(PQLRelationshipNode* node);
+	string getName();
+	void setName(string);
 private:
 	PQLRelationshipNode* R_next;
 	vector<PQLAttributeNode*> children;
+	string name;
 };
 
 #endif

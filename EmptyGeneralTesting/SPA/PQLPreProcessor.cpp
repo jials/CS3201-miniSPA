@@ -34,20 +34,24 @@ static string getNextToken(string str,int index){
 	return str.substr(i,j-i);
 }
 
-void PQLPreProcessor::processSuchThat(){
+void PQLPreProcessor::processSuchThat(QueryTreeRoot* root, string str){
 
 }
-	void PQLPreProcessor::processPattern(QueryTreeRoot* root,string str){
+
+void PQLPreProcessor::processPattern(QueryTreeRoot* root,string str){
 	unsigned int firstIndex = str.find("("),
 		secondIndex = str.find(")");	
 	if (firstIndex!=string::npos&&secondIndex!=string::npos&&secondIndex>firstIndex){
 		unsigned int saperate = str.find(",",firstIndex+1);
 		if (saperate!=string::npos&&saperate<secondIndex){
-			PQLRelationshipNode attrib1(str.substr(firstIndex+1,saperate-firstIndex-1));
-			PQLRelationshipNode attrib2(str.substr(saperate+1,secondIndex-saperate-1));
-			(&attrib1)->setNext(&attrib2);
-			(root->getPattern())->setName(trim(str.substr(0,firstIndex)));
-			(root->getPattern())->setChild(&attrib1);
+			//PQLRelationshipNode attrib1(str.substr(firstIndex+1,saperate-firstIndex-1));
+			//PQLRelationshipNode attrib2(str.substr(saperate+1,secondIndex-saperate-1));
+			//cout << "In precessPattern() " << endl;
+			//cout << "str.substr(saperate+1,secondIndex-saperate-1) = " << str.substr(saperate+1,secondIndex-saperate-1) << endl;
+			//cout << "attrib2.getName() = " << attrib2.getName() << endl;
+			root->getPattern()->setName(trim(str.substr(0,firstIndex)));
+			root->getPattern()->getChild()->setName(str.substr(firstIndex+1,saperate-firstIndex-1));
+			root->getPattern()->getChild()->getNextRel()->setName(str.substr(saperate+1,secondIndex-saperate-1));
 		}
 	}
 }
@@ -79,15 +83,30 @@ QueryTreeRoot PQLPreProcessor::parse(vector<string> strs, string name){
 
 	if (iequals(query.substr(0,6),"select"))
 		result.setName(getNextToken(query,6));
-	else
+	else{
 		result.setName("Error");
+		return result;
+	}
 
-	if (queryLowerCase.find("such that")!=string::npos){
-		processSuchThat(); //to be implemented
+	unsigned int suchThatIndex = queryLowerCase.find("such that");
+	unsigned int patternIndex = queryLowerCase.find("pattern");
+	
+	if (suchThatIndex!=string::npos){
+		if (patternIndex == string::npos||patternIndex<suchThatIndex){
+			processSuchThat(&result,trim(query.substr(suchThatIndex+9)));
+		}
+		else {
+			processSuchThat(&result,trim(query.substr(suchThatIndex+9,patternIndex-suchThatIndex-9)));
+		}
 	}
 
 	if (queryLowerCase.find("pattern")!=string::npos){
-		//processPattern(); //to be implemented
+		if (suchThatIndex == string::npos||suchThatIndex<patternIndex){
+			processPattern(&result,trim(query.substr(patternIndex+7)));
+		}
+		else {
+			processPattern(&result,trim(query.substr(patternIndex+7,suchThatIndex-patternIndex-7)));
+		}
 	}
 
 	return result;
@@ -105,9 +124,6 @@ vector<string> PQLPreProcessor::process(string str){;
 		result.push_back(trim(str.substr(0,str.find(' '))));
 		result.push_back(trim(str.substr(str.find(' ')+1)));
 	}
-	cout << "---------"<<endl;
-	cout << result[0] << endl;
-	cout << result[1] << endl;
 	return result;
 }
 

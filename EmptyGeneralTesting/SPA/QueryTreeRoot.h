@@ -6,6 +6,8 @@
 #include "PQLRelationshipNode.h"
 #include "QueryTreeNode.h"
 #include "PQLAttributeNode.h"
+#include "PQLResultNode.h"
+
 using namespace std;
 
 class QueryTreeRoot{
@@ -13,9 +15,9 @@ public:
 	string getSymbol(string str);
 	QueryTreeRoot();
 	QueryTreeRoot(string name);
-	string getR_Name();
+	string getName();
 
-	PQLSpecialNode* getResult();
+	PQLResultNode* getResult();
 
 	PQLSpecialNode* getSuchThat();
 
@@ -23,7 +25,7 @@ public:
 
 	PQLSpecialNode* getPattern();
 
-	void setResult(PQLSpecialNode* node);
+	void setResult(PQLResultNode* node);
 
 	void setWith(PQLSpecialNode* node);
 
@@ -41,7 +43,7 @@ public:
 protected:
 	string select;
 	string rootName;
-	PQLSpecialNode* result;
+	PQLResultNode* result;
 	PQLSpecialNode* suchThat;
 	PQLSpecialNode* with;
 	PQLSpecialNode* pattern;

@@ -11,7 +11,7 @@ private:
 	vector<string> process(string str);
 	string currentKeyword;
 	void processPattern(QueryTreeRoot* root,string str);
-	void processSuchThat();
+	void processSuchThat(QueryTreeRoot* root,string str);
 public:
 	string trim(string str);
 	int findKeyword(string str);
