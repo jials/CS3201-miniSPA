@@ -153,18 +153,3 @@ assign a; stmt s;
 Select s such that Follows*(3, a)
 1, 2, 3, 4, 5, 6
 5000
-32
-stmt s;
-Select s1 such that Follows*(2, s) and Follows(s, 5)
-4
-5000
-33
-assign a;
-Select s such that Follows(a, 5) and Follows*(3, 5)
-1, 2, 3, 4 
-5000
-34
-assign a;
-Select s such that Follows(a, 5) and Follows(3, 1)
-none
-5000
