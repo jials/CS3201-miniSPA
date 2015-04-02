@@ -14,10 +14,7 @@ using namespace std;
 	}
 
 	string QueryTreeRoot::getSymbol(string str){
-		cout << str << endl;
-		for(unsigned int i=0;i<symbolTable.size();i++){
-			cout << ":" << symbolTable[i][0] << "   " << symbolTable[i][1];
-			
+		for(unsigned int i=0;i<symbolTable.size();i++){			
 			if (symbolTable[i][1].compare(str)==0)
 				return symbolTable[i][0];
 		}
@@ -29,18 +26,18 @@ using namespace std;
 	}
 
 	QueryTreeRoot::QueryTreeRoot(string name)  {
-		_name = name;
-		result=NULL;
-		suchThat=NULL; 
-		with=NULL;
-		pattern=NULL;
+		rootName = name;
+		result=new PQLResultNode();
+		suchThat=new PQLSpecialNode("suchThat"); 
+		with=new PQLSpecialNode("with");
+		pattern=new PQLSpecialNode("pattern");
 	}
 
 	string QueryTreeRoot::getName(){
-		return _name;
+		return rootName;
 	}
 
-	PQLSpecialNode* QueryTreeRoot::getResult(){
+	PQLResultNode* QueryTreeRoot::getResult(){
 		return result;
 	}
 
@@ -52,11 +49,11 @@ using namespace std;
 		return with;
 	}
 
-	PQLSpecialNode* QueryTreeRoot::getPatten(){
+	PQLSpecialNode* QueryTreeRoot::getPattern(){
 		return pattern;
 	}
 
-	void QueryTreeRoot::setResult(PQLSpecialNode* node){
+	void QueryTreeRoot::setResult(PQLResultNode* node){
 		result = node;
 	}
 
@@ -73,7 +70,7 @@ using namespace std;
 	}
 
 	void QueryTreeRoot::setName(string name){
-		_name = name;
+		rootName = name;
 	}
 
 	void QueryTreeRoot::setSelect(string str){
@@ -89,8 +86,8 @@ using namespace std;
 	}
 
 	string select;
-	string _name;
-	PQLSpecialNode* result;
+	string rootName;
+	PQLResultNode* result;
 	PQLSpecialNode* suchThat;
 	PQLSpecialNode* with;
 	PQLSpecialNode* pattern;

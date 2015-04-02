@@ -36,13 +36,13 @@
     <ClCompile Include="PQLSpecialNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QueryTreeNode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="QueryTreeRoot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PQLPreProcessor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PQLResultNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -51,12 +51,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\TNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Follows.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="QueryTreeNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PQLPreProcessor.h">
@@ -72,6 +66,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="QueryTreeRoot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PQLResultNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

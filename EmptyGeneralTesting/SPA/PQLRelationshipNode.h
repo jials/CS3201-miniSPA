@@ -5,14 +5,18 @@
 #include <vector>
 using namespace std;
 
-class PQLRelationshipNode: public QueryTreeNode {
+class PQLRelationshipNode {
 public:
 	PQLRelationshipNode(string str);
-	PQLRelationshipNode* getNext();
+	PQLRelationshipNode* getNextRel();
 	vector<PQLAttributeNode*> getChildren();
+	void setNext(PQLRelationshipNode* node);
+	string getName();
+	void setName(string);
 private:
-	PQLRelationshipNode* _next;
+	PQLRelationshipNode* R_next;
 	vector<PQLAttributeNode*> children;
+	string name;
 };
 
 #endif
