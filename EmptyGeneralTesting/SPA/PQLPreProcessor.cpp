@@ -5,6 +5,8 @@
 #include "QueryTreeRoot.h"
 using namespace std;
 
+const static string relations[] = {"follows","follows*","parent","parent*","modifies","uses"};
+
 PQLPreProcessor::PQLPreProcessor(){
 	PQLPreProcessor::currentKeyword = "";
 }
@@ -35,7 +37,30 @@ static string getNextToken(string str,int index){
 }
 
 void PQLPreProcessor::processSuchThat(QueryTreeRoot* root, string str){
+	unsigned int firstIndex = str.find("("),
+		secondIndex = str.find(")");
+	if (!(firstIndex!=string::npos&&secondIndex!=string::npos&&secondIndex>firstIndex)){
+		root->getSuchThat()->setName("Error");
+		return;
+	}
+	
+	string relation = trim(str.substr(0,firstIndex));
+	root->getSuchThat()->setName(findRelation(relation));
 
+	unsigned int saperate = str.find(",",firstIndex+1);
+	if (saperate!=string::npos&&saperate<secondIndex){
+		root->getSuchThat()->getChild()->setName(str.substr(firstIndex+1,saperate-firstIndex-1));
+		root->getSuchThat()->getChild()->getNextRel()->setName(str.substr(saperate+1,secondIndex-saperate-1));
+	}
+}
+
+string PQLPreProcessor::findRelation(string str){
+	std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+	for (unsigned int i=0; i<6; i++){
+		if (str.compare(relations[i])==0)
+			return relations[i];
+	}
+	return "Error";
 }
 
 void PQLPreProcessor::processPattern(QueryTreeRoot* root,string str){
