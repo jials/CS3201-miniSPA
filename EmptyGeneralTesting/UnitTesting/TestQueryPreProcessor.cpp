@@ -37,5 +37,6 @@ void QueryPreProcessorTest::testParse() {
 	if (res.getPattern()->getChild()->getNextRel() == NULL)
 		cout << "NULL found"  << endl;
 	else cout << "Correct"  << endl;
-	CPPUNIT_ASSERT_EQUAL(0,expectedPattern.compare(res.getPattern()->getChild()->getNextRel()->getName()));
+	vector<PQLAttributeNode*> children = (res.getPattern()->getChild()->getChildren());
+	CPPUNIT_ASSERT_EQUAL(0,expectedPattern.compare(children[1]->getName()));
 }

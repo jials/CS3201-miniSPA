@@ -74,9 +74,10 @@ void PQLPreProcessor::processPattern(QueryTreeRoot* root,string str){
 			//cout << "In precessPattern() " << endl;
 			//cout << "str.substr(saperate+1,secondIndex-saperate-1) = " << str.substr(saperate+1,secondIndex-saperate-1) << endl;
 			//cout << "attrib2.getName() = " << attrib2.getName() << endl;
-			root->getPattern()->setName(trim(str.substr(0,firstIndex)));
-			root->getPattern()->getChild()->setName(str.substr(firstIndex+1,saperate-firstIndex-1));
-			root->getPattern()->getChild()->getNextRel()->setName(str.substr(saperate+1,secondIndex-saperate-1));
+			root->getPattern()->getChild()->setName(trim(str.substr(0,firstIndex)));
+			root->getPattern()->getChild()->insert(str.substr(firstIndex+1,saperate-firstIndex-1));
+			//root->getPattern()->getChild()->getNextRel()->setName(str.substr(saperate+1,secondIndex-saperate-1));
+			root->getPattern()->getChild()->insert(str.substr(saperate+1,secondIndex-saperate-1));
 		}
 	}
 }
