@@ -4,7 +4,7 @@ using namespace std;
 
 
 PQLRelationshipNode::PQLRelationshipNode(string str){
-	name = str;
+	r_name = str;
 	R_next = NULL;
 }
 
@@ -21,13 +21,17 @@ void PQLRelationshipNode::setNext(PQLRelationshipNode* node){
 }
 
 string PQLRelationshipNode::getName(){
-	return name;
+	return r_name;
 }
 
 void PQLRelationshipNode::setName(string str){
-	name = str;
+	r_name = str;
+}
+
+void PQLRelationshipNode::insert(string str){
+	children.push_back(new PQLAttributeNode(str));
 }
 
 vector<PQLAttributeNode*> children;
 PQLRelationshipNode* R_next;
-string name;
+string r_name;
