@@ -23,7 +23,7 @@ void QueryPreProcessorTest::testConstructor() {
 void QueryPreProcessorTest::testParse() {
 	vector<string> strs;
 	strs.push_back("stmt s;");
-	strs.push_back("Select a pattern a(_,_\"i\"_)");
+	strs.push_back("Select a such that Follows* (1,a) pattern a(_,_\"i\"_)");
 
 	PQLPreProcessor processor;
 	QueryTreeRoot res = processor.parse(strs,"");
@@ -31,12 +31,17 @@ void QueryPreProcessorTest::testParse() {
 	cout<<(res.getSymbol("s")) << endl;
 	string expectedSymbol = "stmt";
 	string expectedPattern = "_\"i\"_"; 
+	string str0="1",str1="a",relation = "follows*";
 	cout << "TC1" << endl;
 	CPPUNIT_ASSERT_EQUAL(0,expectedSymbol.compare(res.getSymbol("s")));
 	cout << "TC2" << endl;
 	if (res.getPattern()->getChild()->getNextRel() == NULL)
 		cout << "NULL found"  << endl;
 	else cout << "Correct"  << endl;
-	vector<PQLAttributeNode*> children = (res.getPattern()->getChild()->getChildren());
-	CPPUNIT_ASSERT_EQUAL(0,expectedPattern.compare(children[1]->getName()));
+	vector<PQLAttributeNode*> patternChildren = (res.getPattern()->getChild()->getChildren());
+	vector<PQLAttributeNode*> suchThatChildren = (res.getSuchThat()->getChild()->getChildren());
+	CPPUNIT_ASSERT_EQUAL(0,expectedPattern.compare(patternChildren[1]->getName()));
+	CPPUNIT_ASSERT_EQUAL(0,str1.compare(suchThatChildren[1]->getName()));
+	CPPUNIT_ASSERT_EQUAL(0,str0.compare(suchThatChildren[0]->getName()));
+	CPPUNIT_ASSERT_EQUAL(0,relation.compare(res.getSuchThat()->getChild()->getName())); cout <<res.getSuchThat()->getChild()->getName()<<endl;
 }
