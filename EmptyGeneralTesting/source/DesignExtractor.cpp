@@ -72,6 +72,14 @@ vector<int> DesignExtractor::getFollowedStarBy(int stmt) {
     return result;
 }
 
+bool DesignExtractor::isFollowsStar(int prev, int curr) {
+    
+}
+
+bool DesignExtractor::isParentStar(int prev, int curr) {
+    
+}
+
 
 
 

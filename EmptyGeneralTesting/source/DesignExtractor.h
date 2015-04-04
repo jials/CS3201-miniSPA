@@ -23,6 +23,10 @@ public:
     static vector<int> getParentStarOf(int);
     static vector<int> getFollowedStarBy(int);
     
+    static bool isParentStar(int, int);
+    static bool isFollowsStar(int, int);
+    //static void setParentStar();
+    //static void setFollowsStar();
 };
 
 
