@@ -1,22 +1,24 @@
 #pragma once
 
 #include <string>
-#include "TNode.h"
+#include <map>
+#include <vector>
 
 using namespace std;
 
 class Follows
 {
 public:
-	Follows(void);
-	~Follows(void);
-
-	TNode* setFollows(TNode*, TNode*);
-
-	bool isFollows(TNode*, TNode*);
-	/*Stmt getFollows(Stmt);
-	Stmt getFollowedBy(Stmt);
-	StmtLst getAllFollows();
-	StmtLst getFollowsStar(Stmt);
-	StmtLst getFollowedStarBy(Stmt);*/
+    Follows(void);
+    
+    void setFollows(int, int);
+    bool isFollows(int, int);
+    int getFollows(int);
+    int getFollowedBy(int);
+    vector<int> getAllFollows();
+    vector<int> getFollowsStar(int);
+    vector<int> getFollowedStarBy(int);
+    
+private:
+    static map<int, int> _table;
 };

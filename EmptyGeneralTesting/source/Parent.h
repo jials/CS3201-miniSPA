@@ -1,19 +1,23 @@
 #pragma once
 
 #include <string>
-#include "TNode.h"
+#include <map>
+#include <vector>
+
+using namespace std;
 
 class Parent
 {
 public:
-	Parent(void);
-	
-	void setParent(TNode*, TNode*);
-
-	bool isParent(TNode*, TNode*);
-	//Stmt getParent(Stmt);
-	//Stmt getParentOf(Stmt);
-	//StmtLst getParentStar(Stmt);
-	//StmtLst getParentStarOf(Stmt);
+    Parent(void);
+    void setParent(int, int);
+    bool isParent(int, int);
+    int getParent(int);
+    vector<int> getChildren(int);
+    vector<int> getParentStar(int);
+    vector<int> getParentStarOf(int);
+    
+private:
+    static map<int, int> _table;
+    
 };
-

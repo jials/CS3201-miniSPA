@@ -1,24 +1,48 @@
 #include "Parent.h"
 
-using namespace std;
-
 Parent::Parent() {
 }
 
-void Parent::setParent(TNode*, TNode*) {
+void Parent::setParent(int parent, int child) {
+    _table.insert( std::pair<int, int>(child, parent));
 }
 
-bool Parent::isParent(TNode*, TNode*) {
+bool Parent::isParent(int parent, int child) {
+    map<int,int>::iterator it = _table.find(child);
+    if ( (it == _table.end()) || (it -> second != parent) ) {
+        return false;
+    } else {
+        return true;
+    }
 }
 
-//Stmt Parent::getParent(Stmt) {
-//}
-//
-//Stmt Parent::getParentOf(Stmt) {
-//}
-//
-//StmtLst Parent::getParentStar(Stmt) {
-//}
-//
-//StmtLst Parent::getParentStarOf(Stmt) {
-//}
+//return -1 if not found OR it is the root
+int Parent::getParent(int child) {
+    map<int,int>::iterator it = _table.find(child);
+    
+    //invalid child number
+    if (it == _table.end()) {
+        return -1;
+    } else {
+        return it -> second;
+    }
+}
+
+//performance can be improved in the future
+vector<int> Parent::getChildren(int parent) {
+    map<int,int>::iterator it;
+    vector<int> children;
+    for (it = _table.begin(); it != _table.end(); it++) {
+        if (it -> second == parent) {
+            children.push_back(it -> first);
+        }
+    }
+    return children;
+}
+
+//call design abstraction
+vector<int> Parent::getParentStar(int) {
+}
+
+vector<int> Parent::getParentStarOf(int) {
+}
