@@ -10,12 +10,12 @@ class Parent
 {
 public:
     Parent(void);
-    void setParent(int, int);
-    bool isParent(int, int);
-    int getParent(int);
-    vector<int> getChildren(int);
-    vector<int> getParentStar(int);
-    vector<int> getParentStarOf(int);
+    static void setParent(int, int);
+    static bool isParent(int, int);
+    static int getParent(int);
+    static vector<int> getChildren(int);
+    static vector<int> getParentStar(int);
+    static vector<int> getParentStarOf(int);
     
 private:
     static map<int, int> _table;
