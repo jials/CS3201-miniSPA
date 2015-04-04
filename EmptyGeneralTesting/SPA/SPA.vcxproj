@@ -29,6 +29,7 @@
     <ClCompile Include="..\source\QueryTreeNode.cpp" />
     <ClCompile Include="..\source\QueryTreeRoot.cpp" />
     <ClCompile Include="..\source\SimpleParser.cpp" />
+    <ClCompile Include="..\source\StmtTable.cpp" />
     <ClCompile Include="..\source\TNode.cpp" />
     <ClCompile Include="..\source\VarTable.cpp" />
   </ItemGroup>
@@ -51,6 +52,7 @@
     <ClInclude Include="..\source\QueryTreeNode.h" />
     <ClInclude Include="..\source\QueryTreeRoot.h" />
     <ClInclude Include="..\source\SimpleParser.h" />
+    <ClInclude Include="..\source\StmtTable.h" />
     <ClInclude Include="..\source\TNode.h" />
     <ClInclude Include="..\source\VarTable.h" />
   </ItemGroup>

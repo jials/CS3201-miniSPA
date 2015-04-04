@@ -20,8 +20,12 @@ private:
 	vector<string> tokens;
 	TNode* program();
 	TNode* procedure();
-	TNode* stmtLst();
+	TNode* stmtLst(bool createStmtLstNode);
 	TNode* stmt();
+	TNode* whileLoop();
+	TNode* expr(TNode*);
+	TNode* innerExpr(TNode*);
 	void match(string token, bool special);
+	bool checkIsExpression();
 
 };

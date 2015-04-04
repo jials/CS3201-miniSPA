@@ -12,4 +12,5 @@ public:
   unsigned int split(const std::string &txt, std::vector<std::string> &strs, char ch);
   string toLower(string);
   bool isNumber(const string& s);
+  char* stringToCharArray(string);
 };

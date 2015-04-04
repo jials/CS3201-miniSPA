@@ -55,3 +55,14 @@ bool Helpers::isNumber(const string& s){
     while (it != s.end() && isdigit(*it)) ++it;
     return !s.empty() && it == s.end();
 }
+
+char* Helpers::stringToCharArray(string input){
+	int tmp=input.size();
+	char result[100];
+	for (int a=0;a<=tmp;a++)
+        {
+            result[a]=input[a];
+        }
+	return result;
+
+}

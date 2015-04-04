@@ -8,7 +8,7 @@ using namespace std;
 #ifndef TNode_H
 #define TNode_H
 
-enum nodeType { UNDEFINED, ASSIGN, VARIABLE, PROGRAM, PROCEDURE, CONSTANT };
+enum nodeType { UNDEFINED, ASSIGN, VARIABLE, PROGRAM, PROCEDURE, CONSTANT, STMTLST, PLUS, WHILE };
 
 class TNode
 {
@@ -22,12 +22,13 @@ public:
 	string info;	
 	int lineNumber;
 	vector<TNode*> getChildren();
-
-private:
-	bool defined;
 	TNode* firstChild;
 	TNode* rightSibling;
 	TNode* up;
+
+private:
+	bool defined;
+	
 	
 };
 

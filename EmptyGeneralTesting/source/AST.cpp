@@ -26,6 +26,9 @@ void draw(TNode* node, int level){
 		case PROCEDURE:   type = "PROCEDURE"; break;
 		case ASSIGN:   type = "ASSIGN"; break;
 		case CONSTANT:   type = "CONSTANT"; break;
+		case STMTLST:   type = "STMTLST"; break;
+		case PLUS:   type = "PLUS"; break;
+		case WHILE:   type = "WHILE"; break;
     }
 
 	string tabs;

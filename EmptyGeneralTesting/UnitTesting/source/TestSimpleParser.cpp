@@ -31,6 +31,38 @@ TestSimpleParser::testParse(void)
 		  "z = 2;"
 		 "}";
 	//CPPUNIT_ASSERT(0 == mTestObj->parse(test4));
+
+	const char *test5 =
+		"procedure Example { "
+		  "x = z + y;"
+		 "}";
+	//CPPUNIT_ASSERT(1 == mTestObj->parse(test5));
+
+	const char *test6 =
+		"procedure Example { "
+		  "x = z + y + 33 + k;"
+		 "}";
+	//CPPUNIT_ASSERT(1 == mTestObj->parse(test6));
+
+	const char *test7 =
+		"procedure Example { "
+			"while x{"
+				"y = 1;"
+			"}"
+		 "}";
+	//CPPUNIT_ASSERT(1 == mTestObj->parse(test7));
+
+
+	const char *test8 =
+		"procedure Example { "
+			"while x{"
+				"y = 1;"
+				"while y {"
+					"z = k + y;"
+				"}"
+			"}"
+		 "}";
+	//CPPUNIT_ASSERT(1 == mTestObj->parse(test8));
 }
 
 void
