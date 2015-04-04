@@ -66,11 +66,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\TestSimpleParser.cpp" />
     <ClCompile Include="source\UnitTest.cpp" />
     <ClCompile Include="TestQueryPreProcessor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestQueryPreProcessor.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\TestSimpleParser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

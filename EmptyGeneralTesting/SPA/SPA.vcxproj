@@ -11,28 +11,48 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\source\AST.cpp" />
     <ClCompile Include="..\source\DesignExtractor.cpp" />
+    <ClCompile Include="..\source\Follows.cpp" />
+    <ClCompile Include="..\source\Helpers.cpp" />
+    <ClCompile Include="..\source\Parent.cpp" />
     <ClCompile Include="..\source\Parser.cpp" />
+    <ClCompile Include="..\source\ParsingErrorException.cpp" />
     <ClCompile Include="..\source\PKB.cpp" />
+    <ClCompile Include="..\source\PQLAttributeNode.cpp" />
+    <ClCompile Include="..\source\PQLEvaluator.cpp" />
+    <ClCompile Include="..\source\PQLPreProcessor.cpp" />
+    <ClCompile Include="..\source\PQLRelationshipNode.cpp" />
+    <ClCompile Include="..\source\PQLResultNode.cpp" />
+    <ClCompile Include="..\source\PQLSpecialNode.cpp" />
+    <ClCompile Include="..\source\ProcTable.cpp" />
+    <ClCompile Include="..\source\QueryTreeNode.cpp" />
+    <ClCompile Include="..\source\QueryTreeRoot.cpp" />
+    <ClCompile Include="..\source\SimpleParser.cpp" />
     <ClCompile Include="..\source\TNode.cpp" />
-    <ClCompile Include="PQLAttributeNode.cpp" />
-    <ClCompile Include="PQLEvaluator.cpp" />
-    <ClCompile Include="PQLPreProcessor.cpp" />
-    <ClCompile Include="PQLRelationshipNode.cpp" />
-    <ClCompile Include="PQLResultNode.cpp" />
-    <ClCompile Include="PQLSpecialNode.cpp" />
-    <ClCompile Include="QueryTreeRoot.cpp" />
+    <ClCompile Include="..\source\VarTable.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\source\AST.h" />
+    <ClInclude Include="..\source\DesignExtractor.h" />
+    <ClInclude Include="..\source\Follows.h" />
+    <ClInclude Include="..\source\Helpers.h" />
+    <ClInclude Include="..\source\Parent.h" />
+    <ClInclude Include="..\source\Parser.h" />
+    <ClInclude Include="..\source\ParsingErrorException.h" />
     <ClInclude Include="..\source\PKB.h" />
+    <ClInclude Include="..\source\PQLAttributeNode.h" />
+    <ClInclude Include="..\source\PQLEvaluator.h" />
+    <ClInclude Include="..\source\PQLPreProcessor.h" />
+    <ClInclude Include="..\source\PQLRelationshipNode.h" />
+    <ClInclude Include="..\source\PQLResultNode.h" />
+    <ClInclude Include="..\source\PQLSpecialNode.h" />
+    <ClInclude Include="..\source\ProcTable.h" />
+    <ClInclude Include="..\source\QueryTreeNode.h" />
+    <ClInclude Include="..\source\QueryTreeRoot.h" />
+    <ClInclude Include="..\source\SimpleParser.h" />
     <ClInclude Include="..\source\TNode.h" />
-    <ClInclude Include="PQLAttributeNode.h" />
-    <ClInclude Include="PQLEvaluator.h" />
-    <ClInclude Include="PQLPreProcessor.h" />
-    <ClInclude Include="PQLRelationshipNode.h" />
-    <ClInclude Include="PQLResultNode.h" />
-    <ClInclude Include="PQLSpecialNode.h" />
-    <ClInclude Include="QueryTreeRoot.h" />
+    <ClInclude Include="..\source\VarTable.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}</ProjectGuid>
