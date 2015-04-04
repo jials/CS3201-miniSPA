@@ -9,9 +9,6 @@
 
 using namespace std;
 
-DesignExtractor::DesignExtractor() {
-    int i = 0;
-}
 
 vector<int> DesignExtractor::getParentStar(int stmt) {
     
