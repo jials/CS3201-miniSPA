@@ -7,5 +7,5 @@ public:
 
 	vector<string> evaluateSuchThat(PQLSpecialNode*, vector<string>, vector<vector<string>>);
 	vector<string> evaluateWith();
-	vector<string> evaluatePattern();
+	vector<string> evaluatePattern(PQLSpecialNode*, vector<string>);
 };
