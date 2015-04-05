@@ -10,6 +10,7 @@ using namespace std;
 #include "PKB.h"
 #include "TNode.h"
 #include "VarTable.h"
+#include "Helpers.h"
 
 
 static int current_index = 0;
@@ -36,6 +37,7 @@ VAR VarTable::insertVar(string varName) {
 //addModifies(varname stmtNo)
 
 void VarTable::draw(){
+	Helpers helper;
     map<VAR, VARROW>::iterator it;
     cout << "\n---------------------------------------------------------\n";
     cout << "VarTable";
@@ -44,27 +46,29 @@ void VarTable::draw(){
     {
         cout << "INDEX = " << (it -> first) << "\n";
         cout << "  NAME = " + it->second.varName << "\n";
+		cout << "  USES = " + helper.implode(it->second.usedBy, ",") << "\n";
+		cout << "  MODIFIES = " + helper.implode(it->second.modifiedBy, ",") << "\n";
     }
     cout << "\n---------------------------------------------------------\n";
 }
 
 // Need to insert this variable first
-void VarTable::addUses(string varName, int lineNo) {
+void VarTable::addUses(string varName, string lineNoOrProc) {
     map<VAR, VARROW>::iterator it;
     
     for (it = _table.begin(); it != _table.end(); it++)
     {
         if(it->second.varName == varName){
-            vector<int>::iterator itsUses;
-            vector<int> uses = it->second.usedBy;
+            vector<string>::iterator itsUses;
+            vector<string> uses = it->second.usedBy;
             
             for (itsUses = uses.begin(); itsUses != uses.end(); itsUses++) {
-                if (lineNo == *itsUses) {
+                if (lineNoOrProc == *itsUses) {
                     return;
                 }
             }
             
-            it->second.usedBy.push_back(lineNo);
+            it->second.usedBy.push_back(lineNoOrProc);
             
             return;
         }
@@ -75,22 +79,22 @@ void VarTable::addUses(string varName, int lineNo) {
 }
 
 // Need to insert this variable first
-void VarTable::addModifies(string varName, int lineNo) {
+void VarTable::addModifies(string varName, string lineNoOrProc) {
     map<VAR, VARROW>::iterator it;
     
     for (it = _table.begin(); it != _table.end(); it++)
     {
         if(it->second.varName == varName){
-            vector<int>::iterator itsMods;
-            vector<int> mods = it->second.modifiedBy;
+            vector<string>::iterator itsMods;
+            vector<string> mods = it->second.modifiedBy;
             
             for (itsMods = mods.begin(); itsMods != mods.end(); itsMods++) {
-                if (lineNo == *itsMods) {
+                if (lineNoOrProc == *itsMods) {
                     return;
                 }
             }
             
-            it->second.modifiedBy.push_back(lineNo);
+            it->second.modifiedBy.push_back(lineNoOrProc);
             
             return;
         }
@@ -100,7 +104,7 @@ void VarTable::addModifies(string varName, int lineNo) {
     // exit(0);
 }
 
-vector<int> VarTable::getUsedBy(string varName) {
+vector<string> VarTable::getUsedBy(string varName) {
     map<VAR, VARROW>::iterator it;
     for (it = _table.begin(); it != _table.end(); it++)
     {
@@ -110,7 +114,7 @@ vector<int> VarTable::getUsedBy(string varName) {
     }
 }
 
-vector<int> VarTable::getModifiedBy(string varName) {
+vector<string> VarTable::getModifiedBy(string varName) {
     map<VAR, VARROW>::iterator it;
     for (it = _table.begin(); it != _table.end(); it++)
     {

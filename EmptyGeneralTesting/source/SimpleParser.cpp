@@ -21,6 +21,8 @@ using namespace std;
 
 int next_index = 0;
 int next_lineNumber = 1;
+string currentProcName;
+int currentLineNumber;
 
 SimpleParser::SimpleParser(){
 	cout << "out";
@@ -103,6 +105,7 @@ TNode* SimpleParser::procedure(){
 	match("#name" , true);
 
 	string procName = tokens[next_index-1];
+	currentProcName = procName;
 
 	match("{", false);
 	stmtLstNode = stmtLst(true);
@@ -136,6 +139,10 @@ TNode* SimpleParser::whileLoop(){
 	varNode = new TNode();
 	varNode -> info = tokens[next_index-1];
 	varNode -> type = VARIABLE;
+
+	VarTable::insertVar(tokens[next_index-1]);
+	VarTable::addUses(tokens[next_index-1], to_string(static_cast<long long>(whileNode->lineNumber)));
+	VarTable::addUses(tokens[next_index-1], currentProcName);
 
 	whileNode -> firstChildLink(varNode);
 
@@ -200,6 +207,7 @@ TNode* SimpleParser::stmt(){
 
 	assign -> type = ASSIGN;
 	assign -> lineNumber = next_lineNumber;
+	currentLineNumber = assign -> lineNumber;
 	match("#name", true);
 	
 	next_lineNumber++;
@@ -208,6 +216,8 @@ TNode* SimpleParser::stmt(){
 	assign -> firstChildLink(leftVar);
 
 	VarTable::insertVar(tokens[next_index-1]);
+	VarTable::addModifies(tokens[next_index-1], to_string(static_cast<long long>(assign->lineNumber)));
+	VarTable::addModifies(tokens[next_index-1], currentProcName);
 
 	match("=", false);
 	if(!checkIsExpression()){			//normal assignment, eg: x = z;
@@ -220,11 +230,14 @@ TNode* SimpleParser::stmt(){
 		else{
 			exprNode -> type = VARIABLE;
 			VarTable::insertVar(tokens[next_index-1]);
+			VarTable::addUses(tokens[next_index-1], to_string(static_cast<long long>(assign->lineNumber)));
+			VarTable::addUses(tokens[next_index-1], currentProcName);
 		}
 
 		exprNode -> info = tokens[next_index-1];
 	}
 	else{			//assignment with expr, eg: x = y + z;
+		currentLineNumber = assign -> lineNumber;
 		exprNode = expr(0);
 	}
 		
@@ -270,6 +283,8 @@ TNode* SimpleParser::innerExpr(TNode* left){
 		leftVar -> type = VARIABLE;
 		leftVar -> info = tokens[next_index-1];
 		VarTable::insertVar(tokens[next_index-1]);
+		VarTable::addUses(tokens[next_index-1], to_string(static_cast<long long>(currentLineNumber)));
+		VarTable::addUses(tokens[next_index-1], currentProcName);
 	}
 
 	
@@ -286,6 +301,9 @@ TNode* SimpleParser::innerExpr(TNode* left){
 	else{
 		right -> type = VARIABLE;
 		VarTable::insertVar(tokens[next_index-1]);
+		VarTable::addUses(tokens[next_index-1], to_string(static_cast<long long>(currentLineNumber)));
+		VarTable::addUses(tokens[next_index-1], currentProcName);
+
 	}
 	right -> info = tokens[next_index-1];
 	

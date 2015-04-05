@@ -43,6 +43,19 @@ unsigned int Helpers::split(const std::string &txt, std::vector<std::string> &st
     return strs.size();
 }
 
+string Helpers::implode(vector<string> input, string delimiter){
+	 string result;
+	  for(vector<string>::iterator it = input.begin();
+		it != input.end();
+		++it) {
+		if(it != input.begin()) {
+		  result += ", ";
+		}
+		result += *it;
+	  }
+	  return result;
+}
+
 string Helpers::toLower(string input){
 	transform(input.begin(), input.end(), input.begin(), ::tolower);
 	return input;

@@ -16,8 +16,8 @@ using namespace std;
 typedef struct varRow
 {
     string varName;
-    vector<int> usedBy;
-    vector<int> modifiedBy;
+    vector<string> usedBy;
+    vector<string> modifiedBy;
     
 } VARROW;
 #endif
@@ -30,11 +30,11 @@ public:
     static VAR insertVar(string);
     static void draw();
     
-    static void addUses(string, int);
-    static void addModifies(string, int);
+    static void addUses(string varName, string lineNoOrProc);
+    static void addModifies(string varName, string lineNoOrProc);
     
-    static vector<int> getUsedBy(string);
-    static vector<int> getModifiedBy(string);
+    static vector<string> getUsedBy(string);
+    static vector<string> getModifiedBy(string);
     
 private:
     static map<VAR, VARROW> _table;

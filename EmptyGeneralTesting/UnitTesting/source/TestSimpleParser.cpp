@@ -11,7 +11,7 @@ TestSimpleParser::testParse(void)
 		  "x = z;"
 		  "z = 3;"
 		 "}";
-	CPPUNIT_ASSERT(1 == mTestObj->parse(test1));
+	//CPPUNIT_ASSERT(1 == mTestObj->parse(test1));
 
 	const char *test2 =
 		"procedureExample{ "
@@ -62,7 +62,7 @@ TestSimpleParser::testParse(void)
 				"}"
 			"}"
 		 "}";
-	//CPPUNIT_ASSERT(1 == mTestObj->parse(test8));
+	CPPUNIT_ASSERT(1 == mTestObj->parse(test8));
 }
 
 void
