@@ -24,4 +24,26 @@ public:
 	vector<string> getAllAssign();
 	vector<string> getAllWhile();
 
+	vector<string> patternMatching(string left,string right);
+
+	bool isInVarTable(string name);
+
+	int getFollows(int s);
+	int getFollowedBy(int s);
+	bool isFollows(int s1, int s2);
+	vector<int> getAllFollows();
+
+	vector<int> getFollowsStar(int);
+    vector<int> getFollowedStarBy(int);
+	bool isFollowsStar(int s1, int s2);
+
+	bool isParent(int, int);
+    int getParent(int);
+    vector<int> getChildren(int);
+	vector<int> getAllParents();
+
+    vector<int> getParentStar(int);
+    vector<int> getParentStarOf(int);
+	bool isParentStar(int s1, int s2);
+
 };

@@ -50,10 +50,18 @@ using namespace std;
 			result = selectResult;
 		}
 		else if (suchThatQueryPtr == NULL) {
-			//patternResult = evaluatePattern(patternQueryPtr);
+			patternResult = evaluatePattern(patternQueryPtr);
+			string patternAssign = (*patternQueryPtr).getName();
+			if (patternAssign.compare(select)==0 && root.getSymbol(patternAssign).compare("assign")==0) {
+				result = patternResult;
+			}
+			else {
+				result = selectResult;
+			}
 		}
 		else if (patternQueryPtr == NULL) {
-			//
+			suchThatResult = evaluateSuchThat(suchThatQueryPtr, selectResult, symbols);
+			result = suchThatResult;
 		}
 		else {
 			//both need evaluate
@@ -64,31 +72,41 @@ using namespace std;
 		(*resultNodePtr).setResult(result);
 	}
 
+	bool isInSymbols(string name, vector<vector<string>> symbols) {
+		for(int i = 0; i < symbols.size(); i++) {
+			if(name.compare(symbols.at(i).at(1))==0) {
+				return true;
+			}
+		}
+		return false;
+	}
 
-	vector<string> evaluateSuchThat(PQLSpecialNode* suchThatPtr, vector<string> filteredRes, vector<vector<string>> symbols) {
-		PQLRelationshipNode* relPtr = (*suchThatPtr).getChild();
-		
-		PQLRelationshipNode rel = *relPtr;
+	vector<string> evaluateSuchThat(PQLRelationshipNode* suchThatQueryPtr, vector<string> res, vector<vector<string>> symbols) {
+		PKB pkb = PKB();
+
+		PQLRelationshipNode rel = *suchThatQueryPtr;
 		string relName = rel.getName();
 		vector<PQLAttributeNode*> attributes = rel.getChildren();
 		PQLAttributeNode* aPtr = attributes.at(0);
-		PQLAttributeNode aNode = *aPtr;
 		string a = (*aPtr).getName();
 		PQLAttributeNode* bPtr = attributes.at(1);
 		string b = (*bPtr).getName();
 
-			bool aIsInSymbols = false, bIsInSymbols = false;
-			for(int i = 0; i < symbols.size(); i++) {
-				if(a == symbols.at(i).at(1)) {
-					aIsInSymbols = true;
-				}
-				if(b == symbols.at(i).at(1)) {
-					bIsInSymbols = true;
-				}
-			}
 			
 			if(relName.compare("follows")==0) {
-				
+				if(isInSymbols(a, symbols) && isInSymbols(b, symbols)) {                  //both are declared
+					//
+				}
+				else {
+					if(pkb.isFollows(stoi(a), stoi(b))) {
+						return res;
+					}
+					else {
+						vector<string> none;
+						none.push_back("none");
+						return none;
+					}
+				}
 			} 
 			else if(relName.compare("follows*")==0) {
 				//
@@ -108,10 +126,7 @@ using namespace std;
 			else {
 				throw (string) "invalid relationship in query!";
 			}
-
-
-
-		return filteredRes;
+		return res;
 	}
 
 	vector<string> evaluatePattern(PQLRelationshipNode* patternQueryPtr) {
@@ -120,16 +135,14 @@ using namespace std;
 
 			vector<PQLAttributeNode*> patternMatching = pattern.getChildren();
 			PQLAttributeNode* LPtr = patternMatching.at(0);
-			PQLAttributeNode leftPattern = *LPtr;
-			string left = leftPattern.getName();
+			string left = (*LPtr).getName();
 			PQLAttributeNode* RPtr = patternMatching.at(1);
-			PQLAttributeNode rightPattern = *RPtr;
-			string right = rightPattern.getName();
+			string right = (*RPtr).getName();
 
-			//call a function to match left with right
+			PKB pkb = PKB();
+			vector<string> patternResult = pkb.patternMatching(left, right);
 
-
-		return filteredRes;
+		return patternResult;
 	}
 
 	vector<string> merge(vector<string> vA, vector<string> vB, vector<string> vC) {
