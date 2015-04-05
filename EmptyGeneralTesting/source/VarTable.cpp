@@ -123,3 +123,23 @@ vector<string> VarTable::getModifiedBy(string varName) {
         }
     }
 }
+
+vector<string> VarTable::getAllVariables() {
+    map<VAR, VARROW>::iterator it;
+	vector<string> result;
+    for (it = _table.begin(); it != _table.end(); it++)
+    {
+		result.push_back(it->second.varName);
+    }
+}
+
+VAR VarTable::getVar(string name){
+	map<VAR, VARROW>::iterator it;
+    for (it = _table.begin(); it != _table.end(); it++)
+    {
+        if(it->second.varName == name){
+            return it->first;
+        }
+    }
+	return -1;
+}

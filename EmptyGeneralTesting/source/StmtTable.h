@@ -30,7 +30,9 @@ class StmtTable
 public:
     static void insertStmt(TNode*);
     static void draw();
-    
+    static vector<string> getAllStatementsNumber(nodeType);
+	static vector<string> getAllAssign();
+	static vector<string> getAllWhile();
     
 private:
     static map<short, STMTROW> _table;

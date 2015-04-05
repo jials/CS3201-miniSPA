@@ -15,8 +15,6 @@ class PKB {
 public:
 	PKB();
 	 
-	static int setProcToAST(PROC p, TNode* r);
-	static TNode* getRootAST (PROC p);
 
 	//methods required by query evaluator
 	vector<string> getAllVar();
@@ -24,7 +22,7 @@ public:
 	vector<string> getAllAssign();
 	vector<string> getAllWhile();
 
-	vector<string> patternMatching(string left,string right);
+	vector<string> patternMatching(string left,string right);		//todo
 
 	bool isInVarTable(string name);
 
@@ -37,7 +35,7 @@ public:
     vector<int> getFollowedStarBy(int);
 	bool isFollowsStar(int s1, int s2);
 
-	bool isParent(int, int);
+	bool isParent(int parent, int child);
     int getParent(int);
     vector<int> getChildren(int);
 	vector<int> getAllParents();

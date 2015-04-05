@@ -81,3 +81,25 @@ void StmtTable::draw(){
     }
     cout << "\n---------------------------------------------------------\n";
 }
+
+
+vector<string> StmtTable::getAllStatementsNumber(nodeType type){
+	map<short, STMTROW>::iterator it;
+	vector<string> result;
+	for (it = _table.begin(); it != _table.end(); it++)
+    {
+		if(type==ANY){
+			result.push_back(to_string(static_cast<long long>(it->second.stmtLineNumber)));
+		}
+		else{
+			if(type == it->second.type){
+				result.push_back(to_string(static_cast<long long>(it->second.stmtLineNumber)));
+			}
+		}
+		
+    }
+
+}
+
+
+

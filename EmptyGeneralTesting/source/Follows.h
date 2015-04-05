@@ -18,6 +18,7 @@ public:
     static vector<int> getAllFollows();
     static vector<int> getFollowsStar(int);
     static vector<int> getFollowedStarBy(int);
+	static bool isFollowsStar(int s1, int s2);
     static void draw();
 
 private:
