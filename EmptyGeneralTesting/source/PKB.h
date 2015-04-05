@@ -22,7 +22,8 @@ public:
 	vector<string> getAllAssign();
 	vector<string> getAllWhile();
 
-	vector<string> patternMatching(string left,string right);		//todo
+	//vector<string> patternMatching(string type, string left,string right);		//type: assign/while
+	vector<string> patternMatching(string left,string right);		//type: assign/while
 
 	bool isInVarTable(string name);
 
@@ -43,5 +44,9 @@ public:
     vector<int> getParentStar(int);
     vector<int> getParentStarOf(int);
 	bool isParentStar(int s1, int s2);
+
+	vector<string> getUsedBy(string);
+    vector<string> getModifiedBy(string);
+    
 
 };

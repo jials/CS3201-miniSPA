@@ -19,6 +19,7 @@ typedef struct stmtRow
     string stmtOriginalCode;
 	short stmtLineNumber;
     nodeType type;
+	string tag;
 
 } STMTROW;
 #endif
@@ -31,8 +32,8 @@ public:
     static void insertStmt(TNode*);
     static void draw();
     static vector<string> getAllStatementsNumber(nodeType);
-	static vector<string> getAllAssign();
-	static vector<string> getAllWhile();
+	static vector<string> getAllStatementsWithPattern(nodeType type, string left, string right);
+	
     
 private:
     static map<short, STMTROW> _table;

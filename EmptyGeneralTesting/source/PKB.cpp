@@ -91,3 +91,28 @@ bool PKB::isParentStar(int s1, int s2){
 	return Parent::isParentStar(s1, s2);
 }    
     
+vector<string> PKB::getUsedBy(string var){
+	return VarTable::getUsedBy(var);
+}
+
+vector<string> PKB::getModifiedBy(string var){
+	return VarTable::getModifiedBy(var);
+}
+
+
+//vector<string> PKB::patternMatching(string type, string left,string right){
+//	nodeType enumType;
+//	if(type == "while"){
+//		enumType = WHILE;
+//	}
+//	else if(type == "assign"){
+//		enumType = ASSIGN;
+//	}
+//	return StmtTable::getAllStatementsWithPattern(enumType, left, right);
+//
+//}
+
+vector<string> PKB::patternMatching(string left,string right){
+	return StmtTable::getAllStatementsWithPattern(ASSIGN, left, right);
+
+}
