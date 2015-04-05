@@ -2,6 +2,7 @@
 #include "PQLEvaluator.h"
 #include "QueryTreeNode.h"
 #include "QueryTreeRoot.h"
+#include "PKB.h"
 #include <vector>
 #include <string>
 
@@ -15,45 +16,66 @@ using namespace std;
 	void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr){
 		QueryTreeRoot root = *rootPtr;
 		vector<vector<string>> symbols = root.getSymbolTable();
-        vector<string> result;
+		string select = root.getSelect();
+		string selectType = root.getSymbol(select);
+        
+		PKB pkb = PKB();
+		vector<string> result;
+		vector<string> selectResult;
+		vector<string> suchThatResult;
+		vector<string> patternResult;
+
+		if(selectType.compare("stmt")==0) {
+			selectResult = pkb.getAllStmt();
+		}
+		else if (selectType.compare("assign")==0) {
+			selectResult = pkb.getAllAssign();
+		}
+		else if (selectType.compare("while")==0) {
+			selectResult = pkb.getAllWhile();
+		}
+		else if (selectType.compare("variable")==0) {
+			selectResult = pkb.getAllVar();
+		}
+		else {
+			throw (string) "Select type invalid!";
+		}
 
 		PQLSpecialNode* suchThatPtr = root.getSuchThat();
-		//PQLSpecialNode* withPtr = root.getWith();
-		//PQLSpecialNode* patternPtr = root.getPattern();
+		PQLSpecialNode* patternPtr = root.getPattern();
+		PQLRelationshipNode* suchThatQueryPtr = (*suchThatPtr).getChild();
+		PQLRelationshipNode* patternQueryPtr = (*patternPtr).getChild();
 
-		if(suchThatPtr!=NULL) {
-			result = evaluateSuchThat(suchThatPtr, result, symbols);
+		if(patternQueryPtr == NULL && suchThatQueryPtr == NULL) {
+			result = selectResult;
 		}
-		//if(withPtr != NULL) {
-		//	evaluateWith();
-		//}
-		//if(patternPtr != NULL) {
-		//	evaluatePattern();
-		//}
-		
+		else if (suchThatQueryPtr == NULL) {
+			//patternResult = evaluatePattern(patternQueryPtr);
+		}
+		else if (patternQueryPtr == NULL) {
+			//
+		}
+		else {
+			//both need evaluate
+		}
 
 
-
-		//PQLResultNode* resultNode = root.getResult();
-		//resultNode.setResult(result);
-		
+		PQLResultNode* resultNodePtr = root.getResult();
+		(*resultNodePtr).setResult(result);
 	}
 
 
 	vector<string> evaluateSuchThat(PQLSpecialNode* suchThatPtr, vector<string> filteredRes, vector<vector<string>> symbols) {
-		PQLSpecialNode suchThatNode = *suchThatPtr;
-
-		PQLRelationshipNode* relPtr = suchThatNode.getChild();
-		do {
-			PQLRelationshipNode rel = *relPtr;
-			string relName = rel.getName();
-			vector<PQLAttributeNode*> attributes = rel.getChildren();
-			PQLAttributeNode* aPtr = attributes.at(0);
-			PQLAttributeNode aNode = *aPtr;
-			string a = aNode.getName();
-			PQLAttributeNode* bPtr = attributes.at(1);
-			PQLAttributeNode bNode = *bPtr;
-			string b = bNode.getName();
+		PQLRelationshipNode* relPtr = (*suchThatPtr).getChild();
+		
+		PQLRelationshipNode rel = *relPtr;
+		string relName = rel.getName();
+		vector<PQLAttributeNode*> attributes = rel.getChildren();
+		PQLAttributeNode* aPtr = attributes.at(0);
+		PQLAttributeNode aNode = *aPtr;
+		string a = (*aPtr).getName();
+		PQLAttributeNode* bPtr = attributes.at(1);
+		string b = (*bPtr).getName();
 
 			bool aIsInSymbols = false, bIsInSymbols = false;
 			for(int i = 0; i < symbols.size(); i++) {
@@ -65,33 +87,51 @@ using namespace std;
 				}
 			}
 			
-			if(relName == "follows") {
-				//
+			if(relName.compare("follows")==0) {
+				
 			} 
-			else if(relName == "followsT") {
+			else if(relName.compare("follows*")==0) {
 				//
 			}
-			else if(relName == "parent") {
+			else if(relName.compare("parent")==0) {
 				//
 			}
-			else if(relName == "parentT") {
+			else if(relName.compare("parent*")==0) {
 				//
+			}
+			else if(relName.compare("modifies")==0) {
+				//
+			}
+			else if(relName.compare("uses")==0) {
+				//
+			}
+			else {
+				throw (string) "invalid relationship in query!";
 			}
 
-			//move on to the next relationship
-			//??? relPtr = rel.getNext();
-		}
-		while(relPtr!=NULL);
 
 
 		return filteredRes;
 	}
 
+	vector<string> evaluatePattern(PQLRelationshipNode* patternQueryPtr) {
+
+			PQLRelationshipNode pattern = *patternQueryPtr;
+
+			vector<PQLAttributeNode*> patternMatching = pattern.getChildren();
+			PQLAttributeNode* LPtr = patternMatching.at(0);
+			PQLAttributeNode leftPattern = *LPtr;
+			string left = leftPattern.getName();
+			PQLAttributeNode* RPtr = patternMatching.at(1);
+			PQLAttributeNode rightPattern = *RPtr;
+			string right = rightPattern.getName();
+
+			//call a function to match left with right
 
 
-	vector<string> evaluateWith() {
-		//
+		return filteredRes;
 	}
-	vector<string> evaluatePattern() {
+
+	vector<string> merge(vector<string> vA, vector<string> vB, vector<string> vC) {
 		//
 	}
