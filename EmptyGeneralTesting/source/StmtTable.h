@@ -13,11 +13,13 @@ using namespace std;
 #ifndef StmtTable_H
 #define StmtTable_H
 
+
 typedef struct stmtRow
 {
     string stmtOriginalCode;
 	short stmtLineNumber;
-    
+    nodeType type;
+
 } STMTROW;
 #endif
 
