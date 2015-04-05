@@ -16,6 +16,7 @@ using namespace std;
 #include "ProcTable.h"
 #include "VarTable.h"
 #include "StmtTable.h"
+#include "Parent.h"
 #include "TNode.h"
 #include "AST.h"
 
@@ -40,6 +41,7 @@ int SimpleParser::parse(string input) {
 		ProcTable::draw();
 		VarTable::draw();
 		StmtTable::draw();
+		Parent::draw();
 
 	} catch(const ParsingErrorException& error) {  
 		return 0;
@@ -108,7 +110,7 @@ TNode* SimpleParser::procedure(){
 	currentProcName = procName;
 
 	match("{", false);
-	stmtLstNode = stmtLst(true);
+	stmtLstNode = stmtLst(true, 0);
 	match("}", false);
 
 
@@ -148,7 +150,7 @@ TNode* SimpleParser::whileLoop(){
 
 	match("{", false);
 
-	innerNode = stmtLst(true);
+	innerNode = stmtLst(true, whileNode->lineNumber);
 
 	match("}", false);
 
@@ -159,7 +161,7 @@ TNode* SimpleParser::whileLoop(){
 	return whileNode;
 }
 
-TNode* SimpleParser::stmtLst(bool createStmtLstNode){
+TNode* SimpleParser::stmtLst(bool createStmtLstNode, int parentLine){
 
 	TNode* curNode;
 	TNode* nextNode;
@@ -168,7 +170,7 @@ TNode* SimpleParser::stmtLst(bool createStmtLstNode){
 		curNode = whileLoop();
 	}
 	else{
-		curNode = stmt();
+		curNode = stmt(parentLine);
 		match(";", false);
 	}
 
@@ -177,7 +179,7 @@ TNode* SimpleParser::stmtLst(bool createStmtLstNode){
 		
 	}
 	else{
-		nextNode = stmtLst(false);
+		nextNode = stmtLst(false, parentLine);
 		curNode -> rightSiblingLink(nextNode);
 	}
 
@@ -196,7 +198,7 @@ TNode* SimpleParser::stmtLst(bool createStmtLstNode){
 
 }
 
-TNode* SimpleParser::stmt(){
+TNode* SimpleParser::stmt(int parentLine){
 	TNode *assign;
 	TNode *leftVar;
 	TNode *exprNode;
@@ -218,6 +220,10 @@ TNode* SimpleParser::stmt(){
 	VarTable::insertVar(tokens[next_index-1]);
 	VarTable::addModifies(tokens[next_index-1], to_string(static_cast<long long>(assign->lineNumber)));
 	VarTable::addModifies(tokens[next_index-1], currentProcName);
+	if(parentLine != 0){
+		Parent::setParent(parentLine, assign->lineNumber);
+	}
+
 
 	match("=", false);
 	if(!checkIsExpression()){			//normal assignment, eg: x = z;

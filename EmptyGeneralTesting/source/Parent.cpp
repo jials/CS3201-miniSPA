@@ -1,4 +1,8 @@
 #include "Parent.h"
+#include <iostream>
+
+map<int, int> Parent::_table;
+
 
 Parent::Parent() {
 }
@@ -45,4 +49,18 @@ vector<int> Parent::getParentStar(int) {
 }
 
 vector<int> Parent::getParentStarOf(int) {
+}
+
+
+void Parent::draw(){
+    map<int, int>::iterator it;
+    cout << "\n---------------------------------------------------------\n";
+    cout << "ParentTable";
+    cout << "\n-------------------\n";
+    for (it = _table.begin(); it != _table.end(); it++)
+    {
+        cout << "PARENT = " << it -> second << "\n";
+        cout << "  CHILD = " << it -> first << "\n";
+    }
+    cout << "\n---------------------------------------------------------\n";
 }

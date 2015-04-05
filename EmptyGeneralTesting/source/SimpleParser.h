@@ -20,8 +20,8 @@ private:
 	vector<string> tokens;
 	TNode* program();
 	TNode* procedure();
-	TNode* stmtLst(bool createStmtLstNode);
-	TNode* stmt();
+	TNode* stmtLst(bool createStmtLstNode, int parentLine);
+	TNode* stmt(int parentLine);
 	TNode* whileLoop();
 	TNode* expr(TNode*);
 	TNode* innerExpr(TNode*);
