@@ -13,6 +13,10 @@ using namespace std;
 		pattern=NULL;
 	}
 
+	string QueryTreeRoot::getSelect(){
+		return select;
+	}
+
 	string QueryTreeRoot::getSymbol(string str){
 		for(unsigned int i=0;i<symbolTable.size();i++){			
 			if (symbolTable[i][1].compare(str)==0)

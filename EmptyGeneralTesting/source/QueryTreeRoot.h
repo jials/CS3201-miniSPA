@@ -16,7 +16,7 @@ public:
 	QueryTreeRoot();
 	QueryTreeRoot(string name);
 	string getName();
-
+	string getSelect();
 	PQLResultNode* getResult();
 
 	PQLSpecialNode* getSuchThat();
