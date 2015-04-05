@@ -1,6 +1,9 @@
 #include "Follows.h"
+#include <iostream>
 
 using namespace std;
+
+map<int, int> Follows::_table;
 
 Follows::Follows() {
 }
@@ -55,3 +58,14 @@ vector<int> Follows::getFollowsStar(int) {
 vector<int> Follows::getFollowedStarBy(int) {
 }
 
+void Follows::draw(){
+    map<int, int>::iterator it;
+    cout << "\n---------------------------------------------------------\n";
+    cout << "FollowsTable";
+    cout << "\n-------------------\n";
+    for (it = _table.begin(); it != _table.end(); it++)
+    {
+        cout << "|" << it -> first << " -> " << it -> second << "\n";
+    }
+    cout << "\n---------------------------------------------------------\n";
+}

@@ -17,6 +17,7 @@ using namespace std;
 #include "VarTable.h"
 #include "StmtTable.h"
 #include "Parent.h"
+#include "Follows.h"
 #include "TNode.h"
 #include "AST.h"
 
@@ -42,6 +43,7 @@ int SimpleParser::parse(string input) {
 		VarTable::draw();
 		StmtTable::draw();
 		Parent::draw();
+		Follows::draw();
 
 	} catch(const ParsingErrorException& error) {  
 		return 0;
@@ -181,6 +183,8 @@ TNode* SimpleParser::stmtLst(bool createStmtLstNode, int parentLine){
 	else{
 		nextNode = stmtLst(false, parentLine);
 		curNode -> rightSiblingLink(nextNode);
+		Follows::setFollows(curNode->lineNumber, nextNode->lineNumber);
+
 	}
 
 	if(createStmtLstNode){

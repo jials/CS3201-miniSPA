@@ -58,7 +58,8 @@ TestSimpleParser::testParse(void)
 			"while x{"
 				"y = 1;"
 				"while y {"
-					"z = k + y;"
+					"z = k + y + 2 + 3;"
+					"z = k + 1;"
 				"}"
 			"}"
 		 "}";
