@@ -12,6 +12,7 @@ CppUnit::TestSuite *unitSuite = new CppUnit::TestSuite( "All unit test" );
 unitSuite->addTest(CppUnit::TestFactoryRegistry::getRegistry("VarTableTest").makeTest());	
 unitSuite->addTest(CppUnit::TestFactoryRegistry::getRegistry("TestSimpleParser").makeTest());
 unitSuite->addTest(CppUnit::TestFactoryRegistry::getRegistry("TestParent").makeTest());
+unitSuite->addTest(CppUnit::TestFactoryRegistry::getRegistry("TestFollows").makeTest());
 //unitSuite->addTest(CppUnit::TestFactoryRegistry::getRegistry("TestSimpleValidator").makeTest());
 unitSuite->addTest(CppUnit::TestFactoryRegistry::getRegistry("QueryPreprocessorTest").makeTest());
 unitSuite->addTest(CppUnit::TestFactoryRegistry::getRegistry("ProcTableTest").makeTest());	
