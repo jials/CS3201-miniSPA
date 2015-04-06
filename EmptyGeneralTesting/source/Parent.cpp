@@ -4,7 +4,7 @@
 map<int, int> Parent::_table;
 
 
-Parent::Parent() {
+Parent::Parent(string str) {
 }
 
 void Parent::setParent(int parent, int child) {
@@ -37,20 +37,13 @@ vector<int> Parent::getChildren(int parent) {
     map<int,int>::iterator it;
     vector<int> children;
     for (it = _table.begin(); it != _table.end(); it++) {
+		//cout << "(" << it -> first << ", " << it -> second << ") ";
         if (it -> second == parent) {
             children.push_back(it -> first);
         }
     }
     return children;
 }
-
-//call design abstraction
-vector<int> Parent::getParentStar(int) {
-}
-
-vector<int> Parent::getParentStarOf(int) {
-}
-
 
 void Parent::draw(){
     map<int, int>::iterator it;

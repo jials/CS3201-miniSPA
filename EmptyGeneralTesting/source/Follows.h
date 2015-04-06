@@ -9,7 +9,7 @@ using namespace std;
 class Follows
 {
 public:
-    Follows(void);
+    Follows(string);
     
     static void setFollows(int prev, int curr);
     static bool isFollows(int, int);

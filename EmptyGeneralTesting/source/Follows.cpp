@@ -5,7 +5,7 @@ using namespace std;
 
 map<int, int> Follows::_table;
 
-Follows::Follows() {
+Follows::Follows(string str) {
 }
 
 //Set A to follow B
@@ -14,18 +14,21 @@ void Follows::setFollows(int prev, int curr) {
 }
 
 bool Follows::isFollows(int prev, int curr) {
-    map<int,int>::iterator it = _table.find(prev);
-    if ( (it == _table.end()) || (it -> second != curr) ) {
-        return false;
-    } else {
-        return true;
-    }
+    map<int,int>::iterator it;
+	for (it = _table.begin(); it != _table.end(); it++) {
+		//cout << "(" << it -> first << ", " << it -> second << ") ";
+		if (it -> second == curr && it -> first == prev) {
+			return true;
+		}
+	}
+	return false;
 }
 
 //Return -1 if not found
 int Follows::getFollows(int curr) {
     map<int,int>::iterator it;
     for (it = _table.begin(); it != _table.end(); it++) {
+		//cout << "(" << it -> first << ", " << it -> second << ") ";
         if (it -> second == curr) {
             return it -> first;
         }
@@ -50,12 +53,6 @@ vector<int> Follows::getAllFollows() {
         result[it -> first] = it -> second;
     }
     return result;
-}
-
-vector<int> Follows::getFollowsStar(int) {
-}
-
-vector<int> Follows::getFollowedStarBy(int) {
 }
 
 void Follows::draw(){
