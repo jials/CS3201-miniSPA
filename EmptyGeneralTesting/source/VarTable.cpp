@@ -131,6 +131,7 @@ vector<string> VarTable::getAllVariables() {
     {
 		result.push_back(it->second.varName);
     }
+	return result;
 }
 
 VAR VarTable::getVar(string name){

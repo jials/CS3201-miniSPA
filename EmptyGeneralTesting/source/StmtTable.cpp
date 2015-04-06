@@ -102,7 +102,7 @@ vector<string> StmtTable::getAllStatementsNumber(nodeType type){
 		}
 		
     }
-
+	return result;
 }
 
 vector<string> StmtTable::getAllStatementsWithPattern(nodeType type, string left, string right){
@@ -141,6 +141,7 @@ vector<string> StmtTable::getAllStatementsWithPattern(nodeType type, string left
 		}
 		
     }
+	return result;
 }
 
 

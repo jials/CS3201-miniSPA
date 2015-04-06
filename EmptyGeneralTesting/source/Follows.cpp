@@ -52,11 +52,11 @@ vector<int> Follows::getAllFollows() {
     return result;
 }
 
-vector<int> Follows::getFollowsStar(int) {
-}
-
-vector<int> Follows::getFollowedStarBy(int) {
-}
+//vector<int> Follows::getFollowsStar(int) {
+//}
+//
+//vector<int> Follows::getFollowedStarBy(int) {
+//}
 
 void Follows::draw(){
     map<int, int>::iterator it;

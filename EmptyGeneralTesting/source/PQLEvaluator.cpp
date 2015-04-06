@@ -145,6 +145,6 @@ using namespace std;
 		return patternResult;
 	}
 
-	vector<string> merge(vector<string> vA, vector<string> vB, vector<string> vC) {
-		//
-	}
+	//vector<string> merge(vector<string> vA, vector<string> vB, vector<string> vC) {
+	//	//
+	//}
