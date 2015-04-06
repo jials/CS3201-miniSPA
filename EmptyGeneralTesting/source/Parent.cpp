@@ -45,11 +45,11 @@ vector<int> Parent::getChildren(int parent) {
 }
 
 //call design abstraction
-vector<int> Parent::getParentStar(int) {
-}
-
-vector<int> Parent::getParentStarOf(int) {
-}
+//vector<int> Parent::getParentStar(int) {
+//}
+//
+//vector<int> Parent::getParentStarOf(int) {
+//}
 
 
 void Parent::draw(){

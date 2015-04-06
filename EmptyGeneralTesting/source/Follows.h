@@ -6,6 +6,9 @@
 
 using namespace std;
 
+#ifndef Follows_H
+#define Follows_H
+
 class Follows
 {
 public:
@@ -24,3 +27,5 @@ public:
 private:
     static map<int, int> _table;
 };
+
+#endif

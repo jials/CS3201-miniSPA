@@ -1,6 +1,7 @@
 #include "TestSimpleParser.h"
 #include "SimpleParser.h"
 
+
 void
 TestSimpleParser::testParse(void)
 {
@@ -63,7 +64,35 @@ TestSimpleParser::testParse(void)
 				"}"
 			"}"
 		 "}";
-	CPPUNIT_ASSERT(1 == mTestObj->parse(test8));
+	//CPPUNIT_ASSERT(1 == mTestObj->parse(test8));
+
+	
+	const char *test9 =
+		"procedure ABC {"
+			  "i=1;"					
+			 "b=200 ;"						
+				"c= a   ;"					
+			"while a"							
+			"{"
+			   "while beta {"						
+					"oSCar  = 1 + beta + tmp;"			
+					"while tmp{"					
+					  "oSCar = I + k + j1k + chArlie; }"		
+				"while x {"					
+					"x = x + 1;"					
+					"while left {"					
+					  "while right {"					
+						"Romeo = Romeo + 1;"				
+						"b = 0;"					
+						"c = delta    + l  + width + Romeo ; }"	
+						"while c {"					
+						  "c = c +1   	; }" 			
+						"x = x+ 1	; }}"				
+					  "a=   2; }"					
+			   "w = w+1  ;"						
+			"}"
+			"}";
+	CPPUNIT_ASSERT(1 == mTestObj->parse(test9));
 }
 
 void
@@ -85,6 +114,8 @@ TestSimpleParser::testAppendWhiteSpace(void)
 	CPPUNIT_ASSERT(result2 == mTestObj->appendWhiteSpace(test2));
 
 }
+
+
 
 void TestSimpleParser::setUp(void)
 {

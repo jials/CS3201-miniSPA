@@ -6,115 +6,43 @@
     <ClCompile Include="..\source\Follows.cpp" />
     <ClCompile Include="..\source\Helpers.cpp" />
     <ClCompile Include="..\source\Parent.cpp" />
-    <ClCompile Include="..\source\Parser.cpp" />
-    <ClCompile Include="..\source\ParsingErrorException.cpp" />
     <ClCompile Include="..\source\PKB.cpp" />
+    <ClCompile Include="..\source\ProcTable.cpp" />
+    <ClCompile Include="..\source\SimpleParser.cpp" />
+    <ClCompile Include="..\source\StmtTable.cpp" />
+    <ClCompile Include="..\source\TNode.cpp" />
+    <ClCompile Include="..\source\VarTable.cpp" />
     <ClCompile Include="..\source\PQLAttributeNode.cpp" />
     <ClCompile Include="..\source\PQLEvaluator.cpp" />
     <ClCompile Include="..\source\PQLPreProcessor.cpp" />
     <ClCompile Include="..\source\PQLRelationshipNode.cpp" />
     <ClCompile Include="..\source\PQLResultNode.cpp" />
     <ClCompile Include="..\source\PQLSpecialNode.cpp" />
-    <ClCompile Include="..\source\ProcTable.cpp" />
     <ClCompile Include="..\source\QueryTreeNode.cpp" />
     <ClCompile Include="..\source\QueryTreeRoot.cpp" />
-    <ClCompile Include="..\source\SimpleParser.cpp" />
-    <ClCompile Include="..\source\TNode.cpp" />
-    <ClCompile Include="..\source\VarTable.cpp" />
-    <ClCompile Include="..\source\StmtTable.cpp" />
+    <ClCompile Include="..\source\ModifiesAndUses.cpp" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <ClInclude Include="..\source\AST.h" />
     <ClInclude Include="..\source\DesignExtractor.h" />
     <ClInclude Include="..\source\Follows.h" />
     <ClInclude Include="..\source\Helpers.h" />
     <ClInclude Include="..\source\Parent.h" />
-    <ClInclude Include="..\source\Parser.h" />
     <ClInclude Include="..\source\ParsingErrorException.h" />
     <ClInclude Include="..\source\PKB.h" />
+    <ClInclude Include="..\source\ProcTable.h" />
+    <ClInclude Include="..\source\SimpleParser.h" />
+    <ClInclude Include="..\source\StmtTable.h" />
+    <ClInclude Include="..\source\TNode.h" />
+    <ClInclude Include="..\source\VarTable.h" />
     <ClInclude Include="..\source\PQLAttributeNode.h" />
     <ClInclude Include="..\source\PQLEvaluator.h" />
     <ClInclude Include="..\source\PQLPreProcessor.h" />
     <ClInclude Include="..\source\PQLRelationshipNode.h" />
     <ClInclude Include="..\source\PQLResultNode.h" />
     <ClInclude Include="..\source\PQLSpecialNode.h" />
-    <ClInclude Include="..\source\ProcTable.h" />
     <ClInclude Include="..\source\QueryTreeNode.h" />
     <ClInclude Include="..\source\QueryTreeRoot.h" />
-    <ClInclude Include="..\source\SimpleParser.h" />
-    <ClInclude Include="..\source\TNode.h" />
-    <ClInclude Include="..\source\VarTable.h" />
-    <ClInclude Include="..\source\StmtTable.h" />
-=======
-    <ClCompile Include="..\source\DesignExtractor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\Parser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\PKB.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\TNode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PQLAttributeNode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PQLRelationshipNode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PQLSpecialNode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="QueryTreeNode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="QueryTreeRoot.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PQLPreProcessor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Follows.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Parent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\source\PKB.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\TNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="QueryTreeNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PQLPreProcessor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PQLAttributeNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PQLRelationshipNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PQLSpecialNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="QueryTreeRoot.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Follows.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Parent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
->>>>>>> origin/ParentsFollows
+    <ClInclude Include="..\source\ModifiesAndUses.h" />
   </ItemGroup>
 </Project>

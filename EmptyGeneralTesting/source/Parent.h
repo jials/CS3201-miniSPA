@@ -6,6 +6,9 @@
 
 using namespace std;
 
+#ifndef Parent_H
+#define Parent_H
+
 class Parent
 {
 public:
@@ -24,3 +27,5 @@ private:
     static map<int, int> _table;
     
 };
+
+#endif

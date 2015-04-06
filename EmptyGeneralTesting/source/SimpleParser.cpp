@@ -170,6 +170,9 @@ TNode* SimpleParser::stmtLst(bool createStmtLstNode, int parentLine){
 	
 	if( tokens[next_index] == "while"){
 		curNode = whileLoop();
+		if(parentLine!=0){
+			Parent::setParent(parentLine, curNode->lineNumber);
+		}
 	}
 	else{
 		curNode = stmt(parentLine);
@@ -289,12 +292,18 @@ TNode* SimpleParser::innerExpr(TNode* left){
 	}
 	else{
 		leftVar = new TNode();
-		match("#name", true);
-		leftVar -> type = VARIABLE;
+		match("#any", true);
+		if(helpers.isNumber(tokens[next_index-1])){
+			leftVar -> type = CONSTANT;
+		}
+		else{
+			leftVar -> type = VARIABLE;
+			
+			VarTable::insertVar(tokens[next_index-1]);
+			VarTable::addUses(tokens[next_index-1], to_string(static_cast<long long>(currentLineNumber)));
+			VarTable::addUses(tokens[next_index-1], currentProcName);
+		}
 		leftVar -> info = tokens[next_index-1];
-		VarTable::insertVar(tokens[next_index-1]);
-		VarTable::addUses(tokens[next_index-1], to_string(static_cast<long long>(currentLineNumber)));
-		VarTable::addUses(tokens[next_index-1], currentProcName);
 	}
 
 	
@@ -349,6 +358,7 @@ string SimpleParser::appendWhiteSpace(string input){
 	symbolList.push_back("{");
 	symbolList.push_back("}");
 	symbolList.push_back("+");
+	symbolList.push_back("=");
 	for(int i=0; i <= symbolList.size() - 1 ; i++){
 		helpers.replaceAll(input, symbolList[i], " " + symbolList[i] + " ");
 	}

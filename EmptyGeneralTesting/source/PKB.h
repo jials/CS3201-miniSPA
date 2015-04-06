@@ -6,6 +6,13 @@
 #include <vector>
 
 using namespace std;
+
+#ifndef PKB_H
+#define PKB_H
+
+
+
+
 typedef short PROC;
 typedef short VAR;
 class TNode;
@@ -27,26 +34,36 @@ public:
 
 	bool isInVarTable(string name);
 
-	int getFollows(int s);
-	int getFollowedBy(int s);
+	string getFollows(int s);
+	string getFollowedBy(int s);
 	bool isFollows(int s1, int s2);
-	vector<int> getAllFollows();
+	vector<string> getAllFollows();
 
-	vector<int> getFollowsStar(int);
-    vector<int> getFollowedStarBy(int);
+	vector<string> getFollowsStar(int s);
+	vector<string> getFollowedStarBy(int s);
 	bool isFollowsStar(int s1, int s2);
+	vector<string> getAllFollowsStar();
 
 	bool isParent(int parent, int child);
-    int getParent(int);
-    vector<int> getChildren(int);
-	vector<int> getAllParents();
+    string getParent(int);
+    vector<string> getChildren(int);
+	vector<string> getAllParents();
 
-    vector<int> getParentStar(int);
-    vector<int> getParentStarOf(int);
-	bool isParentStar(int s1, int s2);
+	bool isParentStar(int parent, int child);
+    vector<string> getParentStar(int);
+    vector<string> getChildrenStar(int);
+	vector<string> getAllParentsStar();
 
-	vector<string> getUsedBy(string);
-    vector<string> getModifiedBy(string);
-    
+    string getModifiedBy(int stmt);                  //returns the varName that stmt modifies
+	bool isModifies(int stmt, string var);
+	vector<string> getAllModifies(string var);         //returns the list of stmts that modifies var
+    vector<string> getAllModifyingStmt();
+
+	vector<string> getUsedBy(int stmt);
+	bool isUses(int stmt, string var);
+	vector<string> getAllUses(string var);
+	vector<string> getAllUsingStmt();
 
 };
+
+#endif
