@@ -22,8 +22,8 @@ public:
 	vector<string> getAllAssign();
 	vector<string> getAllWhile();
 
-	//vector<string> patternMatching(string type, string left,string right);		//type: assign/while
-	vector<string> patternMatching(string left,string right);		//type: assign/while
+	vector<string> patternMatching(string type, string left,string right);		//type: assign/while
+	//vector<string> patternMatching(string left,string right);		//type: assign/while
 
 	bool isInVarTable(string name);
 
