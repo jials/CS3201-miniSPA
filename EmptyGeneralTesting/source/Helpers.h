@@ -5,6 +5,9 @@
 #include <vector>
 using namespace std;
 
+#ifndef Helpers_H
+#define Helpers_H
+
 class Helpers // Standard way of defining the class
 {
 public:
@@ -13,5 +16,7 @@ public:
   string implode(vector<string>, string delimiter);
   string toLower(string);
   bool isNumber(const string& s);
-  char* stringToCharArray(string);
+  const char * stringToCharArray(const string& s);
 };
+
+#endif

@@ -6,6 +6,13 @@
 #include <vector>
 
 using namespace std;
+
+#ifndef PKB_H
+#define PKB_H
+
+
+
+
 typedef short PROC;
 typedef short VAR;
 class TNode;
@@ -50,3 +57,5 @@ public:
     
 
 };
+
+#endif
