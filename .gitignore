@@ -1,5 +1,6 @@
 Debug/
 Release/
+ipch/
 
 
 # Windows image file caches
