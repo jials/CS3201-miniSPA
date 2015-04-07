@@ -6,11 +6,13 @@
     <ClCompile Include="source\TestQueryPreProcessor.cpp" />
     <ClCompile Include="TestFollows.cpp" />
     <ClCompile Include="TestParent.cpp" />
+    <ClCompile Include="TestQueryEvaluator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\TestSimpleParser.h" />
     <ClInclude Include="source\TestQueryPreProcessor.h" />
     <ClInclude Include="TestFollows.h" />
     <ClInclude Include="TestParent.h" />
+    <ClInclude Include="TestQueryEvaluator.h" />
   </ItemGroup>
 </Project>
