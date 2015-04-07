@@ -8,7 +8,7 @@ using namespace std;
 #ifndef TNode_H
 #define TNode_H
 
-enum nodeType { UNDEFINED, ASSIGN, VARIABLE, PROGRAM, PROCEDURE, CONSTANT, STMTLST, PLUS, WHILE };
+enum nodeType { ANY, UNDEFINED, ASSIGN, VARIABLE, PROGRAM, PROCEDURE, CONSTANT, STMTLST, PLUS, WHILE };
 
 class TNode
 {

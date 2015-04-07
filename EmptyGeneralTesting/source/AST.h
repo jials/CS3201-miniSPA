@@ -6,6 +6,9 @@
 
 using namespace std;
 
+#ifndef AST_H
+#define AST_H
+
 #include "TNode.h"
 
 class AST{
@@ -19,6 +22,7 @@ private:
 
 };
 
+#endif
 
 
 

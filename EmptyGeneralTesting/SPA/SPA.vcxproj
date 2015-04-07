@@ -15,9 +15,8 @@
     <ClCompile Include="..\source\DesignExtractor.cpp" />
     <ClCompile Include="..\source\Follows.cpp" />
     <ClCompile Include="..\source\Helpers.cpp" />
+    <ClCompile Include="..\source\ModifiesAndUses.cpp" />
     <ClCompile Include="..\source\Parent.cpp" />
-    <ClCompile Include="..\source\Parser.cpp" />
-    <ClCompile Include="..\source\ParsingErrorException.cpp" />
     <ClCompile Include="..\source\PKB.cpp" />
     <ClCompile Include="..\source\PQLAttributeNode.cpp" />
     <ClCompile Include="..\source\PQLEvaluator.cpp" />
@@ -38,8 +37,8 @@
     <ClInclude Include="..\source\DesignExtractor.h" />
     <ClInclude Include="..\source\Follows.h" />
     <ClInclude Include="..\source\Helpers.h" />
+    <ClInclude Include="..\source\ModifiesAndUses.h" />
     <ClInclude Include="..\source\Parent.h" />
-    <ClInclude Include="..\source\Parser.h" />
     <ClInclude Include="..\source\ParsingErrorException.h" />
     <ClInclude Include="..\source\PKB.h" />
     <ClInclude Include="..\source\PQLAttributeNode.h" />

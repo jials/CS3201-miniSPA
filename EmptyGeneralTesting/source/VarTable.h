@@ -30,12 +30,14 @@ public:
     static VAR insertVar(string);
     static void draw();
     
+	static VAR getVar(string);
     static void addUses(string varName, string lineNoOrProc);
     static void addModifies(string varName, string lineNoOrProc);
     
     static vector<string> getUsedBy(string);
     static vector<string> getModifiedBy(string);
     
+	static vector<string> getAllVariables();
 private:
     static map<VAR, VARROW> _table;
     

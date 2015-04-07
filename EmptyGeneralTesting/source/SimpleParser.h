@@ -6,6 +6,8 @@
 
 using namespace std;
 
+#ifndef SimpleParser_H
+#define SimpleParser_H
 
 class SimpleParser
 {
@@ -29,3 +31,4 @@ private:
 	bool checkIsExpression();
 
 };
+#endif

@@ -1,6 +1,10 @@
 #include <string>
 using namespace std;
 
+#ifndef ParsingErrorException_H
+#define ParsingErrorException_H
+
+
 
 class ParsingErrorException : public exception
 {
@@ -14,3 +18,5 @@ public:
 private:
   string msg;
 };
+
+#endif

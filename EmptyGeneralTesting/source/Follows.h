@@ -6,6 +6,9 @@
 
 using namespace std;
 
+#ifndef Follows_H
+#define Follows_H
+
 class Follows
 {
 public:
@@ -16,10 +19,10 @@ public:
     static int getFollows(int);
     static int getFollowedBy(int);
     static vector<int> getAllFollows();
-    static vector<int> getFollowsStar(int);
-    static vector<int> getFollowedStarBy(int);
     static void draw();
 
 private:
     static map<int, int> _table;
 };
+
+#endif

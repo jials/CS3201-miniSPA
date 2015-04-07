@@ -1,4 +1,9 @@
 #include "TestWrapper.h"
+#include "SimpleParser.h"
+#include <fstream>
+#include <string>
+
+using namespace std;
 
 // implementation code of WrapperFactory - do NOT modify the next 5 lines
 AbstractWrapper* WrapperFactory::wrapper = 0;
@@ -13,12 +18,25 @@ volatile bool TestWrapper::GlobalStop = false;
 TestWrapper::TestWrapper() {
   // create any objects here as instance variables of this class
   // as well as any initialization required for your spa program
+	
 }
 
 // method for parsing the SIMPLE source
 void TestWrapper::parse(std::string filename) {
 	// call your parser to do the parsing
-  // ...rest of your code...
+    // ...rest of your code...
+
+	string code;
+	ifstream infile;
+	infile.open (filename);
+        while(!infile.eof()) // To get you all the lines.
+        {
+	        getline(infile,code); // Saves the line in STRING.
+        }
+	infile.close();
+	SimpleParser parser;
+	parser.parse(code);
+
 }
 
 // method to evaluating a query

@@ -9,11 +9,110 @@ using namespace std;
 
 #include "PKB.h"
 #include "TNode.h"
+#include "VarTable.h"
+#include "StmtTable.h"
+#include "Follows.h"
+#include "Parent.h"
 
-int PKB::setProcToAST(PROC p, TNode* r) {
-	return NULL;
+vector<string> PKB::getAllVar(){
+	return VarTable::getAllVariables();
 }
 
-TNode* PKB::getRootAST (PROC p){
-	return NULL;
+vector<string> PKB::getAllStmt(){
+	return StmtTable::getAllStatementsNumber(ANY);
+}
+
+vector<string> PKB::getAllAssign(){
+	return StmtTable::getAllStatementsNumber(ASSIGN);
+}
+
+vector<string> PKB::getAllWhile(){
+	return StmtTable::getAllStatementsNumber(WHILE);
+}
+
+bool PKB::isInVarTable(string name){
+	if (VarTable::getVar(name) == -1) return false;
+	else return true;
+}
+
+int PKB::getFollows(int s){
+	return Follows::getFollows(s);
+}
+
+int PKB::getFollowedBy(int s){
+	return Follows::getFollowedBy(s);
+}
+
+bool PKB::isFollows(int s1, int s2){
+	return Follows::isFollows(s1, s2);
+}
+
+vector<int> PKB::getAllFollows(){
+	return Follows::getAllFollows();
+}
+
+vector<int> PKB::getFollowsStar(int s){
+	return Follows::getFollowsStar(s);
+}
+
+vector<int> PKB::getFollowedStarBy(int s){
+	return Follows::getFollowedStarBy(s);
+}
+	
+bool PKB::isFollowsStar(int s1, int s2){
+	return Follows::isFollowsStar(s1, s2);
+}
+
+bool PKB::isParent(int parent, int child){
+	return Parent::isParent(parent, child);
+}
+
+int PKB::getParent(int child){
+	return Parent::getParent(child);
+}
+
+vector<int> PKB::getChildren(int parent){
+	return Parent::getChildren(parent);
+}
+
+vector<int> PKB::getAllParents(){
+	return Parent::getAllParents();
+}
+
+vector<int> PKB::getParentStar(int s){
+	return Parent::getParentStar(s);
+}
+
+vector<int> PKB::getParentStarOf(int s){
+	return Parent::getParentStarOf(s);
+}
+
+bool PKB::isParentStar(int s1, int s2){
+	return Parent::isParentStar(s1, s2);
+}    
+    
+vector<string> PKB::getUsedBy(string var){
+	return VarTable::getUsedBy(var);
+}
+
+vector<string> PKB::getModifiedBy(string var){
+	return VarTable::getModifiedBy(var);
+}
+
+
+//vector<string> PKB::patternMatching(string type, string left,string right){
+//	nodeType enumType;
+//	if(type == "while"){
+//		enumType = WHILE;
+//	}
+//	else if(type == "assign"){
+//		enumType = ASSIGN;
+//	}
+//	return StmtTable::getAllStatementsWithPattern(enumType, left, right);
+//
+//}
+
+vector<string> PKB::patternMatching(string left,string right){
+	return StmtTable::getAllStatementsWithPattern(ASSIGN, left, right);
+
 }
