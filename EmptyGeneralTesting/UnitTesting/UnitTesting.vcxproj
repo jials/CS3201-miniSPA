@@ -77,12 +77,14 @@
     <ClCompile Include="source\UnitTest.cpp" />
     <ClCompile Include="TestFollows.cpp" />
     <ClCompile Include="TestParent.cpp" />
+    <ClCompile Include="TestQueryEvaluator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\TestQueryPreProcessor.h" />
     <ClInclude Include="source\TestSimpleParser.h" />
     <ClInclude Include="TestFollows.h" />
     <ClInclude Include="TestParent.h" />
+    <ClInclude Include="TestQueryEvaluator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

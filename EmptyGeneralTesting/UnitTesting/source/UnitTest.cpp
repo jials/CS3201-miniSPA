@@ -16,6 +16,7 @@ unitSuite->addTest(CppUnit::TestFactoryRegistry::getRegistry("TestFollows").make
 //unitSuite->addTest(CppUnit::TestFactoryRegistry::getRegistry("TestSimpleValidator").makeTest());
 unitSuite->addTest(CppUnit::TestFactoryRegistry::getRegistry("QueryPreprocessorTest").makeTest());
 unitSuite->addTest(CppUnit::TestFactoryRegistry::getRegistry("ProcTableTest").makeTest());	
+unitSuite->addTest(CppUnit::TestFactoryRegistry::getRegistry("QueryEvaluatorTest").makeTest());	
 CppUnit::TestFactoryRegistry::getRegistry().addTestToSuite(unitSuite);
 CppUnit::TextUi::TestRunner runner;
 
