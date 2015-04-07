@@ -4,9 +4,13 @@
     <ClCompile Include="source\TestSimpleParser.cpp" />
     <ClCompile Include="source\UnitTest.cpp" />
     <ClCompile Include="source\TestQueryPreProcessor.cpp" />
+    <ClCompile Include="TestFollows.cpp" />
+    <ClCompile Include="TestParent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\TestSimpleParser.h" />
     <ClInclude Include="source\TestQueryPreProcessor.h" />
+    <ClInclude Include="TestFollows.h" />
+    <ClInclude Include="TestParent.h" />
   </ItemGroup>
 </Project>
