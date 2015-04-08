@@ -42,6 +42,6 @@ void QueryEvaluatorTest::testMerge() {
 }
 
 void QueryEvaluatorTest::testIsIn() {
-	CPPUNIT_ASSERT(eva.isIn(res,"cs3201"));
-	CPPUNIT_ASSERT(!eva.isIn(res,"banana"));
+	CPPUNIT_ASSERT(eva.isIn("cs3201",res));
+	CPPUNIT_ASSERT(!eva.isIn("banana",res));
 }

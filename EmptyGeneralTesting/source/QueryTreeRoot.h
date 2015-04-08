@@ -48,6 +48,7 @@ protected:
 	PQLSpecialNode* with;
 	PQLSpecialNode* pattern;
 	vector<vector<string>> symbolTable;
+	bool isValidQuery;
 };
 
 #endif

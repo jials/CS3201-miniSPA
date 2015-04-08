@@ -174,3 +174,23 @@ int PQLPreProcessor::findKeyword(string str){
 	}
 	return -1;
 }
+
+static bool isValidEntRef(string str){
+	return true;
+}
+
+static bool isValidExpressionSpec(string str, QueryTreeRoot* root){
+	return true;
+}
+
+static bool isValidIdent(string str){
+	return true;
+}
+
+//returns true if str is declared in the symbol table
+static bool isValidSynonym(string str, QueryTreeRoot* root){
+	if(isValidIdent(str)&&root->getSymbol(str).compare("")!=0){
+		return true;
+	}
+	return false;
+}
