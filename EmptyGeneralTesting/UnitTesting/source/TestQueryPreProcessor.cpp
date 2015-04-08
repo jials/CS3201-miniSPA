@@ -40,8 +40,17 @@ void QueryPreProcessorTest::testParse() {
 	else cout << "Correct"  << endl;
 	vector<PQLAttributeNode*> patternChildren = (res.getPattern()->getChild()->getChildren());
 	vector<PQLAttributeNode*> suchThatChildren = (res.getSuchThat()->getChild()->getChildren());
+	CPPUNIT_ASSERT(res.isValidQuery);
 	CPPUNIT_ASSERT_EQUAL(0,expectedPattern.compare(patternChildren[1]->getName()));
 	CPPUNIT_ASSERT_EQUAL(0,str1.compare(suchThatChildren[1]->getName()));
 	CPPUNIT_ASSERT_EQUAL(0,str0.compare(suchThatChildren[0]->getName()));
 	CPPUNIT_ASSERT_EQUAL(0,relation.compare(res.getSuchThat()->getChild()->getName())); cout <<res.getSuchThat()->getChild()->getName()<<endl;
+}
+
+void QueryPreProcessorTest::testIsValidName(){
+	CPPUNIT_ASSERT(PQLPreProcessor::isValidName("banana"));
+	CPPUNIT_ASSERT(!PQLPreProcessor::isValidName("12345"));
+	CPPUNIT_ASSERT(!PQLPreProcessor::isValidName("_apple"));
+	CPPUNIT_ASSERT(PQLPreProcessor::isValidName("a12345"));
+	CPPUNIT_ASSERT(!PQLPreProcessor::isValidName("a123.45"));
 }

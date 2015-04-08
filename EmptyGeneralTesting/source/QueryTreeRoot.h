@@ -40,6 +40,8 @@ public:
 	void insertSymbol(vector<string>);
 	void setSelect(string);
 
+	bool isValidQuery;
+
 protected:
 	string select;
 	string rootName;
@@ -48,7 +50,7 @@ protected:
 	PQLSpecialNode* with;
 	PQLSpecialNode* pattern;
 	vector<vector<string>> symbolTable;
-	bool isValidQuery;
+	
 };
 
 #endif

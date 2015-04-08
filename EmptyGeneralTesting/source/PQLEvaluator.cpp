@@ -13,7 +13,7 @@
 		vector<vector<string>> resultTable;
 		int indSelect;
 
-		for(int i = 0; i < symbols.size(); i++) {
+		for(unsigned int i = 0; i < symbols.size(); i++) {
 			string type = symbols.at(i).at(0);
 
 			if(select.compare(symbols.at(i).at(1))==0) {
@@ -55,7 +55,7 @@
 	}
 
 	int indInSymbols(string name, vector<vector<string>> symbols) {
-		for(int i = 0; i < symbols.size(); i++) {
+		for(unsigned int i = 0; i < symbols.size(); i++) {
 			if(name.compare(symbols.at(i).at(1))==0) {
 				return i;
 			}
@@ -66,7 +66,7 @@
 	vector<string> merge(vector<string> vA, vector<string> vB) {
 		//assuming two vectors are in ascending order
 		vector<string> res;
-		for (int i = 0; i < vA.size(); i++) {
+		for (unsigned int i = 0; i < vA.size(); i++) {
 			for(int j = 0; j < vB.size(); j++) {
 				if(vA.at(i).compare(vB.at(j))==0) {
 					res.push_back(vA.at(i));
@@ -78,7 +78,7 @@
 	}
 
 	bool isIn(string str, vector<string> vec) {
-		for(int i = 0; i < vec.size(); i++) {
+		for(unsigned int i = 0; i < vec.size(); i++) {
 			if(str.compare(vec.at(i))==0) {
 				return true;
 			}
@@ -133,7 +133,7 @@
 					vector<string> resA = pkb.getAllFollows();
 					currentResultTable.at(indA) = merge(currentResultTable.at(indA), resA);
 					vector<string> resB;
-					for(int i = 0; i <resA.size(); i++) {
+					for(unsigned int i = 0; i <resA.size(); i++) {
 						string stmtB = pkb.getFollows(std::stoi(resA.at(i)));
 						if(!isIn(stmtB, resB)) {
 							resB.push_back(stmtB);
@@ -173,9 +173,9 @@
 					vector<string> resA = pkb.getAllFollowsStar();
 					currentResultTable.at(indA) = merge(currentResultTable.at(indA), resA);
 					vector<string> resB;
-					for(int i = 0; i <resA.size(); i++) {
+					for(unsigned int i = 0; i <resA.size(); i++) {
 						vector<string> stmtB = pkb.getFollowsStar(std::stoi(resA.at(i)));
-						for(int j = 0; j <stmtB.size(); j++) {
+						for(unsigned int j = 0; j <stmtB.size(); j++) {
 							if(!isIn(stmtB.at(j), resB)) {
 								resB.push_back(stmtB.at(j));
 							}
@@ -217,9 +217,9 @@
 					vector<string> resA = pkb.getAllParents();
 					currentResultTable.at(indA) = merge(currentResultTable.at(indA), resA);
 					vector<string> resB;
-					for(int i = 0; i <resA.size(); i++) {
+					for(unsigned int i = 0; i <resA.size(); i++) {
 						vector<string> childStmt = pkb.getChildren(std::stoi(resA.at(i)));
-						for(int j = 0; j < childStmt.size(); j++) {
+						for(unsigned int j = 0; j < childStmt.size(); j++) {
 							if(!isIn(childStmt.at(j), resB)) {
 								resB.push_back(childStmt.at(j));
 							}
@@ -259,9 +259,9 @@
 					vector<string> resA = pkb.getAllParentsStar();
 					currentResultTable.at(indA) = merge(currentResultTable.at(indA), resA);
 					vector<string> resB;
-					for(int i = 0; i <resA.size(); i++) {
+					for(unsigned int i = 0; i <resA.size(); i++) {
 						vector<string> childStmt = pkb.getChildrenStar(std::stoi(resA.at(i)));
-						for(int j = 0; j < childStmt.size(); j++) {
+						for(unsigned int j = 0; j < childStmt.size(); j++) {
 							if(!isIn(childStmt.at(j), resB)) {
 								resB.push_back(childStmt.at(j));
 							}
@@ -304,7 +304,7 @@
 					vector<string> res = pkb.getAllModifyingStmt();
 					currentResultTable.at(indA) = merge(currentResultTable.at(indA), res);
 					vector<string> var;
-					for(int i = 0; i <res.size(); i++) {
+					for(unsigned int i = 0; i <res.size(); i++) {
 						string varName = pkb.getModifiedBy(std::stoi(res.at(i)));
 						if(!isIn(varName, var)) {
 							var.push_back(varName);
@@ -343,9 +343,9 @@
 					vector<string> res = pkb.getAllUsingStmt();
 					currentResultTable.at(indA) = merge(currentResultTable.at(indA), res);
 					vector<string> var;
-					for(int i = 0; i <res.size(); i++) {
+					for(unsigned int i = 0; i <res.size(); i++) {
 						vector<string> varName = pkb.getUsedBy(std::stoi(res.at(i)));
-						for(int j = 0; j < varName.size(); j++) {
+						for(unsigned int j = 0; j < varName.size(); j++) {
 							if(!isIn(varName.at(j), var)) {
 								var.push_back(varName.at(j));
 							}

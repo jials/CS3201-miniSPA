@@ -1,6 +1,7 @@
 #include <vector>
 #include <string>
 #include <algorithm> 
+#include <cctype>
 #include "PQLPreProcessor.h"
 #include "QueryTreeRoot.h"
 using namespace std;
@@ -175,22 +176,51 @@ int PQLPreProcessor::findKeyword(string str){
 	return -1;
 }
 
-static bool isValidEntRef(string str){
+bool isValidEntRef(string str){
 	return true;
 }
 
-static bool isValidExpressionSpec(string str, QueryTreeRoot* root){
+bool isValidExpressionSpec(string str, QueryTreeRoot* root){
 	return true;
 }
 
-static bool isValidIdent(string str){
+bool isValidIdent(string str){
+	if (str.size()==0){
+		return false;
+	}
+	if (!isalpha(str.at(0))){
+		return false;
+	}
+	else {
+		for (unsigned int i=0;i<str.size();i++){
+			if (!isalnum(str.at(i)&&str.at(i)!='#'))
+				return false;
+		}
+	}
 	return true;
 }
 
 //returns true if str is declared in the symbol table
-static bool isValidSynonym(string str, QueryTreeRoot* root){
+bool isValidSynonym(string str, QueryTreeRoot* root){
+	if (!isValidIdent(str)) return false;
 	if(isValidIdent(str)&&root->getSymbol(str).compare("")!=0){
 		return true;
 	}
 	return false;
+}
+
+bool isValidName(string str){
+	if (str.size()==0){
+		return false;
+	}
+	if (!isalpha(str.at(0))){
+		return false;
+	}
+	else {
+		for (unsigned int i=0;i<str.size();i++){
+			if (!isalnum(str.at(i)))
+				return false;
+		}
+	}
+	return true;
 }
