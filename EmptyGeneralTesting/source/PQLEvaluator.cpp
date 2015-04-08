@@ -1,18 +1,5 @@
-#include "PQLPreProcessor.h"
+
 #include "PQLEvaluator.h"
-#include "QueryTreeNode.h"
-#include "QueryTreeRoot.h"
-#include "PKB.h"
-#include <vector>
-#include <string>
-#include <sstream>
-#include <algorithm> 
-#include <iostream>
-
-
-using namespace std;
-
-
 	PQLEvaluator::PQLEvaluator(){
 	}
 

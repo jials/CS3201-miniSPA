@@ -11,6 +11,7 @@ using namespace std;
 		suchThat=NULL; 
 		with=NULL;
 		pattern=NULL;
+		isValidQuery = true;
 	}
 
 	string QueryTreeRoot::getSelect(){
@@ -35,6 +36,7 @@ using namespace std;
 		suchThat=new PQLSpecialNode("suchThat"); 
 		with=new PQLSpecialNode("with");
 		pattern=new PQLSpecialNode("pattern");
+		isValidQuery = true;
 	}
 
 	string QueryTreeRoot::getName(){
@@ -96,3 +98,4 @@ using namespace std;
 	PQLSpecialNode* with;
 	PQLSpecialNode* pattern;
 	vector<vector<string>> symbolTable;
+	bool isValidQuery = true;
