@@ -17,6 +17,11 @@ private:
 public:
 	string trim(string str);
 	PQLPreProcessor();
+	static bool isValidName(string);
 	QueryTreeRoot parse(vector<string> strs, string name);
+	static bool isValidSynonym(string, QueryTreeRoot*);
+	static bool isValidIdent(string str);
+	static bool isValidExpressionSpec(string str, QueryTreeRoot* root);
+	static bool isValidEntRef(string str);
 };
 #endif
