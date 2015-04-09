@@ -36,13 +36,13 @@ public:
 
 	string getFollows(int s);
 	string getFollowedBy(int s);
-	bool isFollows(int s1, int s2);
-	vector<string> getAllFollows();
+	bool isFollows(int s1, int s2);	
+	vector<string> getAllFollows();				//get all follows
 
 	vector<string> getFollowsStar(int s);
 	vector<string> getFollowedStarBy(int s);
 	bool isFollowsStar(int s1, int s2);
-	vector<string> getAllFollowsStar();
+	vector<string> getAllFollowsStar();			//get all statements that having statement follow star it
 
 	bool isParent(int parent, int child);
     string getParent(int);
