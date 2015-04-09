@@ -38,7 +38,7 @@ vector<int> DesignExtractor::getFollowsStar(int stmt) {
     return result;
 }
 
-vector<int> DesignExtractor::getParentStarOf(int stmt) {
+vector<int> DesignExtractor::getChildrenStar(int stmt) {
     
     vector<int> nextGen = Parent::getChildren(stmt);
     vector<int> result;
