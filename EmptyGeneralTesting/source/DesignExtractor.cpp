@@ -51,7 +51,7 @@ vector<int> DesignExtractor::getChildrenStar(int stmt) {
     
     for (it=result.begin(); it!=result.end(); it++) {
         result.push_back(*it);
-        nextGen = DesignExtractor::getParentStarOf(*it);
+        nextGen = DesignExtractor::getChildrenStar(*it);
         result.insert(result.end(), nextGen.begin(), nextGen.end());
     }
     
