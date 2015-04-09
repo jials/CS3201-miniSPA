@@ -13,6 +13,9 @@ using namespace std;
 #include "StmtTable.h"
 #include "Follows.h"
 #include "Parent.h"
+#include "Helpers.h"
+
+Helpers helper;
 
 vector<string> PKB::getAllVar(){
 	return VarTable::getAllVariables();
@@ -35,27 +38,27 @@ bool PKB::isInVarTable(string name){
 	else return true;
 }
 
-int PKB::getFollows(int s){
-	return Follows::getFollows(s);
+string PKB::getFollows(int s){
+	return helper.intToString(Follows::getFollows(s));
 }
 
-int PKB::getFollowedBy(int s){
-	return Follows::getFollowedBy(s);
+string PKB::getFollowedBy(int s){
+	return helper.intToString(Follows::getFollowedBy(s));
 }
 
 bool PKB::isFollows(int s1, int s2){
 	return Follows::isFollows(s1, s2);
 }
 
-vector<int> PKB::getAllFollows(){
+vector<string> PKB::getAllFollows(){
 	return Follows::getAllFollows();
 }
 
-vector<int> PKB::getFollowsStar(int s){
+vector<string> PKB::getFollowsStar(int s){
 	return Follows::getFollowsStar(s);
 }
 
-vector<int> PKB::getFollowedStarBy(int s){
+vector<string> PKB::getFollowedStarBy(int s){
 	return Follows::getFollowedStarBy(s);
 }
 	
@@ -67,52 +70,44 @@ bool PKB::isParent(int parent, int child){
 	return Parent::isParent(parent, child);
 }
 
-int PKB::getParent(int child){
-	return Parent::getParent(child);
+string PKB::getParent(int child){
+	return helper.intToString(Parent::getParent(child));
 }
 
-vector<int> PKB::getChildren(int parent){
-	return Parent::getChildren(parent);
+vector<string> PKB::getChildren(int parent){
+	return helper.intVectorToStringVector(Parent::getChildren(parent));
 }
 
-vector<int> PKB::getAllParents(){
-	return Parent::getAllParents();
+vector<string> PKB::getAllParents(){
+	return helper.intVectorToStringVector(Parent::getAllParent());
 }
 
-vector<int> PKB::getParentStar(int s){
-	return Parent::getParentStar(s);
+vector<string> PKB::getParentStar(int s){
+	return helper.intVectorToStringVector(Parent::getParentStar(s));
 }
 
-vector<int> PKB::getParentStarOf(int s){
-	return Parent::getParentStarOf(s);
-}
 
 bool PKB::isParentStar(int s1, int s2){
 	return Parent::isParentStar(s1, s2);
 }    
     
-vector<string> PKB::getUsedBy(string var){
+vector<string> PKB::getUsedBy(int var){
 	return VarTable::getUsedBy(var);
 }
 
-vector<string> PKB::getModifiedBy(string var){
+string PKB::getModifiedBy(int stmt){
 	return VarTable::getModifiedBy(var);
 }
 
 
-//vector<string> PKB::patternMatching(string type, string left,string right){
-//	nodeType enumType;
-//	if(type == "while"){
-//		enumType = WHILE;
-//	}
-//	else if(type == "assign"){
-//		enumType = ASSIGN;
-//	}
-//	return StmtTable::getAllStatementsWithPattern(enumType, left, right);
-//
-//}
-
-vector<string> PKB::patternMatching(string left,string right){
-	return StmtTable::getAllStatementsWithPattern(ASSIGN, left, right);
+vector<string> PKB::patternMatching(string type, string left,string right){
+	nodeType enumType;
+	if(type == "while"){
+		enumType = WHILE;
+	}
+	else if(type == "assign"){
+		enumType = ASSIGN;
+	}
+	return StmtTable::getAllStatementsWithPattern(enumType, left, right);
 
 }

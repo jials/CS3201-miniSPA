@@ -42,27 +42,27 @@ public:
 	vector<string> getFollowsStar(int s);
 	vector<string> getFollowedStarBy(int s);
 	bool isFollowsStar(int s1, int s2);
-	vector<string> getAllFollowsStar();			//get all statements that having statement follow star it
+	vector<string> getAllFollowsStar();			//get all statements that having at least one statement follow star it
 
 	bool isParent(int parent, int child);
-    string getParent(int);
-    vector<string> getChildren(int);
-	vector<string> getAllParents();
+    string getParent(int);			
+    vector<string> getChildren(int);			//get all children
+	vector<string> getAllParents();				//get all parent that hav a child
 
 	bool isParentStar(int parent, int child);
-    vector<string> getParentStar(int);
-    vector<string> getChildrenStar(int);
-	vector<string> getAllParentsStar();
+    vector<string> getParentStar(int child);				//get all parents star of a child
+    vector<string> getChildrenStar(int parent);			//get all children star of a parent
+	vector<string> getAllParentsStar();				//get all parent that hav a child parent star it
 
     string getModifiedBy(int stmt);                  //returns the varName that stmt modifies
-	bool isModifies(int stmt, string var);
+	bool isModifies(int stmt, string var);			
 	vector<string> getAllModifies(string var);         //returns the list of stmts that modifies var
-    vector<string> getAllModifyingStmt();
+    //vector<string> getAllModifyingStmt();			//get all statements that modifying any var, equal to getAllAssign
 
-	vector<string> getUsedBy(int stmt);
-	bool isUses(int stmt, string var);
-	vector<string> getAllUses(string var);
-	vector<string> getAllUsingStmt();
+	vector<string> getUsedBy(int stmt);					//get var list that used by statement
+	bool isUses(int stmt, string var);					//is statement using the var
+	vector<string> getAllUses(string var);				//get all statements that using the input var
+	vector<string> getAllUsingStmt();					//get all statements that using any var
 
 };
 

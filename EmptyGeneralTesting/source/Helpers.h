@@ -17,6 +17,8 @@ public:
   string toLower(string);
   bool isNumber(const string& s);
   const char * stringToCharArray(const string& s);
+  string intToString(int input);
+  vector<string> intVectorToStringVector (vector<int> input);
 };
 
 #endif
