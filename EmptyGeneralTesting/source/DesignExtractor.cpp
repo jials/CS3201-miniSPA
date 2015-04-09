@@ -72,13 +72,35 @@ vector<int> DesignExtractor::getFollowedStarBy(int stmt) {
     return result;
 }
 
-//bool DesignExtractor::isFollowsStar(int prev, int curr) {
-//    
-//}
-//
-//bool DesignExtractor::isParentStar(int prev, int curr) {
-//    
-//}
+bool DesignExtractor::isFollowsStar(int prev, int curr) {
+    int stmt_1 = prev;
+    int stmt_2 = curr;
+    
+    while (stmt_1 != -1) {
+        stmt_1 = Follows::getFollowedBy(stmt_1);
+        
+        if (stmt_1 == stmt_2) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+bool DesignExtractor::isParentStar(int prev, int curr) {
+    int stmt_1 = prev;
+    int stmt_2 = curr;
+    
+    while (stmt_2 != -1) {
+        stmt_2 = Parent::getParent(stmt_2);
+        
+        if (stmt_2 == stmt_1) {
+            return true;
+        }
+    }
+    
+    return false;
+}
 
 
 
