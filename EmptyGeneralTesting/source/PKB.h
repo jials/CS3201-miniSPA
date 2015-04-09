@@ -42,7 +42,7 @@ public:
 	vector<string> getFollowsStar(int s);
 	vector<string> getFollowedStarBy(int s);
 	bool isFollowsStar(int s1, int s2);
-	vector<string> getAllFollowsStar();			//get all statements that having at least one statement follow star it
+	//vector<string> getAllFollowsStar();			//same as get all follows
 
 	bool isParent(int parent, int child);
     string getParent(int);			
