@@ -33,11 +33,8 @@ VAR VarTable::insertVar(string varName) {
     return current_index-1;
 }
 
-//addUses(varname, stmtNo)
-//addModifies(varname stmtNo)
-
 void VarTable::draw(){
-	Helpers helper;
+    Helpers helper;
     map<VAR, VARROW>::iterator it;
     cout << "\n---------------------------------------------------------\n";
     cout << "VarTable";
@@ -46,8 +43,8 @@ void VarTable::draw(){
     {
         cout << "INDEX = " << (it -> first) << "\n";
         cout << "  NAME = " + it->second.varName << "\n";
-		cout << "  USES = " + helper.implode(it->second.usedBy, ",") << "\n";
-		cout << "  MODIFIES = " + helper.implode(it->second.modifiedBy, ",") << "\n";
+        cout << "  USES = " + helper.implode(it->second.usedBy, ",") << "\n";
+        cout << "  MODIFIES = " + helper.implode(it->second.modifiedBy, ",") << "\n";
     }
     cout << "\n---------------------------------------------------------\n";
 }
@@ -104,7 +101,47 @@ void VarTable::addModifies(string varName, string lineNoOrProc) {
     // exit(0);
 }
 
-vector<string> VarTable::getUsedBy(string varName) {
+bool VarTable::isUses(int stmt, string varName) {
+    map<VAR, VARROW>::iterator it;
+    Helpers helper;
+    for (it = _table.begin(); it != _table.end(); it++) {
+        if (it->second.varName == varName) {
+            vector<string> uses = it->second.usedBy;
+            
+            vector<string>::iterator itUses;
+            string stmtString = helper.intToString(stmt);
+            for (itUses = uses.begin(); itUses != uses.end(); itUses++) {
+                if (*itUses == stmtString) {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+    }
+}
+
+bool VarTable::isModifies(int stmt, string varName) {
+    map<VAR, VARROW>::iterator it;
+    Helpers helper;
+    for (it = _table.begin(); it != _table.end(); it++) {
+        if (it->second.varName == varName) {
+            vector<string> modifies = it->second.modifiedBy;
+            
+            vector<string>::iterator itModifies;
+            string stmtString = helper.intToString(stmt);
+            for (itModifies = modifies.begin(); itModifies != modifies.end(); itModifies++) {
+                if (*itModifies == stmtString) {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+    }
+}
+
+vector<string> VarTable::getAllUses(string varName) {
     map<VAR, VARROW>::iterator it;
     for (it = _table.begin(); it != _table.end(); it++)
     {
@@ -114,7 +151,7 @@ vector<string> VarTable::getUsedBy(string varName) {
     }
 }
 
-vector<string> VarTable::getModifiedBy(string varName) {
+vector<string> VarTable::getAllModifies(string varName) {
     map<VAR, VARROW>::iterator it;
     for (it = _table.begin(); it != _table.end(); it++)
     {
@@ -126,21 +163,21 @@ vector<string> VarTable::getModifiedBy(string varName) {
 
 vector<string> VarTable::getAllVariables() {
     map<VAR, VARROW>::iterator it;
-	vector<string> result;
+    vector<string> result;
     for (it = _table.begin(); it != _table.end(); it++)
     {
-		result.push_back(it->second.varName);
+        result.push_back(it->second.varName);
     }
-	return result;
+    return result;
 }
 
 VAR VarTable::getVar(string name){
-	map<VAR, VARROW>::iterator it;
+    map<VAR, VARROW>::iterator it;
     for (it = _table.begin(); it != _table.end(); it++)
     {
         if(it->second.varName == name){
             return it->first;
         }
     }
-	return -1;
+    return -1;
 }
