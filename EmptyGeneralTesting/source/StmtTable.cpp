@@ -164,3 +164,6 @@ vector<string> StmtTable::getUsedBy(int stmt){
 	return _table[stmt].usedVar;
 }
     
+int StmtTable::getMaxStmtNumber(){
+	return _table.size();
+}

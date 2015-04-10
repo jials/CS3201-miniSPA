@@ -39,14 +39,17 @@ bool PKB::isInVarTable(string name){
 }
 
 string PKB::getFollows(int s){
+	if(s > StmtTable::getMaxStmtNumber()) return "-1";
 	return helper.intToString(Follows::getFollows(s));
 }
 
 string PKB::getFollowedBy(int s){
+	if(s > StmtTable::getMaxStmtNumber()) return "-1";
 	return helper.intToString(Follows::getFollowedBy(s));
 }
 
 bool PKB::isFollows(int s1, int s2){
+	if(s1 > StmtTable::getMaxStmtNumber() || s2 > StmtTable::getMaxStmtNumber()) return false;
 	return Follows::isFollows(s1, s2);
 }
 
@@ -55,26 +58,41 @@ vector<string> PKB::getAllFollows(){
 }
 
 vector<string> PKB::getFollowsStar(int s){
+	if(s > StmtTable::getMaxStmtNumber()){
+		vector<string> r;
+		return r;
+	} 
 	return helper.intVectorToStringVector(Follows::getFollowsStar(s));
 }
 
 vector<string> PKB::getFollowedStarBy(int s){
+	if(s > StmtTable::getMaxStmtNumber()){
+		vector<string> r;
+		return r;
+	} 
 	return helper.intVectorToStringVector(Follows::getFollowedStarBy(s));
 }
 	
 bool PKB::isFollowsStar(int s1, int s2){
+	if(s1 > StmtTable::getMaxStmtNumber() || s2 > StmtTable::getMaxStmtNumber()) return false;
 	return Follows::isFollowsStar(s1, s2);
 }
 
 bool PKB::isParent(int parent, int child){
+	if(parent > StmtTable::getMaxStmtNumber() || child > StmtTable::getMaxStmtNumber()) return false;
 	return Parent::isParent(parent, child);
 }
 
 string PKB::getParent(int child){
+	if(child > StmtTable::getMaxStmtNumber()) return "-1";
 	return helper.intToString(Parent::getParent(child));
 }
 
 vector<string> PKB::getChildren(int parent){
+	if(parent > StmtTable::getMaxStmtNumber()){
+		vector<string> r;
+		return r;
+	} 
 	return helper.intVectorToStringVector(Parent::getChildren(parent));
 }
 
@@ -83,19 +101,29 @@ vector<string> PKB::getAllParents(){
 }
 
 vector<string> PKB::getParentStar(int s){
+	if(s > StmtTable::getMaxStmtNumber()){
+		vector<string> r;
+		return r;
+	} 
 	return helper.intVectorToStringVector(Parent::getParentStar(s));
 }
 
 
 bool PKB::isParentStar(int s1, int s2){
+	if(s1 > StmtTable::getMaxStmtNumber() || s2 > StmtTable::getMaxStmtNumber()) return false;
 	return Parent::isParentStar(s1, s2);
 }    
     
 vector<string> PKB::getUsedBy(int stmt){
+	if(stmt > StmtTable::getMaxStmtNumber()){
+		vector<string> r;
+		return r;
+	} 
 	return StmtTable::getUsedBy(stmt);
 }
 
 string PKB::getModifiedBy(int stmt){
+	if(stmt > StmtTable::getMaxStmtNumber()) return "-1";
 	return StmtTable::getModifiedBy(stmt);
 }
 

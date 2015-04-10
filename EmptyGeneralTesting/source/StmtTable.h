@@ -37,6 +37,7 @@ public:
 	static vector<string> getAllStatementsWithPattern(nodeType type, string left, string right);
 	static string getModifiedBy(int);
     static vector<string> getUsedBy(int);
+	static int getMaxStmtNumber();
     
 private:
     static map<short, STMTROW> _table;
