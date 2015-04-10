@@ -54,10 +54,10 @@ public:
     vector<string> getChildrenStar(int parent);			//get all children star of a parent
     //vector<string> getAllParentsStar();				//get all parent that hav a child parent star it
     
-    string getModifiedBy(int stmt);                  //returns the varName that stmt modifies
+    vector<string> getModifiedBy(int stmt);                  //returns the varName that stmt modifies !!!changed from string to vector<string>
     bool isModifies(int stmt, string var);
     vector<string> getAllModifies(string var);         //returns the list of stmts that modifies var
-    //vector<string> getAllModifyingStmt();			//get all statements that modifying any var, equal to getAllAssign
+    vector<string> getAllModifyingStmt();			//get all statements that modifying any var, NOT equal to getAllAssign because while stmt can also modify some variables
     
     vector<string> getUsedBy(int stmt);					//get var list that used by statement
     bool isUses(int stmt, string var);					//is statement using the var
