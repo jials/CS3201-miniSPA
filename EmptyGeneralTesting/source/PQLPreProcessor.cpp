@@ -176,15 +176,23 @@ int PQLPreProcessor::findKeyword(string str){
 	return -1;
 }
 
-bool isValidEntRef(string str){
+bool PQLPreProcessor::isValidEntRef(string str, QueryTreeRoot* root){
+	if (isValidSynonym(str, root))
+		return true;
+	else if (str.compare("_")==0)
+		return true;
+	else if (str.length()>1&&str.at(0)=='\"'){
+		if (str.at(str.length()-1)=='\"'&&isValidIdent(str.substr(1,str.length()-2)))
+			return true;
+	}
+	return false;
+}
+
+bool PQLPreProcessor::isValidExpressionSpec(string str, QueryTreeRoot* root){
 	return true;
 }
 
-bool isValidExpressionSpec(string str, QueryTreeRoot* root){
-	return true;
-}
-
-bool isValidIdent(string str){
+bool PQLPreProcessor::isValidIdent(string str){
 	if (str.size()==0){
 		return false;
 	}
@@ -201,7 +209,7 @@ bool isValidIdent(string str){
 }
 
 //returns true if str is declared in the symbol table
-bool isValidSynonym(string str, QueryTreeRoot* root){
+bool PQLPreProcessor::isValidSynonym(string str, QueryTreeRoot* root){
 	if (!isValidIdent(str)) return false;
 	if(isValidIdent(str)&&root->getSymbol(str).compare("")!=0){
 		return true;
@@ -209,7 +217,7 @@ bool isValidSynonym(string str, QueryTreeRoot* root){
 	return false;
 }
 
-bool isValidName(string str){
+bool PQLPreProcessor::isValidName(string str){
 	if (str.size()==0){
 		return false;
 	}

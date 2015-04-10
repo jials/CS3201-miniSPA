@@ -67,7 +67,7 @@
 		//assuming two vectors are in ascending order
 		vector<string> res;
 		for (unsigned int i = 0; i < vA.size(); i++) {
-			for(int j = 0; j < vB.size(); j++) {
+			for(unsigned int j = 0; j < vB.size(); j++) {
 				if(vA.at(i).compare(vB.at(j))==0) {
 					res.push_back(vA.at(i));
 					break;
