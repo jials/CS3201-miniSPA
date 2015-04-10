@@ -33,7 +33,7 @@ SimpleParser::SimpleParser(){
 
 int SimpleParser::parse(string input) {
 	input = appendWhiteSpace(input);
-	helpers.split(input,tokens,' ');
+	helpers.split(input,tokens," ");
 	try{
 		TNode* programNode;
 		programNode = program();

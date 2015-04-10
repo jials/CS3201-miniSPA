@@ -20,7 +20,6 @@
     <ClCompile Include="..\source\PQLSpecialNode.cpp" />
     <ClCompile Include="..\source\QueryTreeNode.cpp" />
     <ClCompile Include="..\source\QueryTreeRoot.cpp" />
-    <ClCompile Include="..\source\ModifiesAndUses.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\AST.h" />
@@ -43,6 +42,5 @@
     <ClInclude Include="..\source\PQLSpecialNode.h" />
     <ClInclude Include="..\source\QueryTreeNode.h" />
     <ClInclude Include="..\source\QueryTreeRoot.h" />
-    <ClInclude Include="..\source\ModifiesAndUses.h" />
   </ItemGroup>
 </Project>

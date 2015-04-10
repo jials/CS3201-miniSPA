@@ -20,6 +20,8 @@ typedef struct stmtRow
 	short stmtLineNumber;
     nodeType type;
 	string tag;
+	string modifiedVar;
+	vector<string> usedVar;
 
 } STMTROW;
 #endif
@@ -33,7 +35,8 @@ public:
     static void draw();
     static vector<string> getAllStatementsNumber(nodeType);
 	static vector<string> getAllStatementsWithPattern(nodeType type, string left, string right);
-	
+	static string getModifiedBy(int);
+    static vector<string> getUsedBy(int);
     
 private:
     static map<short, STMTROW> _table;

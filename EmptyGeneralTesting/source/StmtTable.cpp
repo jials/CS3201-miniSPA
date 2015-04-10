@@ -15,6 +15,7 @@ using namespace std;
 
 map<short, STMTROW> StmtTable::_table;
 
+
 string buildCodeFromAST(TNode* node){
 	
 	if(node -> firstChild){
@@ -41,18 +42,29 @@ string buildCodeFromAST(TNode* node){
 }
 
 void StmtTable::insertStmt(TNode* node) {
-    
+    Helpers helper;
 	STMTROW row;
+	row.modifiedVar = -1;
 	string originalCode;
 	if(node -> type == WHILE){
 		originalCode = "while " + node -> firstChild -> info;
 		row.tag = node->firstChild->info;
+		row.usedVar.push_back(row.tag);
 	}
 	else if(node -> type == ASSIGN){
 		originalCode = buildCodeFromAST(node);
+		vector<string> temp;
+		helper.split(originalCode,  temp, "=");
+		row.modifiedVar = temp[0];
+		vector<string> temp2;
+		helper.split(temp[1],  temp2, "+");
+		for(int i = 0;i<=temp2.size()-1; i++){
+			if(!helper.isNumber(temp2[i])){
+				row.usedVar.push_back(temp2[i]);
+			}
+		}
 	}
-
-    
+	   
 	row.stmtOriginalCode = originalCode;
 	row.stmtLineNumber = node -> lineNumber;
 	row.type = node -> type;
@@ -144,5 +156,11 @@ vector<string> StmtTable::getAllStatementsWithPattern(nodeType type, string left
 	return result;
 }
 
+string StmtTable::getModifiedBy(int stmt){
+	return _table[stmt].modifiedVar;
+}
 
-
+vector<string> StmtTable::getUsedBy(int stmt){
+	return _table[stmt].usedVar;
+}
+    

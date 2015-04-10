@@ -51,15 +51,15 @@ bool PKB::isFollows(int s1, int s2){
 }
 
 vector<string> PKB::getAllFollows(){
-	return Follows::getAllFollows();
+	return helper.intVectorToStringVector(Follows::getAllFollows());
 }
 
 vector<string> PKB::getFollowsStar(int s){
-	return Follows::getFollowsStar(s);
+	return helper.intVectorToStringVector(Follows::getFollowsStar(s));
 }
 
 vector<string> PKB::getFollowedStarBy(int s){
-	return Follows::getFollowedStarBy(s);
+	return helper.intVectorToStringVector(Follows::getFollowedStarBy(s));
 }
 	
 bool PKB::isFollowsStar(int s1, int s2){
@@ -91,12 +91,12 @@ bool PKB::isParentStar(int s1, int s2){
 	return Parent::isParentStar(s1, s2);
 }    
     
-vector<string> PKB::getUsedBy(int var){
-	return VarTable::getUsedBy(var);
+vector<string> PKB::getUsedBy(int stmt){
+	return StmtTable::getUsedBy(stmt);
 }
 
 string PKB::getModifiedBy(int stmt){
-	return VarTable::getModifiedBy(var);
+	return StmtTable::getModifiedBy(stmt);
 }
 
 

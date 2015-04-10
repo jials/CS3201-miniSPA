@@ -34,8 +34,7 @@ public:
     static void addUses(string varName, string lineNoOrProc);
     static void addModifies(string varName, string lineNoOrProc);
     
-    //static string getModifiedBy(int);
-    //static vector<string> getUsedBy(int);
+   
     
     static bool isModifies(int, string);
     static bool isUses(int, string);

@@ -23,7 +23,7 @@ void Helpers:: replaceAll(std::string& str, const std::string& from, const std::
 }
 
 
-unsigned int Helpers::split(const std::string &txt, std::vector<std::string> &strs, char ch)
+unsigned int Helpers::split(const std::string &txt, std::vector<std::string> &strs, char* ch)
 {
     unsigned int pos = txt.find( ch );
     unsigned int initialPos = 0;
