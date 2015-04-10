@@ -19,5 +19,7 @@ public:
 	void testIsParent();
 	void testGetChildren();
 
+private:
+	Parent *mTestObj;
 };
 #endif

@@ -9,43 +9,44 @@
 void 
 ParentTest::setUp()
 {
+	mTestObj = new Parent();
 }
 
 void 
 ParentTest::tearDown()
 {
+	delete mTestObj;
 }
 
 // Registers the fixture into the 'registry'
 CPPUNIT_TEST_SUITE_REGISTRATION( ParentTest ); 
 
 void ParentTest::testSetParent() {
-
-	Parent par("");
-	par.setParent(3,5); 
-	CPPUNIT_ASSERT(par.getParent(5) == 3);
-
+	mTestObj->reset();
+	mTestObj->setParent(3,5); 
+	CPPUNIT_ASSERT(mTestObj->getParent(5) == 3);
+	mTestObj->reset();
 	return;
 }
 
 // method to test the assigning and retrieval of grades
 void ParentTest::testIsParent() {
-	Parent par("");
-	par.setParent(2,7);
-	CPPUNIT_ASSERT(par.isParent(2, 7) == true);
-	CPPUNIT_ASSERT(par.isParent(5, 9) == false);
-	
+	mTestObj->reset();
+	mTestObj->setParent(2,7);
+	CPPUNIT_ASSERT(mTestObj->isParent(2, 7) == true);
+	CPPUNIT_ASSERT(mTestObj->isParent(5, 9) == false);
+	mTestObj->reset();
 	return;
 }
 
 void ParentTest::testGetChildren() {
-	Parent par("");
-	par.setParent(4,6);
-	par.setParent(4,8);
-	par.setParent(4,10);
+	mTestObj->reset();
+	mTestObj->setParent(4,6);
+	mTestObj->setParent(4,8);
+	mTestObj->setParent(4,10);
 
-	vector<int> children = par.getChildren(4);
+	vector<int> children = mTestObj->getChildren(4);
 	CPPUNIT_ASSERT(children.size() == 3);
-
+	mTestObj->reset();
 	return;
 }

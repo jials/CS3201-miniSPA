@@ -23,8 +23,8 @@ public:
 	void testGetFollowedBy();
 	void testGetAllFollows();
 
-//private:
-	//Follows *mTestObj;
+private:
+	Follows *mTestObj;
 
 };
 #endif
