@@ -4,7 +4,7 @@
 map<int, int> Parent::_table;
 
 
-Parent::Parent(string str) {
+Parent::Parent() {
 }
 
 void Parent::setParent(int parent, int child) {
@@ -54,17 +54,17 @@ vector<int> Parent::getAllParent() {
     return result;
 }
 
-bool Parent::isParentStar(int parent, int child) {
-	return DesignExtractor::isParentStar(parent, child);
-}
-
-vector<int> Parent::getParentStar(int child) {
-	return DesignExtractor::getParentStar(child);
-}
-
-vector<int> Parent::getChildrenStar(int parent) {
-	return DesignExtractor::getChildrenStar(parent);
-}
+//bool Parent::isParentStar(int parent, int child) {
+//	return DesignExtractor::isParentStar(parent, child);
+//}
+//
+//vector<int> Parent::getParentStar(int child) {
+//	return DesignExtractor::getParentStar(child);
+//}
+//
+//vector<int> Parent::getChildrenStar(int parent) {
+//	return DesignExtractor::getChildrenStar(parent);
+//}
 
 void Parent::draw(){
     map<int, int>::iterator it;
@@ -77,4 +77,8 @@ void Parent::draw(){
         cout << "  CHILD = " << it -> first << "\n";
     }
     cout << "\n---------------------------------------------------------\n";
+}
+
+void Parent::reset() {
+	_table.clear();
 }

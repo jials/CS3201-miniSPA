@@ -5,7 +5,7 @@ using namespace std;
 
 map<int, int> Follows::_table;
 
-Follows::Follows(string str) {
+Follows::Follows() {
 }
 
 //Set A to follow B
@@ -48,24 +48,24 @@ int Follows::getFollowedBy(int prev) {
 
 vector<int> Follows::getAllFollows() {
     map<int,int>::iterator it;
-    vector<int> result (_table.size(), -1);
+    vector<int> result;
     for (it = _table.begin(); it != _table.end(); it++) {
-        result[it -> first] = it -> second;
+		result.push_back(it -> first);
     }
     return result;
 }
 
-vector<int> Follows::getFollowsStar(int curr) {
-	return DesignExtractor::getFollowsStar(curr);
-}
-
-vector<int> Follows::getFollowedStarBy(int prev) {
-	return DesignExtractor::getFollowedStarBy(prev);
-}
-
-bool Follows::isFollowsStar(int prev, int curr) {
-	return DesignExtractor::isFollowsStar(prev, curr);
-}
+//vector<int> Follows::getFollowsStar(int curr) {
+//	return DesignExtractor::getFollowsStar(curr);
+//}
+//
+//vector<int> Follows::getFollowedStarBy(int prev) {
+//	return DesignExtractor::getFollowedStarBy(prev);
+//}
+//
+//bool Follows::isFollowsStar(int prev, int curr) {
+//	return DesignExtractor::isFollowsStar(prev, curr);
+//}
 
 void Follows::draw(){
     map<int, int>::iterator it;
@@ -77,4 +77,8 @@ void Follows::draw(){
         cout << "|" << it -> first << " -> " << it -> second << "\n";
     }
     cout << "\n---------------------------------------------------------\n";
+}
+
+void Follows::reset() {
+	_table.clear();
 }

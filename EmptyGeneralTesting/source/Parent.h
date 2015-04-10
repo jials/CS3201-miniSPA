@@ -3,7 +3,7 @@
 #include <string>
 #include <map>
 #include <vector>
-#include "DesignExtractor.h"
+//#include "DesignExtractor.h"
 
 using namespace std;
 
@@ -13,7 +13,7 @@ using namespace std;
 class Parent
 {
 public:
-    Parent(string);
+    Parent(void);
     static void setParent(int parent, int child);
     static bool isParent(int, int);
     static int getParent(int);
@@ -25,6 +25,7 @@ public:
     static vector<int> getChildrenStar(int);
 	//static vector<int> getAllParentStar();
     static void draw();
+	static void reset();
 
 private:
     static map<int, int> _table;

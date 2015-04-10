@@ -3,7 +3,6 @@
 #include <string>
 #include <map>
 #include <vector>
-#include "DesignExtractor.h"
 
 using namespace std;
 
@@ -13,7 +12,7 @@ using namespace std;
 class Follows
 {
 public:
-    Follows(string);
+    Follows(void);
     
     static void setFollows(int prev, int curr);
     static bool isFollows(int, int);
@@ -27,7 +26,7 @@ public:
 	//static vector<int> getAllFollowsStar();
 
     static void draw();
-
+	static void reset();
 private:
     static map<int, int> _table;
 };
