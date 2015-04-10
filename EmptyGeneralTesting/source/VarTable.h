@@ -43,9 +43,16 @@ public:
     static vector<string> getAllModifies(string);
     
     static vector<string> getAllVariables();
+
+	static vector<string> getModifiedBy(int);
+    static vector<string> getUsedBy(int);
+
+	static void parentRelationshipInfluence();
+
 private:
     static map<VAR, VARROW> _table;
-    
+    static void copyUsesAndModifiesFromChildToParent(int child, int parent);
+
 };
 
 

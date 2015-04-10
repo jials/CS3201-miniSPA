@@ -86,3 +86,9 @@ vector<string> Helpers::intVectorToStringVector(vector<int> input){
 	}
 	return result;
 }
+
+void Helpers::removeVectorDuplicates(std::vector<string>& vec)
+{
+  std::sort(vec.begin(), vec.end());
+  vec.erase(std::unique(vec.begin(), vec.end()), vec.end());
+}

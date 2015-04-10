@@ -119,12 +119,15 @@ vector<string> PKB::getUsedBy(int stmt){
 		vector<string> r;
 		return r;
 	} 
-	return StmtTable::getUsedBy(stmt);
+	return VarTable::getUsedBy(stmt);
 }
 
-string PKB::getModifiedBy(int stmt){
-	if(stmt > StmtTable::getMaxStmtNumber()) return "-1";
-	return StmtTable::getModifiedBy(stmt);
+vector<string> PKB::getModifiedBy(int stmt){
+	if(stmt > StmtTable::getMaxStmtNumber()){
+		vector<string> r;
+		return r;
+	} 
+	return VarTable::getModifiedBy(stmt);
 }
 
 

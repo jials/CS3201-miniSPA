@@ -38,6 +38,7 @@ int SimpleParser::parse(string input) {
 		TNode* programNode;
 		programNode = program();
 		AST::setRoot(programNode);
+		VarTable::parentRelationshipInfluence();
 		AST::drawAst();
 		ProcTable::draw();
 		VarTable::draw();

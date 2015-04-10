@@ -3,7 +3,7 @@
 #include <string>
 #include <map>
 #include <vector>
-//#include "DesignExtractor.h"
+#include "DesignExtractor.h"
 
 using namespace std;
 
@@ -26,6 +26,8 @@ public:
 	//static vector<int> getAllParentStar();
     static void draw();
 	static void reset();
+
+	static map<int, int> getParentTable();
 
 private:
     static map<int, int> _table;

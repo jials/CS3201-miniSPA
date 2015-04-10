@@ -58,9 +58,9 @@ vector<int> Parent::getAllParent() {
 //	return DesignExtractor::isParentStar(parent, child);
 //}
 //
-//vector<int> Parent::getParentStar(int child) {
-//	return DesignExtractor::getParentStar(child);
-//}
+vector<int> Parent::getParentStar(int child) {
+	return DesignExtractor::getParentStar(child);
+}
 //
 //vector<int> Parent::getChildrenStar(int parent) {
 //	return DesignExtractor::getChildrenStar(parent);
@@ -81,4 +81,8 @@ void Parent::draw(){
 
 void Parent::reset() {
 	_table.clear();
+}
+
+map<int, int> Parent::getParentTable(){
+	return _table;
 }

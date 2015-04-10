@@ -19,6 +19,7 @@ public:
   const char * stringToCharArray(const string& s);
   string intToString(int input);
   vector<string> intVectorToStringVector (vector<int> input);
+  void removeVectorDuplicates(std::vector<string>& vec);
 };
 
 #endif

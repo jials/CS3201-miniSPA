@@ -11,6 +11,7 @@ using namespace std;
 #include "TNode.h"
 #include "VarTable.h"
 #include "Helpers.h"
+#include "Parent.h"
 
 
 static int current_index = 0;
@@ -180,4 +181,66 @@ VAR VarTable::getVar(string name){
         }
     }
     return -1;
+}
+
+void VarTable::parentRelationshipInfluence(){
+	map<VAR, VARROW>::iterator it;
+    Helpers helper;
+    for (it = _table.begin(); it != _table.end(); it++) {
+        
+            vector<string> modifies = it->second.modifiedBy;
+			vector<string> uses = it->second.usedBy;
+            vector<string>::iterator itModifies;
+            vector<string>::iterator itUses;
+
+            for (itModifies = modifies.begin(); itModifies != modifies.end(); itModifies++) {
+				vector<int> parents;
+				parents = Parent::getParentStar(atoi((*itModifies).c_str()));
+				for(int q = 0; q < parents.size(); q++){
+					it->second.modifiedBy.push_back(helper.intToString(parents[q]));
+				}
+				
+            }
+            
+			for (itUses = uses.begin(); itUses != uses.end(); itUses++) {
+				vector<int> parents;
+				parents = Parent::getParentStar(atoi((*itUses).c_str()));
+				for(int q = 0; q< parents.size(); q++){
+					it->second.usedBy.push_back(helper.intToString(parents[q]));
+				}
+            }
+			helper.removeVectorDuplicates(it->second.modifiedBy);
+			helper.removeVectorDuplicates(it->second.usedBy);
+        
+    }
+}
+
+vector<string> VarTable::getModifiedBy(int stmt){
+	map<VAR, VARROW>::iterator it;
+	vector<string> result;
+	for (it = _table.begin(); it != _table.end(); it++) {
+	   vector<string> modifies = it->second.modifiedBy;
+	   vector<string>::iterator itModifies;
+	   for (itModifies = modifies.begin(); itModifies != modifies.end(); itModifies++) {
+		   if(atoi((*itModifies).c_str()) == stmt){
+			   result.push_back(it->second.varName);
+		   }
+	   }
+	}
+	return result;
+}
+
+vector<string> VarTable::getUsedBy(int stmt){
+	map<VAR, VARROW>::iterator it;
+	vector<string> result;
+	for (it = _table.begin(); it != _table.end(); it++) {
+		vector<string> uses = it->second.usedBy;
+	   vector<string>::iterator itUses;
+	   for (itUses = uses.begin(); itUses != uses.end(); itUses++) {
+		   if(atoi((*itUses).c_str()) == stmt){
+			   result.push_back(it->second.varName);
+		   }
+	   }
+	}
+	return result;
 }
