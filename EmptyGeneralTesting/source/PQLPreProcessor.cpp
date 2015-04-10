@@ -88,6 +88,7 @@ QueryTreeRoot PQLPreProcessor::parse(vector<string> strs, string name){
 	QueryTreeRoot result(name);
 	if (strs.size()!=2){
 		result.setName("Error");
+		result.isValidQuery = false;
 		return result;
 	}
 
@@ -231,4 +232,20 @@ bool PQLPreProcessor::isValidName(string str){
 		}
 	}
 	return true;
+}
+
+bool PQLPreProcessor::isValidStmtRef(string str, QueryTreeRoot* root){
+
+	if (str.compare("_")==0||isValidSynonym(str,root)){
+		return true;
+	}
+	bool isInteger = true;
+	for (unsigned int i=0;i<str.length();i++){
+		if (!isdigit(str.at(i))){
+			isInteger = false;
+			break;
+		}
+	}
+
+	return isInteger;
 }
