@@ -27,17 +27,10 @@ void QueryPreProcessorTest::testParse() {
 
 	PQLPreProcessor processor;
 	QueryTreeRoot res = processor.parse(strs,"");
-	cout<<"printing"<<endl;
-	cout<<(res.getSymbol("s")) << endl;
 	string expectedSymbol = "stmt";
 	string expectedPattern = "_\"i\"_"; 
 	string str0="1",str1="a",relation = "follows*";
-	cout << "TC1" << endl;
 	CPPUNIT_ASSERT_EQUAL(0,expectedSymbol.compare(res.getSymbol("s")));
-	cout << "TC2" << endl;
-	if (res.getPattern()->getChild()->getNextRel() == NULL)
-		cout << "NULL found"  << endl;
-	else cout << "Correct"  << endl;
 	vector<PQLAttributeNode*> patternChildren = (res.getPattern()->getChild()->getChildren());
 	vector<PQLAttributeNode*> suchThatChildren = (res.getSuchThat()->getChild()->getChildren());
 	CPPUNIT_ASSERT(res.isValidQuery);
@@ -53,4 +46,32 @@ void QueryPreProcessorTest::testIsValidName(){
 	CPPUNIT_ASSERT(!PQLPreProcessor::isValidName("_apple"));
 	CPPUNIT_ASSERT(PQLPreProcessor::isValidName("a12345"));
 	CPPUNIT_ASSERT(!PQLPreProcessor::isValidName("a123.45"));
+}
+
+void QueryPreProcessorTest::testValidityChecking(){
+	vector<string> strs;
+	strs.push_back("stmt s; assign a");
+	strs.push_back("Select a such that Follows* (1,a) pattern a(_,_\"i\"_)");
+	PQLPreProcessor processor;
+	QueryTreeRoot res = processor.parse(strs,"");
+
+	CPPUNIT_ASSERT(PQLPreProcessor::isValidSynonym("s",&res));
+	CPPUNIT_ASSERT(PQLPreProcessor::isValidSynonym("a",&res));
+	CPPUNIT_ASSERT(!PQLPreProcessor::isValidSynonym("_\"i\"_",&res));
+	CPPUNIT_ASSERT(!PQLPreProcessor::isValidSynonym("_",&res));
+	CPPUNIT_ASSERT(!PQLPreProcessor::isValidSynonym("stmt",&res));
+
+	CPPUNIT_ASSERT(PQLPreProcessor::isValidStmtRef("s",&res));
+	CPPUNIT_ASSERT(PQLPreProcessor::isValidStmtRef("_",&res));
+	CPPUNIT_ASSERT(PQLPreProcessor::isValidStmtRef("123",&res));
+	CPPUNIT_ASSERT(!PQLPreProcessor::isValidStmtRef("banana",&res));
+	CPPUNIT_ASSERT(!PQLPreProcessor::isValidStmtRef("_\"i\"_",&res));
+
+	CPPUNIT_ASSERT(PQLPreProcessor::isValidEntRef("a",&res));
+	CPPUNIT_ASSERT(PQLPreProcessor::isValidEntRef("_",&res));
+	CPPUNIT_ASSERT(PQLPreProcessor::isValidEntRef("\"apple123\"",&res));
+	CPPUNIT_ASSERT(PQLPreProcessor::isValidEntRef("\"apple123#\"",&res));
+	CPPUNIT_ASSERT(!PQLPreProcessor::isValidEntRef("\"apple123",&res));
+	CPPUNIT_ASSERT(!PQLPreProcessor::isValidEntRef("apple123\"",&res));
+	CPPUNIT_ASSERT(!PQLPreProcessor::isValidEntRef("54321",&res));
 }

@@ -23,5 +23,6 @@ public:
 	static bool isValidIdent(string str);
 	static bool isValidExpressionSpec(string str, QueryTreeRoot* root);
 	static bool isValidEntRef(string str, QueryTreeRoot*);
+	static bool isValidStmtRef(string str, QueryTreeRoot*);
 };
 #endif
