@@ -3,6 +3,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "DesignExtractor.h"
 
 using namespace std;
 

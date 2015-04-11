@@ -55,17 +55,17 @@ vector<int> Follows::getAllFollows() {
     return result;
 }
 
-//vector<int> Follows::getFollowsStar(int curr) {
-//	return DesignExtractor::getFollowsStar(curr);
-//}
-//
-//vector<int> Follows::getFollowedStarBy(int prev) {
-//	return DesignExtractor::getFollowedStarBy(prev);
-//}
-//
-//bool Follows::isFollowsStar(int prev, int curr) {
-//	return DesignExtractor::isFollowsStar(prev, curr);
-//}
+vector<int> Follows::getFollowsStar(int curr) {
+	return DesignExtractor::getFollowsStar(curr);
+}
+
+vector<int> Follows::getFollowedStarBy(int prev) {
+	return DesignExtractor::getFollowedStarBy(prev);
+}
+
+bool Follows::isFollowsStar(int prev, int curr) {
+	return DesignExtractor::isFollowsStar(prev, curr);
+}
 
 void Follows::draw(){
     map<int, int>::iterator it;
