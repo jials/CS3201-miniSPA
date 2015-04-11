@@ -46,10 +46,10 @@ vector<int> Parent::getChildren(int parent) {
 }
 
 vector<int> Parent::getAllParent() {
-	map<int,int>::iterator it;
-    vector<int> result (_table.size(), -1);
+    map<int,int>::iterator it;
+    vector<int> result;
     for (it = _table.begin(); it != _table.end(); it++) {
-        result[it -> first] = it -> second;
+		result.push_back(it -> first);
     }
     return result;
 }
