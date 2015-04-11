@@ -105,6 +105,14 @@ QueryTreeRoot PQLPreProcessor::parse(vector<string> strs, string name){
 		pos = current.find(";");
 	}
 
+	if (current.compare("")!=0){
+		vector<string> toBeAdded = process(current);
+		if (toBeAdded.size()!=0){
+			result.insertSymbol(toBeAdded);
+		}
+	}
+
+
 	string query = strs[1];
 	string queryLowerCase = query;
 	std::transform(queryLowerCase.begin(), queryLowerCase.end(), queryLowerCase.begin(), ::tolower);
@@ -202,7 +210,7 @@ bool PQLPreProcessor::isValidIdent(string str){
 	}
 	else {
 		for (unsigned int i=0;i<str.size();i++){
-			if (!isalnum(str.at(i)&&str.at(i)!='#'))
+			if (!isalnum(str.at(i))&&str.at(i)!='#')
 				return false;
 		}
 	}
