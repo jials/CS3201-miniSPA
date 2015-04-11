@@ -120,6 +120,7 @@ bool VarTable::isUses(int stmt, string varName) {
             return false;
         }
     }
+    return false;
 }
 
 bool VarTable::isModifies(int stmt, string varName) {
@@ -140,26 +141,31 @@ bool VarTable::isModifies(int stmt, string varName) {
             return false;
         }
     }
+    return false;
 }
 
 vector<string> VarTable::getAllUses(string varName) {
     map<VAR, VARROW>::iterator it;
+    vector<string> result;
     for (it = _table.begin(); it != _table.end(); it++)
     {
         if(it->second.varName == varName){
-            return it->second.usedBy;
+            result = it->second.usedBy;
         }
     }
+    return result;
 }
 
 vector<string> VarTable::getAllModifies(string varName) {
     map<VAR, VARROW>::iterator it;
+    vector<string> result;
     for (it = _table.begin(); it != _table.end(); it++)
     {
         if(it->second.varName == varName){
-            return it->second.modifiedBy;
+            result = it->second.modifiedBy;
         }
     }
+    return result;
 }
 
 vector<string> VarTable::getAllVariables() {
@@ -173,31 +179,31 @@ vector<string> VarTable::getAllVariables() {
 }
 
 vector<string> VarTable::getAllModifyingStmt(){
-	map<VAR, VARROW>::iterator it;
+    map<VAR, VARROW>::iterator it;
     vector<string> result;
-	 Helpers helper;
+    Helpers helper;
     for (it = _table.begin(); it != _table.end(); it++)
     {
-		for(int q = 0; q < it->second.modifiedBy.size(); q++){
-			result.push_back(it->second.modifiedBy[q]);
-		}
+        for(unsigned int q = 0; q < it->second.modifiedBy.size(); q++){
+            result.push_back(it->second.modifiedBy[q]);
+        }
     }
-	helper.removeVectorDuplicates(result);
-	return result;
+    helper.removeVectorDuplicates(result);
+    return result;
 }
 
 vector<string> VarTable::getAllUsingStmt(){
-	map<VAR, VARROW>::iterator it;
+    map<VAR, VARROW>::iterator it;
     vector<string> result;
-	 Helpers helper;
+    Helpers helper;
     for (it = _table.begin(); it != _table.end(); it++)
     {
-		for(int q = 0; q < it->second.usedBy.size(); q++){
-			result.push_back(it->second.usedBy[q]);
-		}
+        for(unsigned int q = 0; q < it->second.usedBy.size(); q++){
+            result.push_back(it->second.usedBy[q]);
+        }
     }
-	helper.removeVectorDuplicates(result);
-	return result;
+    helper.removeVectorDuplicates(result);
+    return result;
 }
 
 VAR VarTable::getVar(string name){
@@ -212,63 +218,63 @@ VAR VarTable::getVar(string name){
 }
 
 void VarTable::parentRelationshipInfluence(){
-	map<VAR, VARROW>::iterator it;
+    map<VAR, VARROW>::iterator it;
     Helpers helper;
     for (it = _table.begin(); it != _table.end(); it++) {
         
-            vector<string> modifies = it->second.modifiedBy;
-			vector<string> uses = it->second.usedBy;
-            vector<string>::iterator itModifies;
-            vector<string>::iterator itUses;
-
-            for (itModifies = modifies.begin(); itModifies != modifies.end(); itModifies++) {
-				vector<int> parents;
-				parents = Parent::getParentStar(atoi((*itModifies).c_str()));
-				for(int q = 0; q < parents.size(); q++){
-					it->second.modifiedBy.push_back(helper.intToString(parents[q]));
-				}
-				
+        vector<string> modifies = it->second.modifiedBy;
+        vector<string> uses = it->second.usedBy;
+        vector<string>::iterator itModifies;
+        vector<string>::iterator itUses;
+        
+        for (itModifies = modifies.begin(); itModifies != modifies.end(); itModifies++) {
+            vector<int> parents;
+            parents = Parent::getParentStar(atoi((*itModifies).c_str()));
+            for(unsigned int q = 0; q < parents.size(); q++){
+                it->second.modifiedBy.push_back(helper.intToString(parents[q]));
             }
             
-			for (itUses = uses.begin(); itUses != uses.end(); itUses++) {
-				vector<int> parents;
-				parents = Parent::getParentStar(atoi((*itUses).c_str()));
-				for(int q = 0; q< parents.size(); q++){
-					it->second.usedBy.push_back(helper.intToString(parents[q]));
-				}
+        }
+        
+        for (itUses = uses.begin(); itUses != uses.end(); itUses++) {
+            vector<int> parents;
+            parents = Parent::getParentStar(atoi((*itUses).c_str()));
+            for(unsigned int q = 0; q< parents.size(); q++){
+                it->second.usedBy.push_back(helper.intToString(parents[q]));
             }
-			helper.removeVectorDuplicates(it->second.modifiedBy);
-			helper.removeVectorDuplicates(it->second.usedBy);
+        }
+        helper.removeVectorDuplicates(it->second.modifiedBy);
+        helper.removeVectorDuplicates(it->second.usedBy);
         
     }
 }
 
 vector<string> VarTable::getModifiedBy(int stmt){
-	map<VAR, VARROW>::iterator it;
-	vector<string> result;
-	for (it = _table.begin(); it != _table.end(); it++) {
-	   vector<string> modifies = it->second.modifiedBy;
-	   vector<string>::iterator itModifies;
-	   for (itModifies = modifies.begin(); itModifies != modifies.end(); itModifies++) {
-		   if(atoi((*itModifies).c_str()) == stmt){
-			   result.push_back(it->second.varName);
-		   }
-	   }
-	}
-	return result;
+    map<VAR, VARROW>::iterator it;
+    vector<string> result;
+    for (it = _table.begin(); it != _table.end(); it++) {
+        vector<string> modifies = it->second.modifiedBy;
+        vector<string>::iterator itModifies;
+        for (itModifies = modifies.begin(); itModifies != modifies.end(); itModifies++) {
+            if(atoi((*itModifies).c_str()) == stmt){
+                result.push_back(it->second.varName);
+            }
+        }
+    }
+    return result;
 }
 
 vector<string> VarTable::getUsedBy(int stmt){
-	map<VAR, VARROW>::iterator it;
-	vector<string> result;
-	for (it = _table.begin(); it != _table.end(); it++) {
-		vector<string> uses = it->second.usedBy;
-	   vector<string>::iterator itUses;
-	   for (itUses = uses.begin(); itUses != uses.end(); itUses++) {
-		   if(atoi((*itUses).c_str()) == stmt){
-			   result.push_back(it->second.varName);
-		   }
-	   }
-	}
-	return result;
+    map<VAR, VARROW>::iterator it;
+    vector<string> result;
+    for (it = _table.begin(); it != _table.end(); it++) {
+        vector<string> uses = it->second.usedBy;
+        vector<string>::iterator itUses;
+        for (itUses = uses.begin(); itUses != uses.end(); itUses++) {
+            if(atoi((*itUses).c_str()) == stmt){
+                result.push_back(it->second.varName);
+            }
+        }
+    }
+    return result;
 }
