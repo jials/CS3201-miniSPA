@@ -117,10 +117,13 @@ QueryTreeRoot PQLPreProcessor::parse(vector<string> strs, string name){
 	string queryLowerCase = query;
 	std::transform(queryLowerCase.begin(), queryLowerCase.end(), queryLowerCase.begin(), ::tolower);
 
-	if (iequals(query.substr(0,6),"select"))
+	if (iequals(query.substr(0,6),"select")){
 		result.setName(getNextToken(query,6));
+		result.setSelect(getNextToken(query,6));
+	}
 	else{
 		result.setName("Error");
+		result.isValidQuery = false;
 		return result;
 	}
 
