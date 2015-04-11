@@ -10,6 +10,7 @@
 using namespace std;
 
 class PQLEvaluator{
+friend class QueryEvaluatorTest;
 public:
 	PQLEvaluator();
 	void evaluateResult(QueryTreeRoot*);

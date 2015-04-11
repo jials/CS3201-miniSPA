@@ -269,7 +269,7 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 	}
 }
 
-int indInSymbols(string name, vector<vector<string>> symbols) {
+int PQLEvaluator::indInSymbols(string name, vector<vector<string>> symbols) {
 	for(unsigned int i = 0; i < symbols.size(); i++) {
 		if(name.compare(symbols.at(i).at(1))==0) {
 			return i;
@@ -278,7 +278,7 @@ int indInSymbols(string name, vector<vector<string>> symbols) {
 	return -1;
 }
 
-vector<string> merge(vector<string> vA, vector<string> vB) {
+vector<string> PQLEvaluator::merge(vector<string> vA, vector<string> vB) {
 	vector<string> res;
 	if(vA.at(0).compare("none")==0 || vB.at(0).compare("none")==0) {
 		res.push_back("none");
@@ -295,7 +295,7 @@ vector<string> merge(vector<string> vA, vector<string> vB) {
 	return res;
 }
 
-bool isNumber(string str) {
+bool PQLEvaluator::isNumber(string str) {
 	for(unsigned int i = 0; i < str.size(); i++) {
 		if(!isdigit(str.at(i))) {
 			return false;
@@ -304,7 +304,7 @@ bool isNumber(string str) {
 	return true;
 }
 
-bool isIn(string str, vector<string> vec) {
+bool PQLEvaluator::isIn(string str, vector<string> vec) {
 	for(unsigned int i = 0; i < vec.size(); i++) {
 		if(str.compare(vec.at(i))==0) {
 			return true;
@@ -313,7 +313,7 @@ bool isIn(string str, vector<string> vec) {
 	return false;
 }
 
-vector<vector<string>> evaluateSuchThat(QueryTreeRoot* rootPtr, PQLRelationshipNode* suchThatQueryPtr) {
+vector<vector<string>> PQLEvaluator::evaluateSuchThat(QueryTreeRoot* rootPtr, PQLRelationshipNode* suchThatQueryPtr) {
 	PKB pkb = PKB();
 	vector<vector<string>> result;
 	vector<string> invalid;
@@ -693,7 +693,7 @@ vector<vector<string>> evaluateSuchThat(QueryTreeRoot* rootPtr, PQLRelationshipN
 	}
 }
 
-vector<string> evaluatePattern(QueryTreeRoot* rootPtr, PQLRelationshipNode* patternQueryPtr) {
+vector<string> PQLEvaluator::evaluatePattern(QueryTreeRoot* rootPtr, PQLRelationshipNode* patternQueryPtr) {
 	vector<vector<string>> symbols = (*rootPtr).getSymbolTable();
 
 	PQLRelationshipNode pattern = *patternQueryPtr;		
