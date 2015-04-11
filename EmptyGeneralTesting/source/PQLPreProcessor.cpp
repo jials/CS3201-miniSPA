@@ -164,6 +164,7 @@ vector<string> PQLPreProcessor::process(string str){;
 }
 
 string PQLPreProcessor::trim(string str){
+	if (str.compare("")==0) return str;
 	unsigned int i=0,j=0;
 	for (i=0;i<str.size();i++){
 		if (str[i]!=' ')
