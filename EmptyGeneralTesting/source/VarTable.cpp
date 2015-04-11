@@ -172,6 +172,34 @@ vector<string> VarTable::getAllVariables() {
     return result;
 }
 
+vector<string> VarTable::getAllModifyingStmt(){
+	map<VAR, VARROW>::iterator it;
+    vector<string> result;
+	 Helpers helper;
+    for (it = _table.begin(); it != _table.end(); it++)
+    {
+		for(int q = 0; q < it->second.modifiedBy.size(); q++){
+			result.push_back(it->second.modifiedBy[q]);
+		}
+    }
+	helper.removeVectorDuplicates(result);
+	return result;
+}
+
+vector<string> VarTable::getAllUsingStmt(){
+	map<VAR, VARROW>::iterator it;
+    vector<string> result;
+	 Helpers helper;
+    for (it = _table.begin(); it != _table.end(); it++)
+    {
+		for(int q = 0; q < it->second.usedBy.size(); q++){
+			result.push_back(it->second.usedBy[q]);
+		}
+    }
+	helper.removeVectorDuplicates(result);
+	return result;
+}
+
 VAR VarTable::getVar(string name){
     map<VAR, VARROW>::iterator it;
     for (it = _table.begin(); it != _table.end(); it++)

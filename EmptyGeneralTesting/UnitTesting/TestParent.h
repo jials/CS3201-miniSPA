@@ -9,6 +9,7 @@ class ParentTest : public CPPUNIT_NS::TestFixture
 	CPPUNIT_TEST( testSetParent );
 	CPPUNIT_TEST( testIsParent );
 	CPPUNIT_TEST( testGetChildren );
+	CPPUNIT_TEST( testGetAllParent );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -18,6 +19,7 @@ public:
 	void testSetParent();
 	void testIsParent();
 	void testGetChildren();
+	void testGetAllParent();
 
 private:
 	Parent *mTestObj;

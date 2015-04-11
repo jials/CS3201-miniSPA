@@ -39,9 +39,9 @@ public:
     bool isFollows(int s1, int s2);
     vector<string> getAllFollows();				//get all follows
     
-    vector<string> getFollowsStar(int s);
-    vector<string> getFollowedStarBy(int s);
-    bool isFollowsStar(int s1, int s2);
+    vector<string> getFollowsStar(int s);		//missing!
+    vector<string> getFollowedStarBy(int s);		//missing!
+    bool isFollowsStar(int s1, int s2);			//missing!
     //vector<string> getAllFollowsStar();			//same as get all follows
     
     bool isParent(int parent, int child);
@@ -49,20 +49,20 @@ public:
     vector<string> getChildren(int);			//get all children
     vector<string> getAllParents();				//get all parent that hav a child
     
-    bool isParentStar(int parent, int child);
+    bool isParentStar(int parent, int child);		//missing!
     vector<string> getParentStar(int child);				//get all parents star of a child
-    vector<string> getChildrenStar(int parent);			//get all children star of a parent
+    vector<string> getChildrenStar(int parent);		//missing!	//get all children star of a parent
     //vector<string> getAllParentsStar();				//get all parent that hav a child parent star it
     
     vector<string> getModifiedBy(int stmt);                  //returns the varName that stmt modifies !!!changed from string to vector<string>
-    bool isModifies(int stmt, string var);
-    vector<string> getAllModifies(string var);         //returns the list of stmts that modifies var
-    vector<string> getAllModifyingStmt();			//get all statements that modifying any var, NOT equal to getAllAssign because while stmt can also modify some variables
+    bool isModifies(int stmt, string var);		//missing!
+    vector<string> getAllModifies(string var);         //returns the list of stmts that modifies var	//missing!
+    vector<string> getAllModifyingStmt();		//missing!	//get all statements that modifying any var, NOT equal to getAllAssign because while stmt can also modify some variables
     
     vector<string> getUsedBy(int stmt);					//get var list that used by statement
-    bool isUses(int stmt, string var);					//is statement using the var
-    vector<string> getAllUses(string var);				//get all statements that using the input var
-    vector<string> getAllUsingStmt();					//get all statements that using any var
+    bool isUses(int stmt, string var);					//is statement using the var		//missing!
+    vector<string> getAllUses(string var);			//missing!	//get all statements that using the input var
+    vector<string> getAllUsingStmt();				//missing!	//get all statements that using any var
     
 };
 

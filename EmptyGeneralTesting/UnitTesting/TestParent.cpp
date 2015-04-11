@@ -50,3 +50,15 @@ void ParentTest::testGetChildren() {
 	mTestObj->reset();
 	return;
 }
+
+void ParentTest::testGetAllParent() {
+	mTestObj->reset();
+	mTestObj->setParent(1,6);
+	mTestObj->setParent(2,8);
+	mTestObj->setParent(3,10);
+
+	vector<int> children = mTestObj->getAllParent();
+	CPPUNIT_ASSERT(children.size() == 3);
+	mTestObj->reset();
+	return;
+}

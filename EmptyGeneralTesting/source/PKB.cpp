@@ -17,6 +17,8 @@ using namespace std;
 
 Helpers helper;
 
+PKB::PKB(){}
+
 vector<string> PKB::getAllVar(){
 	return VarTable::getAllVariables();
 }
@@ -48,6 +50,7 @@ string PKB::getFollowedBy(int s){
 	return helper.intToString(Follows::getFollowedBy(s));
 }
 
+
 bool PKB::isFollows(int s1, int s2){
 	if(s1 > StmtTable::getMaxStmtNumber() || s2 > StmtTable::getMaxStmtNumber()) return false;
 	return Follows::isFollows(s1, s2);
@@ -56,6 +59,7 @@ bool PKB::isFollows(int s1, int s2){
 vector<string> PKB::getAllFollows(){
 	return helper.intVectorToStringVector(Follows::getAllFollows());
 }
+
 
 vector<string> PKB::getFollowsStar(int s){
 	if(s > StmtTable::getMaxStmtNumber()){
@@ -96,6 +100,15 @@ vector<string> PKB::getChildren(int parent){
 	return helper.intVectorToStringVector(Parent::getChildren(parent));
 }
 
+vector<string> PKB::getChildrenStar(int parent){
+	if(parent > StmtTable::getMaxStmtNumber()){
+		vector<string> r;
+		return r;
+	} 
+	return helper.intVectorToStringVector(Parent::getChildrenStar(parent));
+}
+
+
 vector<string> PKB::getAllParents(){
 	return helper.intVectorToStringVector(Parent::getAllParent());
 }
@@ -122,6 +135,19 @@ vector<string> PKB::getUsedBy(int stmt){
 	return VarTable::getUsedBy(stmt);
 }
 
+bool PKB::isUses(int stmt, string var){
+	if(stmt > StmtTable::getMaxStmtNumber()) return "-1";
+	return VarTable::isUses(stmt, var);
+}
+
+vector<string> PKB::getAllUses(string var){
+	return VarTable::getAllUses(var);
+}
+
+vector<string> PKB::getAllUsingStmt(){
+	return VarTable::getAllUsingStmt();
+}
+
 vector<string> PKB::getModifiedBy(int stmt){
 	if(stmt > StmtTable::getMaxStmtNumber()){
 		vector<string> r;
@@ -130,6 +156,18 @@ vector<string> PKB::getModifiedBy(int stmt){
 	return VarTable::getModifiedBy(stmt);
 }
 
+bool PKB::isModifies(int stmt, string var){
+	if(stmt > StmtTable::getMaxStmtNumber()) return "-1";
+	return VarTable::isModifies(stmt, var);
+}
+
+vector<string> PKB::getAllModifyingStmt(){
+	return VarTable::getAllModifyingStmt();
+}
+
+vector<string> PKB::getAllModifies(string var){
+	return VarTable::getAllModifies(var);
+}
 
 vector<string> PKB::patternMatching(string type, string left,string right){
 	nodeType enumType;

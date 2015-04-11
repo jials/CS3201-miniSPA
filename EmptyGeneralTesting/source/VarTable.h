@@ -46,7 +46,9 @@ public:
 
 	static vector<string> getModifiedBy(int);
     static vector<string> getUsedBy(int);
+	static vector<string> getAllModifyingStmt();
 
+	static vector<string> getAllUsingStmt();	
 	static void parentRelationshipInfluence();
 
 private:
