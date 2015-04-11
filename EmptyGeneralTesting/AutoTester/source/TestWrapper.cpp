@@ -1,5 +1,9 @@
 #include "TestWrapper.h"
 #include "SimpleParser.h"
+#include "PQLPreProcessor.h"
+#include "PQLEvaluator.h"
+#include "QueryTreeRoot.h"
+#include "PQLResultNode.h"
 #include <fstream>
 #include <string>
 
@@ -43,7 +47,24 @@ void TestWrapper::parse(std::string filename) {
 void TestWrapper::evaluate(std::string query, std::list<std::string>& results){
 // call your evaluator to evaluate the query here
   // ...code to evaluate query...
-
+  
+	PQLPreProcessor proc;
+	PQLEvaluator eva;
+	QueryTreeRoot root;
+	PQLResultNode* node;
+	vector<string> a ;
+	vector<string> finalResults;
+	string first_token = query.substr(0, query.find("Select"));
+	string second_token = query.substr(query.find("Select"));
+	a.push_back(first_token);
+	a.push_back(second_token);
+	root = proc.parse(a,"");
+	eva.evaluateResult(&root);
+	node = root.getResult();
+	finalResults = node->getResult();
+	for(int q = 0 ; q< finalResults.size(); q++){
+		results.push_back(finalResults[q]);
+	}
   // store the answers to the query in the results list (it is initially empty)
   // each result must be a string.
 }

@@ -46,3 +46,7 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.tlog
+*.tlog
+*.tlog
+EmptyGeneralTesting/SPA/Release/CL.read.1.tlog
