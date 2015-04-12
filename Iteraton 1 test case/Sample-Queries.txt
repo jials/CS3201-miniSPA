@@ -90,7 +90,7 @@ Select a such that Follows*(3, a)
 5000
 19 - v, fs(v,v)
 stmt s1; stmt s2
-Select s such that Follows*(s1, s2)
+Select s1 such that Follows*(s1, s2)
 1, 2, 3, 4, 5
 5000
 20 - v, fs(v,v)

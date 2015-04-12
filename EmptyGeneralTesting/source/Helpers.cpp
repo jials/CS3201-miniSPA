@@ -83,7 +83,7 @@ string Helpers::intToString(int input){
 
 vector<string> Helpers::intVectorToStringVector(vector<int> input){
 	vector<string> result;
-	for(int i =0; i<=input.size()-1;i++){
+	for(int i =0; i<input.size();i++){
 		result.push_back(to_string(static_cast<long long>(input[i])));
 	}
 	return result;

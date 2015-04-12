@@ -27,7 +27,7 @@ vector<int> DesignExtractor::getParentStar(int stmt) {
 vector<int> DesignExtractor::getFollowsStar(int stmt) {
     
     vector<int> result;
-    int this_stmt = Follows::getFollows(stmt);
+	int this_stmt = Follows::getFollows(stmt);
     
     while (this_stmt != -1) {
         result.push_back(this_stmt);
@@ -77,7 +77,7 @@ bool DesignExtractor::isFollowsStar(int prev, int curr) {
     int stmt_2 = curr;
     
     while (stmt_1 != -1) {
-        stmt_1 = Follows::getFollowedBy(stmt_1);
+		stmt_1 = Follows::getFollows(stmt_1);
         
         if (stmt_1 == stmt_2) {
             return true;

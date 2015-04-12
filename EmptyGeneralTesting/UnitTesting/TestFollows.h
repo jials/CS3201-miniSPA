@@ -11,6 +11,7 @@ class FollowsTest : public CPPUNIT_NS::TestFixture
 	CPPUNIT_TEST( testGetFollows );
 	CPPUNIT_TEST( testGetFollowedBy );
 	CPPUNIT_TEST( testGetAllFollows );
+	CPPUNIT_TEST( testIsFollowStar );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -22,6 +23,7 @@ public:
 	void testGetFollows();
 	void testGetFollowedBy();
 	void testGetAllFollows();
+	void testIsFollowStar();
 
 private:
 	Follows *mTestObj;

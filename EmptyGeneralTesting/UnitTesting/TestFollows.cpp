@@ -24,7 +24,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION( FollowsTest );
 void FollowsTest::testSetFollows() {
 	mTestObj->reset();
 	mTestObj->setFollows(3,5); 
-	CPPUNIT_ASSERT(mTestObj->getFollows(5) == 3);
+	CPPUNIT_ASSERT(mTestObj->getFollows(3) == 5);
 	mTestObj->reset();
 	return;
 }
@@ -41,13 +41,13 @@ void FollowsTest::testIsFollows() {
 void FollowsTest::testGetFollows() {
 	mTestObj->reset();
 	mTestObj->setFollows(3,4); 
-	CPPUNIT_ASSERT(mTestObj->getFollows(4) == 3);
+	CPPUNIT_ASSERT(mTestObj->getFollows(3) == 4);
 }
 
 void FollowsTest::testGetFollowedBy() {
 	mTestObj->reset();
 	mTestObj->setFollows(8,9); 
-	CPPUNIT_ASSERT(mTestObj->getFollowedBy(8) == 9);
+	CPPUNIT_ASSERT(mTestObj->getFollowedBy(9) == 8);
 	mTestObj->reset();
 }
 
@@ -59,3 +59,11 @@ void FollowsTest::testGetAllFollows() {
 }
 
 
+void FollowsTest::testIsFollowStar() {
+	mTestObj->reset();
+	mTestObj->setFollows(1,2);
+	mTestObj->setFollows(2,3);
+	mTestObj->setFollows(3,4);
+	CPPUNIT_ASSERT(mTestObj->isFollowsStar(1,4) == true);
+	mTestObj->reset();
+}
