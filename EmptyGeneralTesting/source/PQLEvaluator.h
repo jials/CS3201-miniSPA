@@ -23,4 +23,5 @@ private:
 	int indInSymbols(string name, vector<vector<string>> symbols);
 	bool isNumber(string str);
 	bool isIn(string str, vector<string> vec);
+	vector<string> getAllFromAType(string type);
 };
