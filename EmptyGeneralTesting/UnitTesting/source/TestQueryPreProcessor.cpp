@@ -38,6 +38,15 @@ void QueryPreProcessorTest::testParse() {
 	CPPUNIT_ASSERT_EQUAL(0,str1.compare(suchThatChildren[1]->getName()));
 	CPPUNIT_ASSERT_EQUAL(0,str0.compare(suchThatChildren[0]->getName()));
 	CPPUNIT_ASSERT_EQUAL(0,relation.compare(res.getSuchThat()->getChild()->getName())); cout <<res.getSuchThat()->getChild()->getName()<<endl;
+
+	vector<string> strs2;
+	strs2.push_back("assign          a;");
+	strs2.push_back("Select        a such that   follows (2,           a);");
+	string assignment = "assign";
+
+	QueryTreeRoot res2 = processor.parse(strs2,"");
+	CPPUNIT_ASSERT(res2.isValidQuery);
+	CPPUNIT_ASSERT_EQUAL(0,assignment.compare(res2.getSymbol("a")));
 }
 
 void QueryPreProcessorTest::testIsValidName(){
