@@ -3,6 +3,7 @@
 #include<stdio.h>
 #include <string>
 #include <vector>
+
 using namespace std;
 
 #ifndef Helpers_H
@@ -20,6 +21,9 @@ public:
   string intToString(int input);
   vector<string> intVectorToStringVector (vector<int> input);
   void removeVectorDuplicates(std::vector<string>& vec);
+  string GetExePath();
+
+
 };
 
 #endif

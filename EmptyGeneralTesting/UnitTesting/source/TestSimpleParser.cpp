@@ -1,6 +1,7 @@
 #include "TestSimpleParser.h"
 #include "SimpleParser.h"
 
+#include "Helpers.h"
 
 void
 TestSimpleParser::testParse(void)
@@ -116,6 +117,24 @@ TestSimpleParser::testAppendWhiteSpace(void)
 }
 
 
+
+void
+TestSimpleParser::testReadFile(void)
+{
+	Helpers helper;
+	string path = helper.GetExePath();
+	path += "\\source.txt";
+
+	std::ifstream file(path);
+    std::string str; 
+	string line;
+    while (std::getline(file, str))
+    {
+        line += str + "\n";
+    }
+	CPPUNIT_ASSERT("" != line);
+
+}
 
 void TestSimpleParser::setUp(void)
 {

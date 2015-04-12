@@ -6,6 +6,8 @@
 #include "PQLResultNode.h"
 #include <fstream>
 #include <string>
+#include "VarTable.h"
+
 
 using namespace std;
 
@@ -30,17 +32,21 @@ void TestWrapper::parse(std::string filename) {
 	// call your parser to do the parsing
     // ...rest of your code...
 
-	string code;
-	ifstream infile;
-	infile.open (filename);
-        while(!infile.eof()) // To get you all the lines.
-        {
-	        getline(infile,code); // Saves the line in STRING.
-        }
-	infile.close();
-	SimpleParser parser;
-	parser.parse(code);
+	Helpers helper;
+	string path = helper.GetExePath();
+	path += "\\source.txt";
 
+	std::ifstream file(path);
+    std::string str; 
+	string line;
+    while (std::getline(file, str))
+    {
+        line += str + "\n";
+    }
+
+	SimpleParser parser;
+	parser.parse(line);
+	
 }
 
 // method to evaluating a query
@@ -62,9 +68,19 @@ void TestWrapper::evaluate(std::string query, std::list<std::string>& results){
 	eva.evaluateResult(&root);
 	node = root.getResult();
 	finalResults = node->getResult();
-	for(int q = 0 ; q< finalResults.size(); q++){
-		results.push_back(finalResults[q]);
+	if(finalResults[0] != "none"){
+		for(int q = 0 ; q< finalResults.size(); q++){
+			results.push_back(finalResults[q]);
+		}
 	}
+	
+	
+
+
+
+	
+
   // store the answers to the query in the results list (it is initially empty)
   // each result must be a string.
 }
+

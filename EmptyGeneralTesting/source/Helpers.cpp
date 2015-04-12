@@ -6,6 +6,8 @@
 #include <vector>
 #include <map>
 #include <algorithm>
+#define NOMINMAX
+#include <windows.h>
 
 using namespace std;
 
@@ -91,4 +93,17 @@ void Helpers::removeVectorDuplicates(std::vector<string>& vec)
 {
   std::sort(vec.begin(), vec.end());
   vec.erase(std::unique(vec.begin(), vec.end()), vec.end());
+}
+
+string GetExeFileName()
+{
+  char buffer[5000];
+  GetModuleFileName( NULL, buffer, 5000 );
+  return std::string(buffer);
+}
+
+string Helpers::GetExePath() 
+{
+  std::string f = GetExeFileName();
+  return f.substr(0, f.find_last_of( "\\/" ));
 }
