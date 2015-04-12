@@ -22,7 +22,7 @@ void QueryPreProcessorTest::testConstructor() {
 // method to test the assigning and retrieval of grades
 void QueryPreProcessorTest::testParse() {
 	vector<string> strs;
-	strs.push_back("stmt s;");
+	strs.push_back("stmt s; assign a");
 	strs.push_back("Select a such that Follows* (1,a) pattern a(_,_\"i\"_)");
 
 	PQLPreProcessor processor;
