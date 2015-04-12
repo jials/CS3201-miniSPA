@@ -25,7 +25,17 @@ bool Follows::isFollows(int prev, int curr) {
 }
 
 //Return -1 if not found
-int Follows::getFollows(int curr) {
+int Follows::getFollows(int prev) {
+	 map<int,int>::iterator it = _table.find(prev);
+    if (it == _table.end()) {
+        return -1;
+    } else {
+        return it -> second;
+    }
+}
+
+//Return -1 if not found or it is the starting statement
+int Follows::getFollowedBy(int curr) {
     map<int,int>::iterator it;
     for (it = _table.begin(); it != _table.end(); it++) {
 		//cout << "(" << it -> first << ", " << it -> second << ") ";
@@ -34,16 +44,6 @@ int Follows::getFollows(int curr) {
         }
     }
     return -1;
-}
-
-//Return -1 if not found or it is the starting statement
-int Follows::getFollowedBy(int prev) {
-    map<int,int>::iterator it = _table.find(prev);
-    if (it == _table.end()) {
-        return -1;
-    } else {
-        return it -> second;
-    }
 }
 
 vector<int> Follows::getAllFollows() {
