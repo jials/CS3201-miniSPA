@@ -47,16 +47,38 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 			throw (string) "Select type invalid!";
 		}
 		//fill in pattern result                           --if no pattern/suchthat clause, the xxxResult will be empty, once evaluated, must be smth or invalid or none
-		if(patternQueryPtr!=NULL) {
+		if(patternQueryPtr!=NULL && (*patternQueryPtr).getName().compare("firstChild")!=0) {
 			patternResult = evaluatePattern(rootPtr, patternQueryPtr);
 		}
 		//fill in such that result
-		if(suchThatQueryPtr!=NULL) {
+		if(suchThatQueryPtr!=NULL && (*suchThatQueryPtr).getName().compare("firstChild")!=0) {
 			suchThatResult = evaluateSuchThat(rootPtr, suchThatQueryPtr);
 		}
 
+		//output results from three parts to see correctness
+		cout<<"selectResult is: " << endl;
+		for(unsigned int i=0;i<selectResult.size();i++) {
+			cout << selectResult.at(i) << "  ";
+		}
+		cout << endl;
+
+		cout<<"suchThatResult is: " << endl;
+		for(unsigned int i=0;i<suchThatResult.size();i++) {
+			for(unsigned int j = 0; j < suchThatResult.at(i).size(); j++) {
+				cout << suchThatResult.at(i).at(0) << " ";
+			}
+			cout << endl;
+		}
+		cout << "such that result ends" <<endl;
+
+		cout<<"patternResult is: " << endl;
+		for(unsigned int i=0;i<patternResult.size();i++) {
+				cout << patternResult.at(i).at(0) << " ";
+		}
+		cout << " such that result ends" <<endl;
+
 		//compare results to give the final result
-		if(selectResult.empty() || patternResult.at(0).compare("invalid")==0 || suchThatResult.at(0).at(0).compare("invalid")==0) {
+		if(selectResult.empty() || (!patternResult.empty() && patternResult.at(0).compare("invalid")==0) || (!suchThatResult.empty() && suchThatResult.at(0).at(0).compare("invalid")==0)) {
 			(*resultNodePtr).setResult(none);
 		}
 		else {
@@ -266,13 +288,20 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 			}
 
 		}
+
 	}
+	vector<string> output = (*resultNodePtr).getResult();
+	cout<<"result is ";
+	for(unsigned int i = 0; i < output.size(); i++) {
+		cout << output.at(i) << " ";
+	}
+	cout << endl;
 }
 
 int PQLEvaluator::indInSymbols(string name, vector<vector<string>> symbols) {
 	for(unsigned int i = 0; i < symbols.size(); i++) {
-		if(name.compare(symbols.at(i).at(1))==0) {
-			return i;
+		if (symbols[i][1].compare(name)==0) {
+				return i;
 		}
 	}
 	return -1;
@@ -333,7 +362,7 @@ vector<vector<string>> PQLEvaluator::evaluateSuchThat(QueryTreeRoot* rootPtr, PQ
 	PQLAttributeNode* bPtr = (rel.getChildren()).at(1);
 	string b = (*bPtr).getName();
 	int indB = indInSymbols(b, symbols);
-
+	
 	if(relName.compare("follows")==0) {
 		if(indA==-1 && isNumber(a) && indB==-1 && isNumber(b)) {
 			if(pkb.isFollows(std::stoi(a), std::stoi(b))) {
