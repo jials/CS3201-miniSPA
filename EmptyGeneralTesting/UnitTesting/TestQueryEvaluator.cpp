@@ -6,9 +6,6 @@
 #include <vector>
 using namespace std;
 
-
-
-
 void
 QueryEvaluatorTest::setUp()
 {
@@ -25,37 +22,57 @@ CPPUNIT_TEST_SUITE_REGISTRATION( QueryEvaluatorTest );
 void QueryEvaluatorTest::testConstructor() { 
 }
 
-// method to test the assigning and retrieval of grades
-void QueryEvaluatorTest::testEvaluate() {
+void QueryEvaluatorTest::testIndInSymbols(){
+	PQLEvaluator eva; 
+	vector<vector<string>> symbols;
+	vector<string> line1;
+	line1.push_back("assign");
+	line1.push_back("aaa");
+	symbols.push_back(line1);
+	vector<string> line2;
+	line2.push_back("stmt");
+	line2.push_back("s2");
+	symbols.push_back(line2);
+	vector<string> line3;
+	line3.push_back("variable");
+	line3.push_back("v");
+	symbols.push_back(line3);
+
+	CPPUNIT_ASSERT_EQUAL(2, eva.indInSymbols("v", symbols));
+	CPPUNIT_ASSERT_EQUAL(-1, eva.indInSymbols("while", symbols));
 
 }
 
 void QueryEvaluatorTest::testMerge() {
-
 	PQLEvaluator eva; 
-	const char* args1[] = {"", "abc", "blah", "xyz"};
-	std::vector<std::string> vec1(args1, args1 + 4);
-	const char* args2[] = {"apple", "orange", "pear", "cs3201"};
-	std::vector<std::string> vec2(args2, args2 + 4);
+	std::vector<std::string> vec1;
+	vec1.push_back("blah");
+	vec1.push_back("cs2222");
+	vec1.push_back("rt5");
+	std::vector<std::string> vec2;
+	vec2.push_back("fff");
+	vec2.push_back("cs2222");
+	vec2.push_back("rrr");
+	vec2.push_back("blah");
 	std::vector<string> res = eva.merge(vec1, vec2);
-
-	for (int i=0;i<vec1.size();i++){
-		cout << vec1[i] << endl;
-	}
-
-	for (int i=0;i<res.size();i++){
-		cout << res[i] << endl;
-	}
-
-	CPPUNIT_ASSERT_EQUAL(0,res[6].compare("pear"));
-	CPPUNIT_ASSERT_EQUAL(0,res[0].compare(""));
-	CPPUNIT_ASSERT_EQUAL(0,res[2].compare("apple"));
+	CPPUNIT_ASSERT_EQUAL(0, res.at(0).compare("blah"));
+	CPPUNIT_ASSERT_EQUAL(0,res.at(1).compare("cs2222"));
 }
 
-void QueryEvaluatorTest::testIsIn() {
+void QueryEvaluatorTest::testIsNumber(){
+	PQLEvaluator eva;
+	string str1 = "345235";
+	string str2 = "s3489aaa";
+	CPPUNIT_ASSERT(eva.isNumber(str1));
+	CPPUNIT_ASSERT(!eva.isNumber(str2));
+}
+
+void QueryEvaluatorTest::testIsIn(){
 	PQLEvaluator eva; 
-	const char* args2[] = {"apple", "orange", "pear", "cs3201"};
-	std::vector<std::string> res(args2, args2 + 4);
-	CPPUNIT_ASSERT(eva.isIn("cs3201",res));
-	CPPUNIT_ASSERT(!eva.isIn("banana",res));
+	vector<string> vec;
+	vec.push_back("first");
+	vec.push_back("second");
+	vec.push_back("last");
+	CPPUNIT_ASSERT(eva.isIn("second",vec));
+	CPPUNIT_ASSERT(!eva.isIn("banana",vec));
 }
