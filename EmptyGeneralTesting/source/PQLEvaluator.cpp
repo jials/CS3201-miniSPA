@@ -44,7 +44,9 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 			selectResult = pkb.getAllVar();
 		}
 		else {
-			throw (string) "Select type invalid!";
+			//throw (string) "Select type invalid!";
+			(*resultNodePtr).setResult(none);
+			return;
 		}
 		//fill in pattern result                           --if no pattern/suchthat clause, the xxxResult will be empty, once evaluated, must be smth or invalid or none
 		if(patternQueryPtr!=NULL && (*patternQueryPtr).getName().compare("firstChild")!=0) {
@@ -56,7 +58,7 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 		}
 
 		//output results from three parts to see correctness
-		cout<<"selectResult is: " << endl;
+		/*cout<<"selectResult is: " << endl;
 		for(unsigned int i=0;i<selectResult.size();i++) {
 			cout << selectResult.at(i) << "  ";
 		}
@@ -65,7 +67,7 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 		cout<<"suchThatResult is: " << endl;
 		for(unsigned int i=0;i<suchThatResult.size();i++) {
 			for(unsigned int j = 0; j < suchThatResult.at(i).size(); j++) {
-				cout << suchThatResult.at(i).at(0) << " ";
+				cout << suchThatResult.at(i).at(j) << " ";
 			}
 			cout << endl;
 		}
@@ -76,7 +78,7 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 				cout << patternResult.at(i).at(0) << " ";
 		}
 		cout << " such that result ends" <<endl;
-
+		*/
 		//compare results to give the final result
 		if(selectResult.empty() || (!patternResult.empty() && patternResult.at(0).compare("invalid")==0) || (!suchThatResult.empty() && suchThatResult.at(0).at(0).compare("invalid")==0)) {
 			(*resultNodePtr).setResult(none);
@@ -290,12 +292,12 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 		}
 
 	}
-	vector<string> output = (*resultNodePtr).getResult();
+	/*vector<string> output = (*resultNodePtr).getResult();
 	cout<<"result is ";
 	for(unsigned int i = 0; i < output.size(); i++) {
 		cout << output.at(i) << " ";
 	}
-	cout << endl;
+	cout << endl;*/
 }
 
 int PQLEvaluator::indInSymbols(string name, vector<vector<string>> symbols) {
