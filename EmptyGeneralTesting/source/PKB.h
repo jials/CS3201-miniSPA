@@ -34,8 +34,8 @@ public:
     
     bool isInVarTable(string name);
     
-    string getFollows(int s);
-    string getFollowedBy(int s);
+    string getFollows(int s);				// return next of current statement
+    string getFollowedBy(int s);			//return prev of current statement
     bool isFollows(int s1, int s2);
     vector<string> getAllFollows();				//get all follows
     
