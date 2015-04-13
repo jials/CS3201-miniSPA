@@ -4,7 +4,7 @@ PQLEvaluator::PQLEvaluator(){
 }
 
 void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
-
+    
 	QueryTreeRoot root = *rootPtr;
 	vector<vector<string>> symbols = root.getSymbolTable();
 	string select = root.getSelect();
@@ -17,7 +17,7 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 	PQLResultNode* resultNodePtr = root.getResult();
 
 	if(root.isValidQuery==false) {
-		(*resultNodePtr).setResult(none);
+		(*resultNodePtr).setResult(none);	
 		return;
 	}
 
@@ -53,7 +53,7 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 	}
 
 	//output results from three parts to see correctness
-	/*cout<<"selectResult is: " << endl;
+	cout<<"selectResult is: " << endl;
 	for(unsigned int i=0;i<selectResult.size();i++) {
 		cout << selectResult.at(i) << "  ";
 	}
@@ -70,10 +70,10 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 	cout<<"patternResult is: " << endl;
 	for(unsigned int i=0;i<patternResult.size();i++) {
 		cout << patternResult.at(i) << " ";
-	}*/
+	}
 	
 	//compare results to give the final result
-	if(selectResult.empty() || selectResult[0].compare("none")==0 || (hasPatternClause && patternResult.at(0).compare("invalid")==0) || (hasSuchThatClause && suchThatResult.at(0).at(0).compare("invalid")==0)) {
+	if(selectResult.empty() || (hasPatternClause && patternResult.at(0).compare("invalid")==0) || (hasSuchThatClause && suchThatResult.at(0).at(0).compare("invalid")==0)) {
 		(*resultNodePtr).setResult(none);
 		return;
 	}
@@ -540,6 +540,9 @@ vector<vector<string>> PQLEvaluator::evaluateSuchThat(QueryTreeRoot* rootPtr, PQ
 			if(resB.empty()) {
 				result.push_back(none);
 			}
+			else {
+				result.push_back(resB);
+			}
 			return result;
 		}
 		else if (isUnderscoreA && isUnderscoreB) {
@@ -652,6 +655,9 @@ vector<vector<string>> PQLEvaluator::evaluateSuchThat(QueryTreeRoot* rootPtr, PQ
 			}
 			if(resB.empty()) {
 				result.push_back(none);
+			}
+			else {
+				result.push_back(resB);
 			}
 			return result;
 		}
@@ -770,10 +776,13 @@ vector<vector<string>> PQLEvaluator::evaluateSuchThat(QueryTreeRoot* rootPtr, PQ
 			if(resB.empty()) {
 				result.push_back(none);
 			}
+			else {
+				result.push_back(resB);
+			}
 			return result;
 		}
 		else if(isUnderscoreA && isUnderscoreB) {
-			vector<string> resA = pkb.getAllFollows();
+			vector<string> resA = pkb.getAllParents();
 			if(resA.empty()) {
 				result.push_back(invalid);
 				return result;
@@ -883,10 +892,13 @@ vector<vector<string>> PQLEvaluator::evaluateSuchThat(QueryTreeRoot* rootPtr, PQ
 			if(resB.empty()) {
 				result.push_back(none);
 			}
+			else {
+				result.push_back(resB);
+			}
 			return result;
 		}
 		else if(isUnderscoreA && isUnderscoreB) {
-			vector<string> resA = pkb.getAllFollows();
+			vector<string> resA = pkb.getAllParents();
 			if(resA.empty()) {
 				result.push_back(invalid);
 				return result;
@@ -995,6 +1007,9 @@ vector<vector<string>> PQLEvaluator::evaluateSuchThat(QueryTreeRoot* rootPtr, PQ
 			}
 			if(resB.empty()) {
 				result.push_back(none);
+			}
+			else {
+				result.push_back(resB);
 			}
 			return result;
 		}
@@ -1108,6 +1123,9 @@ vector<vector<string>> PQLEvaluator::evaluateSuchThat(QueryTreeRoot* rootPtr, PQ
 			}
 			if(resB.empty()) {
 				result.push_back(none);
+			}
+			else {
+				result.push_back(resB);
 			}
 			return result;
 		}
