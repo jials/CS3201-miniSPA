@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
 
 using namespace std;
 
@@ -30,7 +31,7 @@ public:
     vector<string> getAllWhile();
 	vector<string> getAllProgLine();
     
-    vector<string> patternMatching(string type, string left,string right);		//type: assign/while
+    map<int, string> patternMatching(string type, string left,string right);		//type: assign/while, return <stmt, modifiedVar> tuple eg. <1, x> 
     //vector<string> patternMatching(string left,string right);		//type: assign/while
     
     bool isInVarTable(string name);

@@ -45,7 +45,11 @@ void TestWrapper::parse(std::string filename) {
     }
 
 	SimpleParser parser;
-	parser.parse(line);
+	if(!parser.parse(line)){
+		cout << "\nParsing of SIMPLE code fail" << endl;
+	}
+	
+
 	
 }
 
@@ -53,7 +57,6 @@ void TestWrapper::parse(std::string filename) {
 void TestWrapper::evaluate(std::string query, std::list<std::string>& results){
 // call your evaluator to evaluate the query here
   // ...code to evaluate query...
-  
 	PQLPreProcessor proc;
 	PQLEvaluator eva;
 	QueryTreeRoot root;

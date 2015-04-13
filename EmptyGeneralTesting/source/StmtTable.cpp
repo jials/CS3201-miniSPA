@@ -105,8 +105,8 @@ vector<string> StmtTable::getAllStatementsNumber(nodeType type){
 	return result;
 }
 
-vector<string> StmtTable::getAllStatementsWithPattern(nodeType type, string left, string right){
-	map<short, STMTROW>::iterator it;
+map<int, string> StmtTable::getAllStatementModifyTuplesWithPattern(nodeType type, string left, string right){
+	/*map<short, STMTROW>::iterator it;
 	vector<string> result;
 	Helpers helper;
 	string concat;
@@ -140,7 +140,9 @@ vector<string> StmtTable::getAllStatementsWithPattern(nodeType type, string left
 			}
 		}
 		
-    }
+    }*/
+
+	map<int, string> result;
 	return result;
 }
 

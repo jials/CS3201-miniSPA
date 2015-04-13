@@ -33,7 +33,7 @@ public:
     static void insertStmt(TNode*);
     static void draw();
     static vector<string> getAllStatementsNumber(nodeType);
-	static vector<string> getAllStatementsWithPattern(nodeType type, string left, string right);
+	static map<int, string> getAllStatementModifyTuplesWithPattern(nodeType type, string left, string right);
 	
 	static int getMaxStmtNumber();
     
