@@ -28,6 +28,7 @@ public:
     vector<string> getAllStmt();     //preferably in ascending order, same for getAllAssign() and getAllWhile()
     vector<string> getAllAssign();
     vector<string> getAllWhile();
+	vector<string> getAllProgLine();
     
     vector<string> patternMatching(string type, string left,string right);		//type: assign/while
     //vector<string> patternMatching(string left,string right);		//type: assign/while
