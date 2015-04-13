@@ -1,125 +1,105 @@
 1 - v, m(c,c)
 assign a;
-Select a such that Modifies("Example", "x")
+Select a such that Modifies(1, "x")
 1, 2, 3, 4, 5, 6
 5000
 2 - v, m(c,c)
 assign a;
-Select a such that Modifies("Example", "o")
+Select a such that Modifies(1, "o")
 none
 5000
 3 - v, f(c,v)
 variable v;
-Select v such that Modifies("Example", v)
-x, z, i, y
+Select v such that Modifies(4, v)
+y
 5000
 4 - v, f(v,c)
-procedure p;
-Select p such that Modifies(p, "z")
-Example
-5000
-5 - v, f(v,c)
-procedure p;
-Select p such that Modifies(p, "o")
-none
-5000
-6 - v, f(v,c)
-procedure p;
-Select p such that Modifies(p, "z")
-Example
-5000
-7 - v, f(v,c)
-statement s;
+stmt s;
 Select s such that Modifies(s, "z")
-5
+2, 5
 5000
-8 - v, f(c,v)
+5 - v, f(c,v)
 variable v;
 Select v such that Modifies(3, v)
 i
 5000
-9 - v, f(c,c)
-statement s;
+6 - v, f(c,c)
+stmt s;
 Select s such that Modifies(4, "x")
 none
 5000
-10 - v, f(c,v)
+7 - v, f(c,v)
 variable v;
 Select v such that Uses(7, v)
 none
 5000
-11 - v, m(c,c)
+8 - v, m(c,c)
 assign a;
-Select a such that Uses("Example", "x")
+Select a such that Uses(4, "x")
 1, 2, 3, 4, 5, 6
 5000
-12 - v, m(c,c)
+9 - v, m(c,c)
 assign a;
-Select a such that Uses("Example", "y")
+Select a such that Uses(4, "y")
 none
 5000
-13 - v, f(c,v)
-variable v;
-Select v such that Uses("Example", v)
-x, i
-5000
-14 - v, f(v,c)
-procedure p;
-Select p such that Uses(p, "x")
-Example
-5000
-15 - v, f(v,c)
-procedure p;
-Select p such that Uses(p, "o")
-none
-5000
-16 - v, f(v,c)
-procedure p;
-Select p such that Uses(p, "z")
-Example
-5000
-17 - v, f(v,c)
-statement s;
-Select s such that Uses(s, "x")
-4
-5000
-18 - v, f(c,v)
+10 - v, f(c,v)
 variable v;
 Select v such that Uses(5, v)
 i
 5000
-19 - v, f(c,c)
-statement s;
+11 - v, f(v,c)
+stmt s;
+Select s such that Uses(s, "x")
+4
+5000
+12 - v, f(c,v)
+variable v;
+Select v such that Uses(5, v)
+i
+5000
+13 - v, f(c,c)
+stmt s;
 Select s such that Uses(1, "x")
 none
 5000
-20 - v, pt
+14 - v, pt
 assign a;
-Select a pattern a(_, "_x_")
+Select a pattern a(_, _"x"_)
 4
 5000
-21 - v, pt
+15 - v, pt
 assign a;
-Select a pattern a("y", "_x_")
+Select a pattern a("y", _"x"_)
 4
 5000
-22 - v, pt
+16 - v, pt
 assign a;
-Select a pattern a("_y_", "_x_")
+Select a pattern a(_"y"_, _"x"_)
 4
 5000
-23 - v, pt
+17 - v, pt
 assign a;
-Select a pattern a(_, "_10_")
+Select a pattern a(_, _"10"_)
 6
 5000
-24 - v, pt
+18 - v, pt
 assign a;
-Select a pattern a("_z", "i_")
+Select a pattern a(_"z"_, _"i"_)
 5
 5000
-25 - v, pt
+19 - v, pt
 assign a;
-Select a pattern a("x_", "_")
+Select a pattern a(_"x"_, _)
 1, 6
+5000
+20 - v, f(c,c)
+variable v;
+Select v such that Uses(_, v)
+x, i
+5000
+21 - v, f(c,c)
+variable v;
+Select v such that Modifies(_, v)
+x, z, i, y
 5000

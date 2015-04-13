@@ -35,6 +35,10 @@ vector<string> PKB::getAllWhile(){
 	return StmtTable::getAllStatementsNumber(WHILE);
 }
 
+vector<string> PKB::getAllProgLine(){
+	return StmtTable::getAllStatementsNumber(ANY);
+}
+
 bool PKB::isInVarTable(string name){
 	if (VarTable::getVar(name) == -1) return false;
 	else return true;

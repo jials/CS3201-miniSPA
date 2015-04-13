@@ -1,0 +1,11 @@
+procedure Example2 {
+  x = 2 + 1;
+  z = 3 + x;
+  lee = 20;
+  while x{
+    i = 5 + lee;
+    y = x + z + i;
+    z = i + lee;
+    lee = x;}
+  x = 10;
+}

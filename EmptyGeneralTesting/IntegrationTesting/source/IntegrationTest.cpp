@@ -32,7 +32,7 @@ const char *test2 =
 SimpleParser parser;
 parser.parse(test2);
 vector<string> results;
-string query = "stmt s; Select s such that Parent(2, s)";
+string query = "variable v; Select v such that Uses(_, v)";
 PQLPreProcessor proc;
 PQLEvaluator eva;
 QueryTreeRoot root;

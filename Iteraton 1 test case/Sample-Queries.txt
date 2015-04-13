@@ -146,7 +146,7 @@ none
 30 - v, ps(v,v)
 stmt s1; stmt s2;
 Select s1 such that Parent*(3, s2)
-1, 2, 3, 4, 5, 6
+none
 5000
 31 - v, fs(c,v)
 assign a; stmt s;

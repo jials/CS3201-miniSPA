@@ -185,6 +185,7 @@ vector<string> VarTable::getAllModifyingStmt(){
     for (it = _table.begin(); it != _table.end(); it++)
     {
         for(unsigned int q = 0; q < it->second.modifiedBy.size(); q++){
+			if(helper.isNumber(it->second.modifiedBy[q]))
             result.push_back(it->second.modifiedBy[q]);
         }
     }
@@ -199,6 +200,7 @@ vector<string> VarTable::getAllUsingStmt(){
     for (it = _table.begin(); it != _table.end(); it++)
     {
         for(unsigned int q = 0; q < it->second.usedBy.size(); q++){
+			if(helper.isNumber(it->second.usedBy[q]))
             result.push_back(it->second.usedBy[q]);
         }
     }
