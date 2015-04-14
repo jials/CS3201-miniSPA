@@ -74,6 +74,7 @@
   <ItemGroup>
     <ClCompile Include="source\TestQueryPreProcessor.cpp" />
     <ClCompile Include="source\TestSimpleParser.cpp" />
+    <ClCompile Include="source\TestStmtTable.cpp" />
     <ClCompile Include="source\UnitTest.cpp" />
     <ClCompile Include="TestFollows.cpp" />
     <ClCompile Include="TestParent.cpp" />
@@ -82,6 +83,7 @@
   <ItemGroup>
     <ClInclude Include="source\TestQueryPreProcessor.h" />
     <ClInclude Include="source\TestSimpleParser.h" />
+    <ClInclude Include="source\TestStmtTable.h" />
     <ClInclude Include="TestFollows.h" />
     <ClInclude Include="TestParent.h" />
     <ClInclude Include="TestQueryEvaluator.h" />

@@ -9,7 +9,7 @@
 using namespace std;
 
 #include "PKB.h"
-#include "TNode.h"
+
 #include "StmtTable.h"
 #include "Helpers.h"
 
@@ -51,6 +51,7 @@ void StmtTable::insertStmt(TNode* node) {
 	}
 	else if(node -> type == ASSIGN){
 		originalCode = buildCodeFromAST(node);
+		row.tag = node->firstChild->info;
 	}
 	   
 	row.stmtOriginalCode = originalCode;
@@ -60,6 +61,18 @@ void StmtTable::insertStmt(TNode* node) {
 
 }
 
+void StmtTable::insertStmtByCode(nodeType type, int lineNumber, string code, string tag){
+
+	STMTROW row;
+
+	row.stmtOriginalCode = code;
+	row.stmtLineNumber = lineNumber;
+	row.type = type;
+	row.tag = tag;
+    _table[lineNumber] = row;
+
+
+}
 
 
 void StmtTable::draw(){
@@ -105,20 +118,25 @@ vector<string> StmtTable::getAllStatementsNumber(nodeType type){
 	return result;
 }
 
-map<int, string> StmtTable::getAllStatementModifyTuplesWithPattern(nodeType type, string left, string right){
-	/*map<short, STMTROW>::iterator it;
-	vector<string> result;
+map<int, string> StmtTable::getAllStatementModifyTuplesWithPattern(nodeType type, string left, string right, bool isDeclaredVar){
+	
+	map<short, STMTROW>::iterator it;
+	map<int, string> result;
 	Helpers helper;
 	string concat;
+	string original_right = right;
+	string right_side_regex;
 
 	if(type == WHILE){
-		helper.replaceAll(left, "_", "(\w)*");
+		helper.replaceAll(left, "_", "(.)*");
 	}
 	else if(type == ASSIGN){
-		helper.replaceAll(left, "_", "(\w)*");
-		helper.replaceAll(right, "_", "(\w)*");
-		concat = left + "=" + right;
+		helper.replaceAll(left, "_", "(.)*");
+		helper.replaceAll(right, "_", "(.)*");
+		concat = left + " = " + right;
 		helper.replaceAll(concat, " ","");
+		right_side_regex = "(.)*=" + right;
+		helper.replaceAll(right_side_regex, " ","");
 	}
 
 	for (it = _table.begin(); it != _table.end(); it++)
@@ -126,23 +144,24 @@ map<int, string> StmtTable::getAllStatementModifyTuplesWithPattern(nodeType type
 		if(type == it->second.type){
 			if(type == WHILE){
 				cmatch what;
-				if (regex_match(helper.stringToCharArray(it->second.tag), what, regex(left))){
-					result.push_back(to_string(static_cast<long long>(it->second.stmtLineNumber)));
+				if ((isDeclaredVar || regex_match(helper.stringToCharArray(it->second.tag), what, regex(left))) && original_right == "_"){
+					result[it->second.stmtLineNumber] = it->second.tag;
 				}	
 			}
 			else if(type == ASSIGN){
 				string code = it->second.stmtOriginalCode;
 				helper.replaceAll(code, " ","");
 				cmatch what;
-				if (regex_match(helper.stringToCharArray(code), what, regex(concat))){
-					result.push_back(to_string(static_cast<long long>(it->second.stmtLineNumber)));
+				if ((isDeclaredVar && regex_match(helper.stringToCharArray(code),what, regex(right_side_regex)))					
+					||(!isDeclaredVar && regex_match(helper.stringToCharArray(code), what, regex(concat)))){
+					result[it->second.stmtLineNumber] = it->second.tag;
 				}	
 			}
 		}
 		
-    }*/
+    }
 
-	map<int, string> result;
+	
 	return result;
 }
 
@@ -150,4 +169,12 @@ map<int, string> StmtTable::getAllStatementModifyTuplesWithPattern(nodeType type
     
 int StmtTable::getMaxStmtNumber(){
 	return _table.size();
+}
+
+map<short, STMTROW> StmtTable::getTable(){
+	return _table;
+}
+
+void StmtTable::reset() {
+	_table.clear();
 }

@@ -173,7 +173,7 @@ vector<string> PKB::getAllModifies(string var){
 	return VarTable::getAllModifies(var);
 }
 
- map<int, string> PKB::patternMatching(string type, string left,string right){
+ map<int, string> PKB::patternMatching(string type, string left,string right, bool isDeclaredVar){
 	nodeType enumType;
 	if(type == "while"){
 		enumType = WHILE;
@@ -181,6 +181,6 @@ vector<string> PKB::getAllModifies(string var){
 	else if(type == "assign"){
 		enumType = ASSIGN;
 	}
-	return StmtTable::getAllStatementModifyTuplesWithPattern(enumType, left, right);
+	return StmtTable::getAllStatementModifyTuplesWithPattern(enumType, left, right, isDeclaredVar);
 
 }

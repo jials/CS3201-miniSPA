@@ -31,7 +31,7 @@ public:
     vector<string> getAllWhile();
 	vector<string> getAllProgLine();
     
-    map<int, string> patternMatching(string type, string left,string right);		//type: assign/while, return <stmt, modifiedVar> tuple eg. <1, x> 
+    map<int, string> patternMatching(string type, string left,string right, bool isDeclaredVar);		//type: assign/while, return <stmt, modifiedVar> tuple eg. <1, x> 
     //vector<string> patternMatching(string left,string right);		//type: assign/while
     
     bool isInVarTable(string name);
