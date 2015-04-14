@@ -84,3 +84,12 @@ void QueryPreProcessorTest::testValidityChecking(){
 	CPPUNIT_ASSERT(!PQLPreProcessor::isValidEntRef("apple123\"",&res));
 	CPPUNIT_ASSERT(!PQLPreProcessor::isValidEntRef("54321",&res));
 }
+
+void QueryPreProcessorTest::testIsValidExpressionSpec(){
+	CPPUNIT_ASSERT(PQLPreProcessor::isValidExpressionSpec("_"));
+	CPPUNIT_ASSERT(PQLPreProcessor::isValidExpressionSpec("_\"x\"_"));
+	CPPUNIT_ASSERT(PQLPreProcessor::isValidExpressionSpec("_\"k+j1k\"_"));
+	CPPUNIT_ASSERT(!PQLPreProcessor::isValidExpressionSpec("_\"+\"_"));
+	CPPUNIT_ASSERT(PQLPreProcessor::isValidExpressionSpec("_\"Rome\"_"));
+	CPPUNIT_ASSERT(!PQLPreProcessor::isValidExpressionSpec("a+b+c")); cout << "preprocessor test finish" << endl;
+}

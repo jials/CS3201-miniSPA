@@ -6,7 +6,9 @@
 #include <vector>
 using namespace std;
 
+
 class PQLPreProcessor{
+friend class QueryPreProcessorTest;
 private:
 	vector<string> process(string str);
 	string currentKeyword;
@@ -14,15 +16,16 @@ private:
 	void processSuchThat(QueryTreeRoot* root,string str);
 	string findRelation(string);
 	int findKeyword(string str);
-public:
-	string trim(string str);
-	PQLPreProcessor();
-	static bool isValidName(string);
-	QueryTreeRoot parse(vector<string> strs, string name);
 	static bool isValidSynonym(string, QueryTreeRoot*);
 	static bool isValidIdent(string str);
-	static bool isValidExpressionSpec(string str, QueryTreeRoot* root);
+	static bool isValidExpressionSpec(string str);
 	static bool isValidEntRef(string str, QueryTreeRoot*);
 	static bool isValidStmtRef(string str, QueryTreeRoot*);
+	static bool isInteger(string str);
+	static bool isValidName(string);
+	string trim(string str);
+public:
+	PQLPreProcessor();
+	QueryTreeRoot parse(vector<string> strs, string name);
 };
 #endif

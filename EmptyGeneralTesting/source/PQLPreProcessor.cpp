@@ -104,7 +104,7 @@ void PQLPreProcessor::processPattern(QueryTreeRoot* root,string str){
 			string firstToken = trim(str.substr(firstIndex+1,saperate-firstIndex-1));
 			string secondToken = trim(str.substr(saperate+1,secondIndex-saperate-1));
 			
-			if (!isValidEntRef(firstToken, root)||!isValidExpressionSpec(secondToken, root)){
+			if (!isValidEntRef(firstToken, root)||!isValidExpressionSpec(secondToken)){
 				root -> isValidQuery = false;	cout << "line 107" <<endl;
 			}
 
@@ -115,7 +115,7 @@ void PQLPreProcessor::processPattern(QueryTreeRoot* root,string str){
 }
 
 QueryTreeRoot PQLPreProcessor::parse(vector<string> strs, string name){
-	string keyword[] = {"assign","stmt","while","variable"};
+	string keyword[] = {"assign","stmt","while","variable","constant","prog_line"};
 	QueryTreeRoot result(name);
 	if (strs.size()!=2){
 		result.setName("Error");
@@ -212,7 +212,7 @@ string PQLPreProcessor::trim(string str){
 }
 
 int PQLPreProcessor::findKeyword(string str){
-	string keyword[] = {"assign","stmt","while","variable"};
+	string keyword[] = {"assign","stmt","while","variable","constant","prog_line"};
 	for (int i=0;i < sizeof(keyword);i++){
 		if (keyword[i].compare(str)==0)
 			return i;
@@ -232,8 +232,25 @@ bool PQLPreProcessor::isValidEntRef(string str, QueryTreeRoot* root){
 	return false;
 }
 
-bool PQLPreProcessor::isValidExpressionSpec(string str, QueryTreeRoot* root){
-	return true;
+bool PQLPreProcessor::isValidExpressionSpec(string str){
+	if (str=="_")
+		return true;
+	if (str.size()>4){
+		if (str.at(0)!='_'||str.at(1)!='\"')
+			return false;
+		if (str.at(str.size()-1)!='_'||str.at(str.size()-2)!='\"')
+			return false;
+		string sub = str.substr(2,str.size()-4);
+		if (isValidName(sub)||isInteger(sub))
+			return true;
+		if (sub.find('+')==sub.find_last_of('+')){
+			string firstToken = sub.substr(0,sub.find('+'));
+			string secondToken = sub.substr(sub.find('+')+1);
+			if ((isValidName(firstToken)||isInteger(firstToken))&&(isValidName(secondToken)||isInteger(secondToken)))
+				return true;
+		}
+	}
+	return false;
 }
 
 bool PQLPreProcessor::isValidIdent(string str){
@@ -282,13 +299,17 @@ bool PQLPreProcessor::isValidStmtRef(string str, QueryTreeRoot* root){
 	if (str.compare("_")==0||isValidSynonym(str,root)){
 		return true;
 	}
-	bool isInteger = true;
+
+	return isInteger(str);
+}
+
+bool PQLPreProcessor::isInteger(string str){
+	if (str.size()==0)
+		return false;
 	for (unsigned int i=0;i<str.length();i++){
 		if (!isdigit(str.at(i))){
-			isInteger = false;
-			break;
+			return false;
 		}
 	}
-
-	return isInteger;
+	return true;
 }
