@@ -1,7 +1,7 @@
 1 - v, f(c,c), pt
 assign a;
 Select a such that Follows(3, 4) pattern a(_"i"_, _)
-5
+1
 5000
 2 - v, f(c,v), pt
 assign a;
@@ -10,13 +10,13 @@ none
 5000
 3 - v, f(v,v), pt
 assign a1; assign a2;
-Select a1 such that Follows(a1, a2) pattern a1(_"x"_, _)
-1
+Select a1 such that Follows(a1, a2) pattern a(_"x"_, _)
+none
 5000
 4 - v, f(v,v), pt
 assign a1; assign a2
-Select a2 such that Follows(a1, a2) pattern a(_"x"_, _)
-9
+Select a2 such that Follows(a1, a2) pattern a(_"c"_, _)
+3, 15
 5000
 5 - v, f(c,c)=false, pt
 assign a;
@@ -26,22 +26,22 @@ none
 6 - v, fs(c,c), pt
 stmt s;
 Select s such that Follows*(1, 4) pattern a(_"x"_, _)
-1, 9
+10, 18
 5000
 7 - v, fs(c,c) = false, pt
 stmt s;
-Select s such that Follows*(4, 4) pattern a(_"x"_, _)
+Select s such that Follows*(5, 5) pattern a(_"x"_, _)
 none
 5000
 8 - v, fs(c,v), pt
-assign a; while w;
-Select a such that Follows*(3, a) pattern w("x", _)
-4
+assign a;
+Select a such that Follows*(5, a) pattern a("w", _)
+20
 5000
 9 - v, fs(v,v), pt
 assign a1; assign a2;
-Select a2 such that Follows*(a1, a2) pattern a2(_, _"le"_)
-7
+Select a2 such that Follows*(a1, a2) pattern a2(_, _"Rome"_)
+15
 5000
 10 - v, p(c,c), pt
 assign a;
@@ -50,13 +50,13 @@ none
 5000
 11 - v, p(v,c), pt
 assign a; while w;
-Select a such that Parent(a, 5) pattern w(_"x"_, _)
+Select a such that Parent(a, 5) pattern w(_"a"_, _)
 4
 5000
 12 - v, ps(c,c), pt
 assign a;
 Select a such that Parent*(4, 7) pattern a(_"x"_, _)
-1, 9
+10, 18
 5000
 13 - v, ps(v,c), pt
 assign a;
@@ -66,7 +66,7 @@ none
 14 - v, m(c,c), pt
 assign a;
 Select a such that Modifies(_, "x") pattern a(_"x"_, _)
-1, 9
+10, 18
 5000
 15 - v, m(c,c), pt
 assign a;
@@ -75,13 +75,13 @@ none
 5000
 16 - v, m(c,c), pt
 assign a;
-Select a such that Modifies(4, "y") pattern a(_"y"_, _"x"_)
-6
+Select a such that Modifies(4, "oSCar") pattern a(_"oSCar"_, _"j1k"_)
+8
 5000
 17 - v, u(c,c), pt
 assign a;
-Select a such that Uses(4, "i") pattern a(_"y"_, _"x"_)
-6
+Select a such that Uses(4, "I") pattern a(_"c"_, _"width+Romeo"_)
+15
 5000
 18 - v, u(c,c), pt
 assign a;
@@ -90,17 +90,17 @@ none
 5000
 18 - v, u(c,c), pt
 assign a;
-Select a such that Uses(_, "x") pattern a(_"z"_, _)
-2
+Select a such that Uses(_, "x") pattern a("a", _)
+19
 5000
 19 - v, m(c,c), pt
 assign a; stmt s; variable v;
-Select s such that Modifies(s, v) pattern a(v, _"x + z"_)
-6
+Select s such that Modifies(s, v) pattern a(v, _"k+j1k"_)
+8
 5000
 20 - v, u(c,c), pt
 assign a; stmt s; variable v;
-Select s such that Uses(s, v) pattern a(v, _"x + z"_)
+Select s such that Uses(s, v) pattern a(v, _"k+j1k"_)
 none
 5000
 
