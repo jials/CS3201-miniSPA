@@ -18,7 +18,7 @@ public:
 
 private: 
 	vector<vector<string>> evaluateSuchThat(QueryTreeRoot* rootPtr, PQLRelationshipNode* suchThatQueryPtr);
-	vector<string> evaluatePattern(QueryTreeRoot* rootPtr, PQLRelationshipNode* patternQueryPtr);
+	vector<vector<string>> evaluatePattern(QueryTreeRoot* rootPtr, PQLRelationshipNode* patternQueryPtr);
 	
 	int indInSymbols(string name, vector<vector<string>> symbols);
 	bool isNumber(string str);

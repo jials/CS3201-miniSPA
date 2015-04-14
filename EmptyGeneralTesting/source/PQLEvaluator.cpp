@@ -24,7 +24,7 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 	PKB pkb = PKB();
 	vector<string> selectResult;
 	vector<vector<string>> suchThatResult;
-	vector<string> patternResult;
+	vector<vector<string>> patternResult;
 	vector<string> result;
 
 	PQLSpecialNode* suchThatPtr = root.getSuchThat();
@@ -69,22 +69,39 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 
 	cout<<"patternResult is: " << endl;
 	for(unsigned int i=0;i<patternResult.size();i++) {
-		cout << patternResult.at(i) << " ";
+		for(unsigned int j = 0; j < patternResult.at(i).size(); j++) {
+			cout << patternResult.at(i).at(j) << " ";
+		}
+		cout << endl;
 	}
 	
 	//compare results to give the final result
-	if(selectResult.empty() || (hasPatternClause && patternResult.at(0).compare("invalid")==0) || (hasSuchThatClause && suchThatResult.at(0).at(0).compare("invalid")==0)) {
+	if(selectResult.empty() || (hasPatternClause && patternResult[0][0].compare("invalid")==0) || (hasSuchThatClause && suchThatResult[0][0].compare("invalid")==0)) {
 		(*resultNodePtr).setResult(none);
 		return;
 	}
 
 	if(!hasSuchThatClause|| suchThatResult.at(0).at(0).compare("valid")==0) {                //if no such that clause or returns T
-		if(hasPatternClause) {
-			if((*patternQueryPtr).getName().compare(select)==0) {             //select = pattern
-				(*resultNodePtr).setResult(patternResult);
+		if(hasPatternClause) {                //pattern A(V, xxx)
+			if((*patternQueryPtr).getName().compare(select)==0) {             //select = A
+				(*resultNodePtr).setResult(patternResult[0]);
+			}
+			else if((*(*patternQueryPtr).getChildren().at(0)).getName().compare(select)==0) {               //select = V
+				vector<string> res;
+				for(unsigned int i=0; i < patternResult.size(); i++) {
+					if(!isIn(patternResult[i][1], res)) {
+						res.push_back(patternResult[i][1]);
+					}
+				}
+				if(res.empty()) {
+					(*resultNodePtr).setResult(none);
+				}
+				else {
+					(*resultNodePtr).setResult(res);
+				}
 			}
 			else {
-				if(patternResult[0].compare("none")==0) {
+				if(patternResult[0][0].compare("none")==0) {
 					(*resultNodePtr).setResult(none);
 				}
 				else {
@@ -136,8 +153,9 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 				varTableB = true;
 			}
 		}
+
 		//start
-		if(!hasPatternClause) { 
+		if(!hasPatternClause) {     //only have such that
 			if(suchThatA.compare(select)==0) {
 				if(isNumberB || varTableB || isUnderscoreB ) {
 					(*resultNodePtr).setResult(suchThatResult[0]);
@@ -185,110 +203,127 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 				}
 			}
 		}
-		else {                                   //three parts needs evaluate
+		else {                                                                //both such that and pattern
 			string pattern = (*patternQueryPtr).getName();
+			int indP =  indInSymbols(pattern, symbols);
+			string patternVar = (*(*patternQueryPtr).getChildren().at(0)).getName();
+			int indV = indInSymbols(patternVar, symbols);
 
-			if(select!=suchThatA && select!=suchThatB && select!=pattern) {
-				if(suchThatResult[0][0].compare("none")!=0 && patternResult[0].compare("none")!=0) {
-					(*resultNodePtr).setResult(selectResult);
-				}
-				else {
-					(*resultNodePtr).setResult(none);
-				}
+			if(suchThatA==pattern) {
+				//
 			}
-			else if(pattern.compare(suchThatA)==0) {
-				if(indB==-1 && (isNumber(suchThatB) || pkb.isInVarTable(suchThatB))) {
-					if(select.compare(pattern)==0) {
-						result = merge(patternResult, suchThatResult.at(0));
+			else if(suchThatB==pattern) {
+				//
+			}
+			else if(suchThatB==patternVar && indB!=-1) {
+				if(isNumberA || isUnderscoreA ) {
+					if(select==pattern) {
+						for(unsigned int i=0; i < patternResult.size(); i++) {
+							if(!isIn(patternResult[i][0],result) && isIn(patternResult[i][1], suchThatResult[0])) {
+								result.push_back(patternResult[i][0]);
+							}
+						}
+						if(result.empty()) {
+							result.push_back("none");
+						}
+						(*resultNodePtr).setResult(result);
+					}
+					else if(select==suchThatB) {    //=patternVar
+						vector<string> intermediate;
+						for(unsigned int i=0; i < patternResult.size(); i++) {
+							if(!isIn(patternResult[i][1],intermediate)) {
+								intermediate.push_back(patternResult[i][1]);
+							}
+						}
+						if(intermediate.empty()) {
+							intermediate.push_back("none");
+						}
+						result = merge(intermediate, suchThatResult[0]);
 						(*resultNodePtr).setResult(result);
 					}
 					else {
-						//shld not end up here
+						//shld not be here
 					}
 				}
-				else {
-					vector<vector<string>> intermediate;
-					for(unsigned int i=0; i < suchThatResult.size(); i++) {        //checked against pattern
-						if(isIn(suchThatResult.at(i).at(0), patternResult)) {
-							intermediate.push_back(suchThatResult[i]);
-						}
-					}
-					if(intermediate.empty()) {
-						(*resultNodePtr).setResult(none);
-					}
-					else {
-						if(select.compare(suchThatA)==0) {
-							for(unsigned int i=0; i < intermediate.size(); i++) {
-								if(!isIn(intermediate[i][0], result)) {
-									result.push_back(intermediate[i][0]);
-								}
+				else {                          //indA!=-1
+					/*if(select=pattern==suchThatA)  BUGGGGGGGGGGGGGGGGGGGGGGGGG*/
+					if(select==pattern) {
+						vector<string> intermediate;
+						for(unsigned int i=0; i < suchThatResult.size(); i++) {
+							if(!isIn(suchThatResult[i][1],intermediate)) {
+								intermediate.push_back(suchThatResult[i][1]);
 							}
-							(*resultNodePtr).setResult(result);
 						}
-						else if(select.compare(suchThatB)==0) {
-							for(unsigned int i=0; i < intermediate.size(); i++) {
-								if(!isIn(intermediate[i][1], result)) {
-									result.push_back(intermediate[i][1]);
-								}
-							}
-							(*resultNodePtr).setResult(result);
+						if(intermediate.empty()) {
+							(*resultNodePtr).setResult(none);
 						}
 						else {
-							//shld not end up here
+							for(unsigned int i=0; i < patternResult.size(); i++) {
+								if( isIn(patternResult[i][1], intermediate) && !isIn(patternResult[i][0], result)) {
+									result.push_back(suchThatResult[i][0]);
+								}
+							}
+							if(result.empty()) {
+								result.push_back("none");
+							}
+							(*resultNodePtr).setResult(result);
 						}
 					}
-				}
-			}
-			else if(pattern.compare(suchThatB)==0) {
-				if(indA==-1 && isNumber(suchThatA)) {
-					if(pattern.compare(select)==0) {
-						result = merge(patternResult, suchThatResult.at(0));
+					else if(select==suchThatB) {    //=patternVar
+						vector<string> intermediate;
+						for(unsigned int i=0; i < patternResult.size(); i++) {
+							if(!isIn(patternResult[i][1],intermediate)) {
+								intermediate.push_back(patternResult[i][1]);
+							}
+						}
+						if(intermediate.empty()) {
+							intermediate.push_back("none");
+						}
+						for(unsigned int i=0; i < suchThatResult.size(); i++) {
+							if(!isIn(suchThatResult[i][1], result)) {
+								result.push_back(suchThatResult[i][1]);
+							}
+						}
+						if(result.empty()) {
+							result.push_back("none");
+						}
+						result = merge(intermediate, result);
 						(*resultNodePtr).setResult(result);
 					}
-					else {
-						//shld not end up here
-					}
-				}
-				else {
-					vector<vector<string>> intermediate;
-					for(unsigned int i=0; i < suchThatResult.size(); i++) {        //checked against pattern
-						if(isIn(suchThatResult.at(i).at(1), patternResult)) {
-							intermediate.push_back(suchThatResult[i]);
-						}
-					}
-					if(intermediate.empty()) {
-						(*resultNodePtr).setResult(none);
-					}
-					else {
-						if(select.compare(suchThatA)==0) {
-							for(unsigned int i=0; i < intermediate.size(); i++) {
-								if(!isIn(intermediate[i][0], result)) {
-									result.push_back(intermediate[i][0]);
-								}
+					else if(select==suchThatA) {
+						vector<string> intermediate;
+						for(unsigned int i=0; i < patternResult.size(); i++) {
+							if(!isIn(patternResult[i][1],intermediate)) {
+								intermediate.push_back(patternResult[i][1]);
 							}
-							(*resultNodePtr).setResult(result);
 						}
-						else if(select.compare(suchThatB)==0) {
-							for(unsigned int i=0; i < intermediate.size(); i++) {
-								if(!isIn(intermediate[i][1], result)) {
-									result.push_back(intermediate[i][1]);
-								}
-							}
-							(*resultNodePtr).setResult(result);
+						if(intermediate.empty()) {
+							(*resultNodePtr).setResult(none);
 						}
 						else {
-							//shld not end up here
+							for(unsigned int i=0; i < suchThatResult.size(); i++) {
+								if( isIn(suchThatResult[i][1], intermediate) && !isIn(suchThatResult[i][0], result)) {
+									result.push_back(suchThatResult[i][0]);
+								}
+							}
+							if(result.empty()) {
+								result.push_back("none");
+							}
+							(*resultNodePtr).setResult(result);
 						}
+					}
+					else {
+						//shld not be here
 					}
 				}
 			}
-			else {                                      //pattern has no link with such that
-				if(patternResult[0].compare("none")==0 || suchThatResult[0][0].compare("none")==0) {
+			else {   //pattern not related to such that
+				if(patternResult[0][0].compare("none")==0 || suchThatResult[0][0].compare("none")==0) {
 					(*resultNodePtr).setResult(none);
 				}
 				else {
 					if(select.compare(suchThatA)==0) {
-						if(indB==-1 && (isNumber(suchThatB) || pkb.isInVarTable(suchThatB))) {
+						if(isNumberB || varTableB || isUnderscoreB) {
 							(*resultNodePtr).setResult(suchThatResult[0]);
 						}
 						else {
@@ -304,7 +339,7 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 						}
 					}
 					else if(select.compare(suchThatB)==0) {
-						if(indA==-1 && isNumber(suchThatB)) {
+						if(isNumberA || isUnderscoreA ) {
 							(*resultNodePtr).setResult(suchThatResult[0]);
 						}
 						else {
@@ -320,7 +355,31 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 						}
 					}
 					else if(select.compare(pattern)==0) {
-						(*resultNodePtr).setResult(patternResult);
+						if(indV==-1) {
+							(*resultNodePtr).setResult(patternResult[0]);
+						}
+						else {
+							for(unsigned int i=0; i < patternResult.size(); i++) {
+								if(!isIn(patternResult[i][0], result)) {
+									result.push_back(patternResult[i][0]);
+								}
+							}
+							if(result.empty()) {
+								result.push_back("none");
+							}
+							(*resultNodePtr).setResult(result);
+						}
+					}
+					else if(indV!=-1 && select.compare(patternVar)==0) {
+						for(unsigned int i=0; i < patternResult.size(); i++) {
+							if(!isIn(patternResult[i][1], result)) {
+								result.push_back(patternResult[i][1]);
+							}
+						}
+						if(result.empty()) {
+							result.push_back("none");
+						}
+						(*resultNodePtr).setResult(result);
 					}
 					else {
 						//shld not end up here
@@ -330,12 +389,6 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 		}
 	}
 
-	/*vector<string> output = (*resultNodePtr).getResult();
-	cout<<"result is ";
-	for(unsigned int i = 0; i < output.size(); i++) {
-		cout << output.at(i) << " ";
-	}
-	cout << endl;*/
 }
 
 int PQLEvaluator::indInSymbols(string name, vector<vector<string>> symbols) {
@@ -404,6 +457,11 @@ vector<vector<string>> PQLEvaluator::evaluateSuchThat(QueryTreeRoot* rootPtr, PQ
 	PQLAttributeNode* bPtr = (rel.getChildren()).at(1);
 	string b = (*bPtr).getName();
 	int indB = indInSymbols(b, symbols);
+
+	if(a.compare(b)==0) {
+		result.push_back(invalid);
+		return result;
+	}
 
 	bool isUnderscoreA = false, isUnderscoreB = false;
 	bool isNumberA = false, isNumberB = false;
@@ -1153,9 +1211,8 @@ vector<vector<string>> PQLEvaluator::evaluateSuchThat(QueryTreeRoot* rootPtr, PQ
 	}
 }
 
-vector<string> PQLEvaluator::evaluatePattern(QueryTreeRoot* rootPtr, PQLRelationshipNode* patternQueryPtr) {
+vector<vector<string>>  PQLEvaluator::evaluatePattern(QueryTreeRoot* rootPtr, PQLRelationshipNode* patternQueryPtr) {
 	vector<vector<string>> symbols = (*rootPtr).getSymbolTable();
-
 	PQLRelationshipNode pattern = *patternQueryPtr;		
 	string name = pattern.getName();
 	string type = (*rootPtr).getSymbol(name);
@@ -1165,8 +1222,11 @@ vector<string> PQLEvaluator::evaluatePattern(QueryTreeRoot* rootPtr, PQLRelation
 	vector<string> none;
 	none.push_back("none");
 
+	vector<vector<string>> patternResult;
+
 	if(type!="assign") {                 //scope: pattern only applied to assign
-		return invalid;
+		patternResult.push_back(invalid);
+		return patternResult;
 	}
 
 	vector<PQLAttributeNode*> patternMatching = pattern.getChildren();
@@ -1174,14 +1234,53 @@ vector<string> PQLEvaluator::evaluatePattern(QueryTreeRoot* rootPtr, PQLRelation
 	string left = (*LPtr).getName();
 	PQLAttributeNode* RPtr = patternMatching.at(1);
 	string right = (*RPtr).getName();
-
-	PKB pkb = PKB();
-	vector<string> patternResult = pkb.patternMatching("assign", left, right);
-
-	if(patternResult.empty()) {
-		return none;
+	//check if isDeclaredVar on the left
+	bool isDeclaredVar = false;
+	if(indInSymbols(left, symbols)!=-1) {
+		if((*rootPtr).getSymbol(left)!="variable") {
+			patternResult.push_back(invalid);
+		    return patternResult;
+		}
+		isDeclaredVar = true;
+	}
+	else if (left.size()!=1 && left.at(0)=='"' && left.at(left.size()-1)=='"') {
+		left.erase(left.size()-1,1);
+		left.erase(0,1);
 	}
 
+	//remove double quotes(if any) on the right
+	if(right.size()!=1 && right.at(1)=='"' && right.at(right.size()-2)=='"') {
+		right.erase(right.size()-2,1);
+		right.erase(1, 1);
+	}
+	PKB pkb = PKB();
+	
+	map<int, string> map = pkb.patternMatching("assign",left, right, isDeclaredVar);
+
+	if(map.empty()) {
+		patternResult.push_back(none);
+		return patternResult;
+	}
+	else{
+		if(isDeclaredVar) {
+			map<int, string>::iterator it;
+			for (it = map.begin(); it != map.end(); it++) {
+				vector<string> pair;
+				pair.push_back(it->first);
+				pair.push_back(it->second);
+				cout << pair[0] << " " <<pair[1] << endl;
+				patternResult.push_back(pair);
+			}
+		}
+		else {
+			map<int, string>::iterator it;
+			vector<string> res;
+			for (it = map.begin(); it != map.end(); it++) {
+				res.push_back(it->first);	
+			}
+			patternResult.push_back(pair);
+		}
+	}
 	return patternResult;
 }
 
