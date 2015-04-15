@@ -126,6 +126,23 @@ map<int, string> StmtTable::getAllStatementModifyTuplesWithPattern(nodeType type
 	string concat;
 	string original_right = right;
 	string right_side_regex;
+	vector<string> right_symbol;
+	string left_symbol;
+
+	if(right!="_"){
+		string tmp = right;
+		helper.replaceAll(tmp, "_","");
+		helper.replaceAll(tmp, " ","");
+		if(right.find('+') != std::string::npos){
+			helper.split(tmp,right_symbol,"+");
+		}
+		else{
+			right_symbol.push_back(tmp);
+		}
+	}
+	if(left!="_" && !isDeclaredVar){
+		left_symbol = left;
+	}
 
 	if(type == WHILE){
 		helper.replaceAll(left, "_", "(.)*");
@@ -133,6 +150,14 @@ map<int, string> StmtTable::getAllStatementModifyTuplesWithPattern(nodeType type
 	else if(type == ASSIGN){
 		helper.replaceAll(left, "_", "(.)*");
 		helper.replaceAll(right, "+", "\\+");
+		
+		if(right.find('+') != std::string::npos){
+			if(right.at(0)== '_') right = right.substr(1);
+			if(right.at(right.size()-1)=='_'){
+				helper.replaceAll(right, "_", "(\\+|\\;)*");
+			}
+		}
+		
 		helper.replaceAll(right, "_", "(.)*");
 		concat = left + " = " + right;
 		helper.replaceAll(concat, " ","");
@@ -155,7 +180,11 @@ map<int, string> StmtTable::getAllStatementModifyTuplesWithPattern(nodeType type
 				cmatch what;
 				if ((isDeclaredVar && regex_match(helper.stringToCharArray(code),what, regex(right_side_regex)))					
 					||(!isDeclaredVar && regex_match(helper.stringToCharArray(code), what, regex(concat)))){
+				    
+					
+					
 					result[it->second.stmtLineNumber] = it->second.tag;
+				
 				}	
 			}
 		}

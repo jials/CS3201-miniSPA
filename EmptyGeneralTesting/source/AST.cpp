@@ -17,6 +17,7 @@ void AST::setRoot(TNode* _root){
 }
 
 
+
 void draw(TNode* node, int level){
 	string type;
 	switch (node -> type)

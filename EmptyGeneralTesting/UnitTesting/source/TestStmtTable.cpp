@@ -28,13 +28,12 @@ void TestStmtTable::testPatternMatching() {
 	mTestObj->insertStmtByCode(WHILE, 2, "while x", "x");
 	mTestObj->insertStmtByCode(ASSIGN, 3, "y = 23 + x;", "y");
 	mTestObj->insertStmtByCode(ASSIGN, 4, "x = z + y + 2;", "x");
-	mTestObj->insertStmtByCode(ASSIGN, 5, "y = x + 2;", "y");
+	mTestObj->insertStmtByCode(ASSIGN, 5, "y = x + 21;", "y");
 	mTestObj->insertStmtByCode(WHILE, 6, "while y", "y");
+	mTestObj->insertStmtByCode(ASSIGN, 7, "q = k + 22", "q");
 
-	map<int, string> result = mTestObj->getAllStatementModifyTuplesWithPattern(ASSIGN, "_x_", "_", false);
-	CPPUNIT_ASSERT(result[1] == "x");
-	CPPUNIT_ASSERT(result[4] == "x");
-	CPPUNIT_ASSERT(result.size() == 2);
+	map<int, string> result = mTestObj->getAllStatementModifyTuplesWithPattern(ASSIGN, "x", "_y+2_", false);
+	CPPUNIT_ASSERT(result.size() == 0);
 
 	map<int, string> result2 = mTestObj->getAllStatementModifyTuplesWithPattern(ASSIGN, "y", "_x_", false);
 	CPPUNIT_ASSERT(result2[3] == "y");
@@ -58,5 +57,22 @@ void TestStmtTable::testPatternMatching() {
 	map<int, string> result6 = mTestObj->getAllStatementModifyTuplesWithPattern(WHILE, "x", "_", false);
 	CPPUNIT_ASSERT(result6[2] == "x");
 	CPPUNIT_ASSERT(result6.size() == 1);
+
+	map<int, string> result7 = mTestObj->getAllStatementModifyTuplesWithPattern(ASSIGN, "y", "_x+2_", false);
+	CPPUNIT_ASSERT(result7.size() == 0);
+
+	map<int, string> result8 = mTestObj->getAllStatementModifyTuplesWithPattern(ASSIGN, "y", "_x+21_", false);
+	CPPUNIT_ASSERT(result8[5] == "y");
+	CPPUNIT_ASSERT(result8.size() == 1);
+
+	map<int, string> result9 = mTestObj->getAllStatementModifyTuplesWithPattern(ASSIGN, "y", "_x+2_", true);
+	CPPUNIT_ASSERT(result9.size() == 0);
+
+	map<int, string> result10 = mTestObj->getAllStatementModifyTuplesWithPattern(ASSIGN, "_", "k", false);
+	CPPUNIT_ASSERT(result10.size() == 0);
+
+	map<int, string> result11 = mTestObj->getAllStatementModifyTuplesWithPattern(ASSIGN, "_", "k+22", false);
+	CPPUNIT_ASSERT(result11[7] == "q");
+	CPPUNIT_ASSERT(result11.size() == 1);
 }
 

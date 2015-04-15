@@ -16,7 +16,7 @@ public:
 	
 	static void drawAst();
 	static void setRoot(TNode* _root);
-
+	
 private:
 	static TNode* root;
 
