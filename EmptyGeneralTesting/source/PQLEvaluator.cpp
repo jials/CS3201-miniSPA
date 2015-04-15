@@ -12,8 +12,6 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 
 	vector<string> none;
 	none.push_back("none");
-	vector<string> all;
-	all.push_back("all");
 	PQLResultNode* resultNodePtr = root.getResult();
 
 	if(root.isValidQuery==false) {
@@ -45,7 +43,6 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 		hasPatternClause = true;
 		patternResult = evaluatePattern(rootPtr, patternQueryPtr);
 	}
-
 	//fill in such that result
 	if(suchThatQueryPtr!=NULL && (*suchThatQueryPtr).getName().compare("firstChild")!=0) {
 		hasSuchThatClause = true;
@@ -58,7 +55,6 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 		cout << selectResult.at(i) << "  ";
 	}
 	cout << endl;
-
 	cout<<"suchThatResult is: " << endl;
 	for(unsigned int i=0;i<suchThatResult.size();i++) {
 		for(unsigned int j = 0; j < suchThatResult.at(i).size(); j++) {
@@ -66,7 +62,6 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 		}
 		cout << endl;
 	}
-
 	cout<<"patternResult is: " << endl;
 	for(unsigned int i=0;i<patternResult.size();i++) {
 		for(unsigned int j = 0; j < patternResult.at(i).size(); j++) {
@@ -79,7 +74,6 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 	if(selectResult.empty() || 
 		(hasPatternClause && (patternResult[0][0].compare("invalid")==0 || patternResult[0][0].compare("none")==0)) || 
 		(hasSuchThatClause && (suchThatResult[0][0].compare("invalid")==0 || suchThatResult[0][0].compare("none")==0))) {
-
 		(*resultNodePtr).setResult(none);
 		return;
 	}
@@ -94,7 +88,7 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 					}
 					(*resultNodePtr).setResult(result);
 				}
-				else {
+				else {  //no v
 					(*resultNodePtr).setResult(patternResult[0]);
 				}
 			}
@@ -105,20 +99,10 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 						res.push_back(patternResult[i][1]);
 					}
 				}
-				/*if(res.empty()) {
-					(*resultNodePtr).setResult(none);
-				}
-				else {*/
-					(*resultNodePtr).setResult(res);
-				//}
+				(*resultNodePtr).setResult(res);
 			}
 			else {
-				if(patternResult[0][0].compare("none")==0) {
-					(*resultNodePtr).setResult(none);
-				}
-				else {
-					(*resultNodePtr).setResult(selectResult);
-				}
+				(*resultNodePtr).setResult(selectResult);
 			}
 		}
 		else {            //if no pattern result
@@ -165,25 +149,20 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 				varTableB = true;
 			}
 		}
-
+		//preparation done
 		if(!hasPatternClause) {     //only have such that
 			if(suchThatA.compare(select)==0) {
 				if(isNumberB || varTableB || isUnderscoreB ) {
 					(*resultNodePtr).setResult(suchThatResult[0]);
 				}
 				else {
-					if(suchThatResult[0][0].compare("none")==0) {
-						(*resultNodePtr).setResult(none);
-					}
-					else {
-						vector<string> ans;
-						for(unsigned int i=0; i < suchThatResult.size(); i++) {
-							if(!isIn(suchThatResult.at(i).at(0), ans)) {
-								ans.push_back(suchThatResult.at(i).at(0));
-							}
+					vector<string> ans;
+					for(unsigned int i=0; i < suchThatResult.size(); i++) {
+						if(!isIn(suchThatResult[i][0], ans)) {
+							ans.push_back(suchThatResult[i][0]);
 						}
-						(*resultNodePtr).setResult(ans);
 					}
+					(*resultNodePtr).setResult(ans);
 				}
 			}
 			else if(suchThatB.compare(select)==0) {
@@ -191,27 +170,17 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 					(*resultNodePtr).setResult(suchThatResult[0]);
 				}
 				else {
-					if(suchThatResult[0][0].compare("none")==0) {
-						(*resultNodePtr).setResult(none);
-					}
-					else {
-						vector<string> ans;
-						for(unsigned int i=0; i < suchThatResult.size(); i++) {
-							if(!isIn(suchThatResult.at(i).at(1), ans)) {
-								ans.push_back(suchThatResult.at(i).at(1));
-							}
+					vector<string> ans;
+					for(unsigned int i=0; i < suchThatResult.size(); i++) {
+						if(!isIn(suchThatResult.at(i).at(1), ans)) {
+							ans.push_back(suchThatResult.at(i).at(1));
 						}
-						(*resultNodePtr).setResult(ans);
 					}
+					(*resultNodePtr).setResult(ans);
 				}
 			}
 			else {
-				if(suchThatResult[0][0].compare("none")==0) {
-					(*resultNodePtr).setResult(none);
-				}
-				else {
 					(*resultNodePtr).setResult(selectResult);
-				}
 			}
 		}
 		else {                                                                //both such that and pattern
@@ -221,9 +190,12 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 			int indV = indInSymbols(patternVar, symbols);
 
 			if(suchThatA==pattern) {
-				if(select==pattern) {
+				if(select==suchThatA) {
 					if(indB==-1 && indV==-1) {
 						result = merge(suchThatResult[0], patternResult[0]);
+						if(result.empty()) {
+							result.push_back("none");
+						}
 						(*resultNodePtr).setResult(result);
 					}
 					else if(indB==-1 && indV!=-1) {
@@ -254,7 +226,7 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 								vector<string> pair = suchThatResult[i];
 								for(unsigned int j=0; j < patternResult.size(); j++) {
 									if(patternResult[j][0]==pair[0] && patternResult[j][1]==pair[1]) {
-										result.push_back(patternResult[j][0]);
+										result.push_back(pair[0]);
 										break;
 									}
 								}
@@ -265,24 +237,18 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 							(*resultNodePtr).setResult(result);
 						}
 						else {
-							vector<string> intermediate;
-							for(unsigned int i=0; i < patternResult.size(); i++) {
-								if(!isIn(patternResult[i][0],intermediate)) {
-									intermediate.push_back(patternResult[i][0]);
-								}
-							}
-							if(intermediate.empty()) {
-								intermediate.push_back("none");
-							}
 							for(unsigned int i=0; i < suchThatResult.size(); i++) {
-								if(!isIn(suchThatResult[i][0], result)) {
-									result.push_back(suchThatResult[i][0]);
+								vector<string> pair = suchThatResult[i];
+								for(unsigned int j=0; j < patternResult.size(); j++) {
+									if(patternResult[j][0]==pair[0] && !isIn(pair[0],result)) {
+										result.push_back(pair[0]);
+										break;
+									}
 								}
 							}
 							if(result.empty()) {
 								result.push_back("none");
 							}
-							result = merge(intermediate, result);
 							(*resultNodePtr).setResult(result);
 						}
 					}
@@ -316,18 +282,13 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 							(*resultNodePtr).setResult(result);
 						}
 						else {
-							vector<string> intermediate;
-							for(unsigned int i=0; i < patternResult.size(); i++) {
-								if(!isIn(patternResult[i][0],intermediate)) {
-									intermediate.push_back(patternResult[i][0]);
-								}
-							}
-							if(intermediate.empty()) {
-								intermediate.push_back("none");
-							}
 							for(unsigned int i=0; i < suchThatResult.size(); i++) {
-								if(!isIn(suchThatResult[i][1], result) && isIn(suchThatResult[i][0], intermediate)) {
-									result.push_back(suchThatResult[i][1]);
+								vector<string> pair = suchThatResult[i];
+								for(unsigned int j=0; j < patternResult.size(); j++) {
+									if(patternResult[j][0]==pair[0] && !isIn(pair[1],result)) {
+										result.push_back(pair[1]);
+										break;
+									}
 								}
 							}
 							if(result.empty()) {
@@ -350,41 +311,20 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 						(*resultNodePtr).setResult(result);
 					}
 					else {   //indB!=-1, indV!=-1
-						if(suchThatB==patternVar) {
-							for(unsigned int i=0; i < suchThatResult.size(); i++) {
-								vector<string> pair = suchThatResult[i];
-								for(unsigned int j=0; j < patternResult.size(); j++) {
-									if(patternResult[j][0]==pair[0] && patternResult[j][1]==pair[1]) {
-										result.push_back(patternResult[j][1]);
-										break;
-									}
+						//patternVar==suchThatB handled before
+						for(unsigned int i=0; i < suchThatResult.size(); i++) {
+							vector<string> pair = suchThatResult[i];
+							for(unsigned int j=0; j < patternResult.size(); j++) {
+								if(patternResult[j][0]==pair[0] && !isIn(patternResult[j][1],result)) {
+									result.push_back(patternResult[j][1]);
+									break;
 								}
 							}
-							if(result.empty()) {
-								result.push_back("none");
-							}
-							(*resultNodePtr).setResult(result);
 						}
-						else {
-							vector<string> intermediate;
-							for(unsigned int i=0; i < suchThatResult.size(); i++) {
-								if(!isIn(suchThatResult[i][0],intermediate)) {
-									intermediate.push_back(suchThatResult[i][0]);
-								}
-							}
-							if(intermediate.empty()) {
-								intermediate.push_back("none");
-							}
-							for(unsigned int i=0; i < patternResult.size(); i++) {
-								if(!isIn(patternResult[i][1], result) && isIn(patternResult[i][0], intermediate)) {
-									result.push_back(patternResult[i][1]);
-								}
-							}
-							if(result.empty()) {
-								result.push_back("none");
-							}
-							(*resultNodePtr).setResult(result);
+						if(result.empty()) {
+							result.push_back("none");
 						}
+						(*resultNodePtr).setResult(result);
 					}
 				}
 				else {
@@ -392,9 +332,12 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 				}
 			}
 			else if(suchThatB==pattern) {
-				if(select==pattern) {
+				if(select==suchThatB) {
 					if(indA==-1 && indV==-1) {
 						result = merge(suchThatResult[0], patternResult[0]);
+						if(result.empty()) {
+							result.push_back("none");
+						}
 						(*resultNodePtr).setResult(result);
 					}
 					else if(indA==-1 && indV!=-1) {
@@ -420,24 +363,18 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 						(*resultNodePtr).setResult(result);
 					}
 					else {   //indA!=-1, indV!=-1
-						vector<string> intermediate;
-						for(unsigned int i=0; i < patternResult.size(); i++) {
-							if(!isIn(patternResult[i][0],intermediate)) {
-								intermediate.push_back(patternResult[i][0]);
-							}
-						}
-						if(intermediate.empty()) {
-							intermediate.push_back("none");
-						}
 						for(unsigned int i=0; i < suchThatResult.size(); i++) {
-							if(!isIn(suchThatResult[i][1], result)) {
-								result.push_back(suchThatResult[i][1]);
+							vector<string> pair = suchThatResult[i];
+							for(unsigned int j=0; j < patternResult.size(); j++) {
+								if(patternResult[j][0]==pair[1] && !isIn(pair[1],result)) {
+									result.push_back(pair[1]);
+									break;
+								}
 							}
 						}
 						if(result.empty()) {
 							result.push_back("none");
 						}
-						result = merge(intermediate, result);
 						(*resultNodePtr).setResult(result);
 					}
 				}
@@ -454,19 +391,13 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 						(*resultNodePtr).setResult(result);
 					}
 					else {
-						vector<string> intermediate;
-						for(unsigned int i=0; i < patternResult.size(); i++) {
-							if(!isIn(patternResult[i][0], intermediate)) {
-								intermediate.push_back(patternResult[i][0]);
-							}
-						}
-						if(intermediate.empty()) {
-							intermediate.push_back("none");
-						}
-
 						for(unsigned int i=0; i < suchThatResult.size(); i++) {
-							if(!isIn(suchThatResult[i][0], result) && isIn(suchThatResult[i][1], intermediate)) {
-								result.push_back(suchThatResult[i][0]);
+							vector<string> pair = suchThatResult[i];
+							for(unsigned int j=0; j < patternResult.size(); j++) {
+								if(patternResult[j][0]==pair[1] && !isIn(pair[0],result)) {
+									result.push_back(pair[0]);
+									break;
+								}
 							}
 						}
 						if(result.empty()) {
@@ -488,19 +419,13 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 						(*resultNodePtr).setResult(result);
 					}
 					else {
-						vector<string> intermediate;
 						for(unsigned int i=0; i < suchThatResult.size(); i++) {
-							if(!isIn(suchThatResult[i][1], intermediate)) {
-								intermediate.push_back(suchThatResult[i][1]);
-							}
-						}
-						if(intermediate.empty()) {
-							intermediate.push_back("none");
-						}
-
-						for(unsigned int i=0; i < patternResult.size(); i++) {
-							if(!isIn(patternResult[i][1], result) && isIn(patternResult[i][0], intermediate)) {
-								result.push_back(patternResult[i][1]);
+							vector<string> pair = suchThatResult[i];
+							for(unsigned int j=0; j < patternResult.size(); j++) {
+								if(patternResult[j][0]==pair[1] && !isIn(patternResult[j][1],result)) {
+									result.push_back(patternResult[j][1]);
+									break;
+								}
 							}
 						}
 						if(result.empty()) {
@@ -529,14 +454,13 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 					else if(select==suchThatB) {    //=patternVar
 						vector<string> intermediate;
 						for(unsigned int i=0; i < patternResult.size(); i++) {
-							if(!isIn(patternResult[i][1],intermediate)) {
-								intermediate.push_back(patternResult[i][1]);
+							if(!isIn(patternResult[i][1],result) && isIn(patternResult[i][1],suchThatResult[0])) {
+								result.push_back(patternResult[i][1]);
 							}
 						}
-						if(intermediate.empty()) {
-							intermediate.push_back("none");
+						if(result.empty()) {
+							result.push_back("none");
 						}
-						result = merge(intermediate, suchThatResult[0]);
 						(*resultNodePtr).setResult(result);
 					}
 					else {
@@ -550,7 +474,7 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 								vector<string> pair = suchThatResult[i];
 								for(unsigned int j=0; j<patternResult.size(); j++) {
 									if(patternResult[j][0]==pair[0] && patternResult[j][1]==pair[1]) {
-										result.push_back(pair[0]);
+										result.push_back(patternResult[j][0]);
 									}
 								}
 							}
@@ -560,15 +484,12 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 							(*resultNodePtr).setResult(result);
 						}
 						else {
-							vector<string> intermediate;
-							for(unsigned int i=0; i < suchThatResult.size(); i++) {
-								if(!isIn(suchThatResult[i][1],intermediate)) {
-									intermediate.push_back(suchThatResult[i][1]);
-								}
-							}
-							for(unsigned int i=0; i < patternResult.size(); i++) {
-								if( isIn(patternResult[i][1], intermediate) && !isIn(patternResult[i][0], result)) {
-									result.push_back(patternResult[i][0]);
+							for(unsigned int i=0; i<suchThatResult.size(); i++) {
+								vector<string> pair = suchThatResult[i];
+								for(unsigned int j=0; j<patternResult.size(); j++) {
+									if(!isIn(patternResult[j][0],result) && patternResult[j][1]==pair[1]) {
+										result.push_back(patternResult[j][0]);
+									}
 								}
 							}
 							if(result.empty()) {
@@ -578,121 +499,93 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 						}
 					}
 					else if(select==suchThatB) {    //=patternVar
-						vector<string> intermediate;
-						for(unsigned int i=0; i < patternResult.size(); i++) {
-							if(!isIn(patternResult[i][1],intermediate)) {
-								intermediate.push_back(patternResult[i][1]);
-							}
-						}
-						if(intermediate.empty()) {
-							intermediate.push_back("none");
-						}
-						for(unsigned int i=0; i < suchThatResult.size(); i++) {
-							if(!isIn(suchThatResult[i][1], result)) {
-								result.push_back(suchThatResult[i][1]);
+						for(unsigned int i=0; i<suchThatResult.size(); i++) {
+							vector<string> pair = suchThatResult[i];
+							for(unsigned int j=0; j<patternResult.size(); j++) {
+								if(!isIn(pair[1],result) && patternResult[j][1]==pair[1]) {
+									result.push_back(pair[1]);
+								}
 							}
 						}
 						if(result.empty()) {
 							result.push_back("none");
 						}
-						result = merge(intermediate, result);
 						(*resultNodePtr).setResult(result);
 					}
 					else if(select==suchThatA) {
-						vector<string> intermediate;
-						for(unsigned int i=0; i < patternResult.size(); i++) {
-							if(!isIn(patternResult[i][1],intermediate)) {
-								intermediate.push_back(patternResult[i][1]);
-							}
-						}
-						if(intermediate.empty()) {
-							(*resultNodePtr).setResult(none);
-						}
-						else {
-							for(unsigned int i=0; i < suchThatResult.size(); i++) {
-								if( isIn(suchThatResult[i][1], intermediate) && !isIn(suchThatResult[i][0], result)) {
-									result.push_back(suchThatResult[i][0]);
+						for(unsigned int i=0; i<suchThatResult.size(); i++) {
+							vector<string> pair = suchThatResult[i];
+							for(unsigned int j=0; j<patternResult.size(); j++) {
+								if(!isIn(pair[0],result) && patternResult[j][1]==pair[1]) {
+									result.push_back(pair[0]);
 								}
 							}
-							if(result.empty()) {
-								result.push_back("none");
-							}
-							(*resultNodePtr).setResult(result);
 						}
+						if(result.empty()) {
+							result.push_back("none");
+						}
+						(*resultNodePtr).setResult(result);
 					}
 					else {
 						//shld not be here
 					}
 				}
 			}
+			else if(suchThatA==patternVar) {                    //impossible case
+				(*resultNodePtr).setResult(none);
+			}
 			else {   //pattern not related to such that
-				if(patternResult[0][0].compare("none")==0 || suchThatResult[0][0].compare("none")==0) {
-					(*resultNodePtr).setResult(none);
-				}
-				else {
-					if(select.compare(suchThatA)==0) {
-						if(isNumberB || varTableB || isUnderscoreB) {
-							(*resultNodePtr).setResult(suchThatResult[0]);
-						}
-						else {
-							for(unsigned int i=0; i < suchThatResult.size(); i++) {
-								if(!isIn(suchThatResult[i][0], result)) {
-									result.push_back(suchThatResult[i][0]);
-								}
-							}
-							if(result.empty()) {
-								result.push_back("none");
-							}
-							(*resultNodePtr).setResult(result);
-						}
+				if(select.compare(suchThatA)==0) {
+					if(isNumberB || varTableB || isUnderscoreB) {
+						(*resultNodePtr).setResult(suchThatResult[0]);
 					}
-					else if(select.compare(suchThatB)==0) {
-						if(isNumberA || isUnderscoreA ) {
-							(*resultNodePtr).setResult(suchThatResult[0]);
-						}
-						else {
-							for(unsigned int i=0; i < suchThatResult.size(); i++) {
-								if(!isIn(suchThatResult[i][1], result)) {
-									result.push_back(suchThatResult[i][1]);
-								}
+					else {
+						for(unsigned int i=0; i < suchThatResult.size(); i++) {
+							if(!isIn(suchThatResult[i][0], result)) {
+								result.push_back(suchThatResult[i][0]);
 							}
-							if(result.empty()) {
-								result.push_back("none");
-							}
-							(*resultNodePtr).setResult(result);
-						}
-					}
-					else if(select.compare(pattern)==0) {
-						if(indV==-1) {
-							(*resultNodePtr).setResult(patternResult[0]);
-						}
-						else {
-							for(unsigned int i=0; i < patternResult.size(); i++) {
-								if(!isIn(patternResult[i][0], result)) {
-									result.push_back(patternResult[i][0]);
-								}
-							}
-							if(result.empty()) {
-								result.push_back("none");
-							}
-							(*resultNodePtr).setResult(result);
-						}
-					}
-					else if(indV!=-1 && select.compare(patternVar)==0) {
-						for(unsigned int i=0; i < patternResult.size(); i++) {
-							if(!isIn(patternResult[i][1], result)) {
-								result.push_back(patternResult[i][1]);
-							}
-						}
-						if(result.empty()) {
-							result.push_back("none");
 						}
 						(*resultNodePtr).setResult(result);
 					}
+				}
+				else if(select.compare(suchThatB)==0) {
+					if(isNumberA || isUnderscoreA ) {
+						(*resultNodePtr).setResult(suchThatResult[0]);
+					}
 					else {
-						//shld not end up here
+						for(unsigned int i=0; i < suchThatResult.size(); i++) {
+							if(!isIn(suchThatResult[i][1], result)) {
+								result.push_back(suchThatResult[i][1]);
+							}
+						}
+						(*resultNodePtr).setResult(result);
 					}
 				}
+				else if(select.compare(pattern)==0) {
+					if(indV==-1) {
+						(*resultNodePtr).setResult(patternResult[0]);
+					}
+					else {
+						for(unsigned int i=0; i < patternResult.size(); i++) {
+							if(!isIn(patternResult[i][0], result)) {
+								result.push_back(patternResult[i][0]);
+							}
+						}
+						(*resultNodePtr).setResult(result);
+					}
+				}
+				else if(indV!=-1 && select.compare(patternVar)==0) {
+					for(unsigned int i=0; i < patternResult.size(); i++) {
+						if(!isIn(patternResult[i][1], result)) {
+							result.push_back(patternResult[i][1]);
+						}
+					}
+					(*resultNodePtr).setResult(result);
+				}
+				else {
+					//shld not end up here
+				}
+
 			}
 		}
 	}
@@ -721,6 +614,9 @@ vector<string> PQLEvaluator::merge(vector<string> vA, vector<string> vB) {
 				break;
 			}
 		}
+	}
+	if(res.empty()) {
+		res.push_back("none");
 	}
 	return res;
 }
@@ -1615,6 +1511,9 @@ vector<string> PQLEvaluator::getAllFromAType(string type) {
 	}
 	else if (type.compare("prog_line")==0) {
 		return pkb.getAllProgLine();
+	}
+	else if (type.compare("constant")==0) {
+		return pkb.getAllConstant();
 	}
 	else {
 		vector<string> none;
