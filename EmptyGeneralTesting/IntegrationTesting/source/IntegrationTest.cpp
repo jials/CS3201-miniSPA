@@ -47,7 +47,7 @@ const char *test2 =
 SimpleParser parser;
 parser.parse(test2);
 vector<string> results;
-string query = "stmt s1; stmt s2; Select s1 such that Parent*(s1, s2)";
+string query = "assign a; Select a such that Parent*(a, 6) pattern a(\"x\", _)";
 PQLPreProcessor proc;
 PQLEvaluator eva;
 QueryTreeRoot root;

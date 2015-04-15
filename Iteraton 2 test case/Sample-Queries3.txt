@@ -1,42 +1,42 @@
 1 - v, f(c,c), pt
 assign a;
-Select a such that Follows(3, 4) pattern a(_"i"_, _)
+Select a such that Follows(3, 4) pattern a("i", _)
 5
 5000
 2 - v, f(c,v), pt
 assign a;
-Select a such that Follows(2, a) pattern a(_"i"_, _)
+Select a such that Follows(2, a) pattern a("i", _)
 none
 5000
 3 - v, f(v,v), pt
 assign a1; assign a2;
-Select a1 such that Follows(a1, a2) pattern a1(_"x"_, _)
+Select a1 such that Follows(a1, a2) pattern a1("x", _)
 1
 5000
 4 - v, f(v,v), pt
 assign a1; assign a2
-Select a2 such that Follows(a1, a2) pattern a(_"x"_, _)
-9
+Select a2 such that Follows(a1, a2) pattern a2("x", _)
+none
 5000
 5 - v, f(c,c)=false, pt
 assign a;
-Select a such that Follows(3, 6) pattern a(_"x"_, _)
+Select a such that Follows(3, 6) pattern a("x", _)
 none
 5000
 6 - v, fs(c,c), pt
-stmt s;
-Select s such that Follows*(1, 4) pattern a(_"x"_, _)
+assign a;
+Select a such that Follows*(1, 4) pattern a("x", _)
 1, 9
 5000
 7 - v, fs(c,c) = false, pt
 stmt s;
-Select s such that Follows*(4, 4) pattern a(_"x"_, _)
+Select s such that Follows*(4, 4) pattern a("x", _)
 none
 5000
 8 - v, fs(c,v), pt
-assign a; while w;
-Select a such that Follows*(3, a) pattern w("x", _)
-4
+assign a;
+Select a such that Follows*(3, a) pattern a("x", _)
+9
 5000
 9 - v, fs(v,v), pt
 assign a1; assign a2;
@@ -49,63 +49,57 @@ Select a such that Parent(1, 5) pattern a(_, _"x"_)
 none
 5000
 11 - v, p(v,c), pt
-assign a; while w;
-Select a such that Parent(a, 5) pattern w(_"x"_, _)
-4
+assign a;
+Select a such that Parent(a, 5) pattern a("x", _)
+none
 5000
 12 - v, ps(c,c), pt
 assign a;
-Select a such that Parent*(4, 7) pattern a(_"x"_, _)
+Select a such that Parent*(4, 7) pattern a("x", _)
 1, 9
 5000
 13 - v, ps(v,c), pt
 assign a;
-Select a such that Parent*(a, 6) pattern a(_"x"_, _)
+Select a such that Parent*(a, 6) pattern a("x", _)
 none
 5000
 14 - v, m(c,c), pt
 assign a;
-Select a such that Modifies(_, "x") pattern a(_"x"_, _)
+Select a such that Modifies(_, "x") pattern a("x", _)
 1, 9
 5000
 15 - v, m(c,c), pt
 assign a;
-Select a such that Modifies(1, "o") pattern a(_"x"_, _)
+Select a such that Modifies(1, "o") pattern a("x", _)
 none
 5000
 16 - v, m(c,c), pt
 assign a;
-Select a such that Modifies(4, "y") pattern a(_"y"_, _"x"_)
+Select a such that Modifies(4, "y") pattern a("y", _"x"_)
 6
 5000
 17 - v, u(c,c), pt
 assign a;
-Select a such that Uses(4, "i") pattern a(_"y"_, _"x"_)
+Select a such that Uses(4, "i") pattern a("y", _"x"_)
 6
 5000
 18 - v, u(c,c), pt
 assign a;
-Select a such that Uses(4, "y") pattern a(_"y"_, _"x"_)
+Select a such that Uses(4, "y") pattern a("y", _"x"_)
 none
 5000
-18 - v, u(c,c), pt
+19 - v, u(c,c), pt
 assign a;
-Select a such that Uses(_, "x") pattern a(_"z"_, _)
-2
+Select a such that Uses(_, "x") pattern a("z", _)
+2, 7
 5000
-19 - v, m(c,c), pt
+20 - v, m(c,c), pt
 assign a; stmt s; variable v;
 Select s such that Modifies(s, v) pattern a(v, _"x + z"_)
-6
+4, 6
 5000
-20 - v, u(c,c), pt
+21 - v, u(c,c), pt
 assign a; stmt s; variable v;
 Select s such that Uses(s, v) pattern a(v, _"x + z"_)
 none
 5000
-
-
-
-
-
-

@@ -30,6 +30,8 @@ public:
     vector<string> getAllAssign();
     vector<string> getAllWhile();
 	vector<string> getAllProgLine();
+	vector<string> getAllConstant();
+
     
     map<int, string> patternMatching(string type, string left,string right, bool isDeclaredVar);		//type: assign/while, return <stmt, modifiedVar> tuple eg. <1, x> 
     //vector<string> patternMatching(string left,string right);		//type: assign/while

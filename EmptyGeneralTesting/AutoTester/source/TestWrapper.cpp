@@ -57,6 +57,7 @@ void TestWrapper::parse(std::string filename) {
 void TestWrapper::evaluate(std::string query, std::list<std::string>& results){
 // call your evaluator to evaluate the query here
   // ...code to evaluate query...
+	try{
 	PQLPreProcessor proc;
 	Helpers helper;
 	PQLEvaluator eva;
@@ -72,12 +73,18 @@ void TestWrapper::evaluate(std::string query, std::list<std::string>& results){
 	eva.evaluateResult(&root);
 	node = root.getResult();
 	finalResults = node->getResult();
-	if(finalResults[0] != "none"){
-		for(int q = 0 ; q< finalResults.size(); q++){
-			results.push_back(finalResults[q]);
-		}
-	}
 	
+	for(int q = 0 ; q< finalResults.size(); q++){
+		if(finalResults[q] == "none") return;
+		results.push_back(finalResults[q]);
+		
+	}
+	}
+	catch(const exception& error){
+		cout << "error";
+	}
+
+
 	
 
 

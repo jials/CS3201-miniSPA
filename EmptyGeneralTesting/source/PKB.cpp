@@ -14,6 +14,7 @@ using namespace std;
 #include "Follows.h"
 #include "Parent.h"
 #include "Helpers.h"
+#include "ConstTable.h"
 
 Helpers helper;
 
@@ -184,3 +185,7 @@ vector<string> PKB::getAllModifies(string var){
 	return StmtTable::getAllStatementModifyTuplesWithPattern(enumType, left, right, isDeclaredVar);
 
 }
+
+ vector<string> PKB::getAllConstant(){
+	 return ConstTable::getAllConstant();
+  }

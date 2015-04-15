@@ -20,6 +20,7 @@ using namespace std;
 #include "Follows.h"
 #include "TNode.h"
 #include "AST.h"
+#include "ConstTable.h"
 
 int next_index = 0;
 int next_lineNumber = 1;
@@ -45,6 +46,7 @@ int SimpleParser::parse(string input) {
 		StmtTable::draw();
 		Parent::draw();
 		Follows::draw();
+		ConstTable::draw();
 
 	} catch(const ParsingErrorException& error) {  
 		return 0;
@@ -240,6 +242,7 @@ TNode* SimpleParser::stmt(int parentLine){
 		exprNode = new TNode();
 		if(helpers.isNumber(tokens[next_index-1])){
 			exprNode -> type = CONSTANT;
+			ConstTable::insertConst(tokens[next_index-1]);
 		}
 		else{
 			exprNode -> type = VARIABLE;
@@ -296,6 +299,7 @@ TNode* SimpleParser::innerExpr(TNode* left){
 		match("#any", true);
 		if(helpers.isNumber(tokens[next_index-1])){
 			leftVar -> type = CONSTANT;
+			ConstTable::insertConst(tokens[next_index-1]);
 		}
 		else{
 			leftVar -> type = VARIABLE;
@@ -317,6 +321,7 @@ TNode* SimpleParser::innerExpr(TNode* left){
 	match("#any", true);
 	if(helpers.isNumber(tokens[next_index-1])){
 		right -> type = CONSTANT;
+		ConstTable::insertConst(tokens[next_index-1]);
 	}
 	else{
 		right -> type = VARIABLE;
