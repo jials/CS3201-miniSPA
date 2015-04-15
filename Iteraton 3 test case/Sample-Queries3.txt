@@ -1,36 +1,36 @@
 1 - v, f(c,c), pt
 assign a;
-Select a such that Follows(3, 4) pattern a(_"i"_, _)
+Select a such that Follows(3, 4) pattern a("i", _)
 1
 5000
 2 - v, f(c,v), pt
 assign a;
-Select a such that Follows(2, a) pattern a(_"i"_, _)
+Select a such that Follows(2, a) pattern a("i", _)
 none
 5000
 3 - v, f(v,v), pt
 assign a1; assign a2;
-Select a1 such that Follows(a1, a2) pattern a(_"x"_, _)
+Select a1 such that Follows(a1, a2) pattern a("x", _)
 none
 5000
 4 - v, f(v,v), pt
-assign a1; assign a2
-Select a2 such that Follows(a1, a2) pattern a(_"c"_, _)
-3, 15
+assign a1; while w;
+Select a1 such that Follows(a1, w) pattern a1("c", _)
+3
 5000
 5 - v, f(c,c)=false, pt
 assign a;
-Select a such that Follows(3, 6) pattern a(_"x"_, _)
+Select a such that Follows(3, 6) pattern a("x", _)
 none
 5000
 6 - v, fs(c,c), pt
-stmt s;
-Select s such that Follows*(1, 4) pattern a(_"x"_, _)
+assign a;
+Select a such that Follows*(1, 4) pattern a("x", _)
 10, 18
 5000
 7 - v, fs(c,c) = false, pt
 stmt s;
-Select s such that Follows*(5, 5) pattern a(_"x"_, _)
+Select s such that Follows*(5, 5) pattern a("x", _)
 none
 5000
 8 - v, fs(c,v), pt
@@ -48,44 +48,39 @@ assign a;
 Select a such that Parent(1, 5) pattern a(_, _"x"_)
 none
 5000
-11 - v, p(v,c), pt
-assign a; while w;
-Select a such that Parent(a, 5) pattern w(_"a"_, _)
-4
-5000
 12 - v, ps(c,c), pt
 assign a;
-Select a such that Parent*(4, 7) pattern a(_"x"_, _)
+Select a such that Parent*(4, 7) pattern a("x", _)
 10, 18
 5000
 13 - v, ps(v,c), pt
 assign a;
-Select a such that Parent*(a, 6) pattern a(_"x"_, _)
+Select a such that Parent*(a, 6) pattern a("x", _)
 none
 5000
 14 - v, m(c,c), pt
 assign a;
-Select a such that Modifies(_, "x") pattern a(_"x"_, _)
+Select a such that Modifies(_, "x") pattern a("x", _)
 10, 18
 5000
 15 - v, m(c,c), pt
 assign a;
-Select a such that Modifies(1, "o") pattern a(_"x"_, _)
+Select a such that Modifies(1, "o") pattern a("x", _)
 none
 5000
 16 - v, m(c,c), pt
 assign a;
-Select a such that Modifies(4, "oSCar") pattern a(_"oSCar"_, _"j1k"_)
+Select a such that Modifies(4, "oSCar") pattern a("oSCar", _"j1k"_)
 8
 5000
 17 - v, u(c,c), pt
 assign a;
-Select a such that Uses(4, "I") pattern a(_"c"_, _"width+Romeo"_)
+Select a such that Uses(4, "I") pattern a("c", _"width+Romeo"_)
 15
 5000
 18 - v, u(c,c), pt
 assign a;
-Select a such that Uses(4, "y") pattern a(_"y"_, _"x"_)
+Select a such that Uses(4, "y") pattern a("y", _"x"_)
 none
 5000
 18 - v, u(c,c), pt
@@ -96,7 +91,7 @@ Select a such that Uses(_, "x") pattern a("a", _)
 19 - v, m(c,c), pt
 assign a; stmt s; variable v;
 Select s such that Modifies(s, v) pattern a(v, _"k+j1k"_)
-8
+4, 5, 6, 7, 8
 5000
 20 - v, u(c,c), pt
 assign a; stmt s; variable v;
