@@ -52,7 +52,9 @@ void VarTable::draw(){
 
 // Need to insert this variable first
 void VarTable::addUses(string varName, string lineNoOrProc) {
-    map<VAR, VARROW>::iterator it;
+  Helpers helper;
+   if(!helper.isNumber(lineNoOrProc)) return;
+	map<VAR, VARROW>::iterator it;
     
     for (it = _table.begin(); it != _table.end(); it++)
     {
@@ -78,7 +80,9 @@ void VarTable::addUses(string varName, string lineNoOrProc) {
 
 // Need to insert this variable first
 void VarTable::addModifies(string varName, string lineNoOrProc) {
-    map<VAR, VARROW>::iterator it;
+   Helpers helper;
+   if(!helper.isNumber(lineNoOrProc)) return;
+	map<VAR, VARROW>::iterator it;
     
     for (it = _table.begin(); it != _table.end(); it++)
     {
