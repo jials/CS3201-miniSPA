@@ -21,20 +21,33 @@ CppUnit::TextUi::TestRunner runner;
 //Parse();
 Helpers helper;
 
+//const char *test2 =
+//		"procedure Example{ "
+//		  "x = 2;"
+//		  "z = 3;"
+//		  "i = 5;"
+//		  "y = x;"
+//		  "z = i;"
+//		  "x = 10;"
+//		 "}";
+
 const char *test2 =
-		"procedure Example{ "
-		  "x = 2;"
-		  "z = 3;"
-		  "i = 5;"
-		  "y = x;"
-		  "z = i;"
-		  "x = 10;"
-		 "}";
+	"procedure Example2 {"
+  "x = 2 + 1;"
+  "z = 3 + x;"
+  "lee = 20;"
+  "while x{"
+    "i = 5 + lee;"
+    "y = x + z + i;"
+    "z = i + lee;"
+    "lee = x;}"
+  "x = 10;"
+"}";
 
 SimpleParser parser;
 parser.parse(test2);
 vector<string> results;
-string query = "assign a; Select a such that Uses(a, _) pattern a(\"z\", _)";
+string query = "stmt s1; stmt s2; Select s1 such that Parent*(s1, s2)";
 PQLPreProcessor proc;
 PQLEvaluator eva;
 QueryTreeRoot root;

@@ -86,7 +86,7 @@ none
 18 - v, m(c,c), pt
 assign a;
 Select a such that Uses(_, "x") pattern a("z", _)
-none
+2, 5
 5000
 19 - v, m(c,c), pt
 assign a; variable v;
