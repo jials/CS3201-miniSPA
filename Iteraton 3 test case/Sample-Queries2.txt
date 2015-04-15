@@ -81,7 +81,7 @@ Select a pattern a("w", _"w"_)
 23 - v, pt
 assign a;
 Select a pattern a(_, _"2"_)
-2, 19
+19
 5000
 24 - v, pt
 assign a;
@@ -91,7 +91,7 @@ none
 25 - v, pt
 assign a;
 Select a pattern a("c", _"delta+l"_)
-none
+15
 5000
 26
 assign a;

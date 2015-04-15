@@ -154,7 +154,23 @@ map<int, string> StmtTable::getAllStatementModifyTuplesWithPattern(nodeType type
 		if(right.find('+') != std::string::npos){
 			if(right.at(0)== '_') right = right.substr(1);
 			if(right.at(right.size()-1)=='_'){
-				helper.replaceAll(right, "_", "(\\+|\\;)*");
+				helper.replaceAll(right, "_", "(\\+|\\;)+(.)*");
+			}
+			else{
+				right += "(\\+|\\;)+";
+			}
+		}
+		else{
+			if(right != "_"){
+				bool cutoff = false;
+				if(right.at(0)== '_'){
+					cutoff = true;
+					right = right.substr(1);
+				} 
+				if(right.at(right.size()-1)=='_'){
+					helper.replaceAll(right, "_", "(\\+|\\;)+(.)*");
+				}
+				if(cutoff) right = "_"+right;
 			}
 		}
 		
@@ -177,6 +193,9 @@ map<int, string> StmtTable::getAllStatementModifyTuplesWithPattern(nodeType type
 			else if(type == ASSIGN){
 				string code = it->second.stmtOriginalCode;
 				helper.replaceAll(code, " ","");
+				if(code.at(code.size()-1)!=';'){
+					code = code +";";
+				}
 				cmatch what;
 				if ((isDeclaredVar && regex_match(helper.stringToCharArray(code),what, regex(right_side_regex)))					
 					||(!isDeclaredVar && regex_match(helper.stringToCharArray(code), what, regex(concat)))){
