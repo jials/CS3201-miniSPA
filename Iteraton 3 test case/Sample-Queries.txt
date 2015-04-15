@@ -153,3 +153,15 @@ assign a; stmt s;
 Select s such that Follows*(3, a)
 none
 5000
+32
+assign a; constant c;
+Select c such that Follows(4, a)
+none
+5000
+33
+assign a; constant c;
+Select c such that Parent*(5, a)
+1, 200, 0, 2
+5000
+
+

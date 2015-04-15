@@ -41,7 +41,7 @@ Select a such that Follows*(5, a) pattern a("w", _)
 9 - v, fs(v,v), pt
 assign a1; assign a2;
 Select a2 such that Follows*(a1, a2) pattern a2(_, _"Rome"_)
-15
+none
 5000
 10 - v, p(c,c), pt
 assign a;
@@ -76,7 +76,7 @@ Select a such that Modifies(4, "oSCar") pattern a("oSCar", _"j1k"_)
 17 - v, u(c,c), pt
 assign a;
 Select a such that Uses(4, "I") pattern a("c", _"width+Romeo"_)
-15
+none
 5000
 18 - v, u(c,c), pt
 assign a;
@@ -90,7 +90,7 @@ Select a such that Uses(_, "x") pattern a("a", _)
 5000
 19 - v, m(c,c), pt
 assign a; stmt s; variable v;
-Select s such that Modifies(s, v) pattern a(v, _"k+j1k"_)
+Select s such that Modifies(s, v) pattern a(v, _"I+k"_)
 4, 5, 6, 7, 8
 5000
 20 - v, u(c,c), pt
@@ -98,6 +98,17 @@ assign a; stmt s; variable v;
 Select s such that Uses(s, v) pattern a(v, _"k+j1k"_)
 none
 5000
+21
+assign a; variable v;
+Select v pattern a(v, _"1"_)
+i, oSCar, x, Romeo, c, w
+5000
+21
+assign a; stmt s; variable v;
+Select a such that Uses(a, v) pattern a(v, _"1"_)
+10, 13, 15, 17, 18, 20
+5000
+
 
 
 

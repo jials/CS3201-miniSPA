@@ -86,11 +86,27 @@ Select a pattern a(_, _"2"_)
 24 - v, pt
 assign a;
 Select a pattern a("c", _"l + width"_)
-15
+none
 5000
 25 - v, pt
+assign a;
+Select a pattern a("c", _"delta+l"_)
+none
+5000
+26
 assign a;
 Select a pattern a("x", _)
 10, 18
 5000
+27
+assign a; constant c;
+Select c pattern a("b", _)
+1, 200, 0, 2
+5000
+28
+assign a; stmt s;
+Select s pattern a(_, _"j1k + chArlie"_)
+none
+5000
+
 
