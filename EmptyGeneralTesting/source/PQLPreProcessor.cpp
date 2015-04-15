@@ -244,8 +244,8 @@ bool PQLPreProcessor::isValidExpressionSpec(string str){
 		if (isValidName(sub)||isInteger(sub))
 			return true;
 		if (sub.find('+')==sub.find_last_of('+')){
-			string firstToken = sub.substr(0,sub.find('+'));
-			string secondToken = sub.substr(sub.find('+')+1);
+			string firstToken = trim(sub.substr(0,sub.find('+')));
+			string secondToken = trim(sub.substr(sub.find('+')+1));
 			if ((isValidName(firstToken)||isInteger(firstToken))&&(isValidName(secondToken)||isInteger(secondToken)))
 				return true;
 		}

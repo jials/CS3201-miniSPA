@@ -23,7 +23,7 @@ private:
 	static bool isValidStmtRef(string str, QueryTreeRoot*);
 	static bool isInteger(string str);
 	static bool isValidName(string);
-	string trim(string str);
+	static string trim(string str);
 public:
 	PQLPreProcessor();
 	QueryTreeRoot parse(vector<string> strs, string name);
