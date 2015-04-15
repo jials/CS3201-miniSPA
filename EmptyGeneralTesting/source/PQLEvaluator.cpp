@@ -673,7 +673,13 @@ vector<vector<string>> PQLEvaluator::evaluateSuchThat(QueryTreeRoot* rootPtr, PQ
 
 	if(indA!=-1) {
 		typeA = (*rootPtr).getSymbol(a);
-		possibleA = getAllFromAType(typeA);
+		if(typeA=="stmt" || typeA=="assign" || typeA=="while" || typeA=="prog_line") {
+			possibleA = getAllFromAType(typeA);
+		}
+		else {
+			result.push_back(invalid);
+			return result;
+		}
 	}
 	else {
 		if(isNumber(a)) {
@@ -689,7 +695,13 @@ vector<vector<string>> PQLEvaluator::evaluateSuchThat(QueryTreeRoot* rootPtr, PQ
 	}
 	if(indB!=-1) {
 		typeB = (*rootPtr).getSymbol(b);
-		possibleB = getAllFromAType(typeB);
+		if(typeB=="stmt" || typeB=="assign" || typeB=="while" || typeB=="prog_line" || typeB=="variable") {
+			possibleB = getAllFromAType(typeB);
+		}
+		else {
+			result.push_back(invalid);
+			return result;
+		}
 	}
 	else {
 		if(isNumber(b)) {
@@ -1432,7 +1444,7 @@ vector<vector<string>>  PQLEvaluator::evaluatePattern(QueryTreeRoot* rootPtr, PQ
 		patternResult.push_back(invalid);
 		return patternResult;
 	}
-
+	
 	vector<PQLAttributeNode*> patternMatching = pattern.getChildren();
 	PQLAttributeNode* LPtr = patternMatching.at(0);
 	string left = (*LPtr).getName();
@@ -1451,7 +1463,6 @@ vector<vector<string>>  PQLEvaluator::evaluatePattern(QueryTreeRoot* rootPtr, PQ
 		left.erase(left.size()-1,1);
 		left.erase(0,1);
 	}
-
 	//remove double quotes(if any) on the right
 	if(right.size()!=1 && right.at(1)=='"' && right.at(right.size()-2)=='"') {
 		right.erase(right.size()-2,1);
