@@ -132,6 +132,7 @@ map<int, string> StmtTable::getAllStatementModifyTuplesWithPattern(nodeType type
 	}
 	else if(type == ASSIGN){
 		helper.replaceAll(left, "_", "(.)*");
+		helper.replaceAll(right, "+", "\\+");
 		helper.replaceAll(right, "_", "(.)*");
 		concat = left + " = " + right;
 		helper.replaceAll(concat, " ","");
