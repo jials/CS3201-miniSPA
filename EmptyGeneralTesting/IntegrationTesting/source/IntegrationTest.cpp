@@ -31,23 +31,48 @@ Helpers helper;
 //		  "x = 10;"
 //		 "}";
 
-const char *test2 =
-	"procedure Example2 {"
-  "x = 2 + 1;"
-  "z = 3 + x;"
-  "lee = 20;"
-  "while x{"
-    "i = 5 + lee;"
-    "y = x + z + i;"
-    "z = i + lee;"
-    "lee = x;}"
-  "x = 10;"
-"}";
+//const char *test2 =
+//	"procedure Example2 {"
+//  "x = 2 + 1;"
+//  "z = 3 + x;"
+//  "lee = 20;"
+//  "while x{"
+//    "i = 5 + lee;"
+//    "y = x + z + i;"
+//    "z = i + lee;"
+//    "lee = x;}"
+//  "x = 10;"
+//"}";
+
+const char *test2 = 
+	"procedure ABC {"
+ " i=1;"							
+" b=200 ;"						
+"	c= a   ;"					
+"while a	"						
+"{"
+   "while beta {"						
+       " oSCar  = 1 + beta + tmp;"			
+      "  while tmp{				"	
+     "     oSCar = I + k + j1k + chArlie; }"		
+	"while x {					"
+        "x = x + 1;				"	
+        "while left {			"		
+         " while right {			"		
+        "    Romeo = Romeo + 1;	"			
+       "     b = 0;				"	
+      "      c = delta    + l  + width + Romeo ; }"	
+     "       while c {					"
+    "          c = c +1   	; } 		"	
+   "         x = x+ 1	; }}			"	
+  "        a=   2; }					"
+ "  w = w+1  ;						"
+ "}}";
 
 SimpleParser parser;
 parser.parse(test2);
 vector<string> results;
-string query = "assign a; Select a such that Parent*(a, 6) pattern a(\"x\", _)";
+string query = "stmt s1; stmt s2; Select s1 such that Parent*(s1, s2)";
 PQLPreProcessor proc;
 PQLEvaluator eva;
 QueryTreeRoot root;
@@ -62,8 +87,12 @@ root = proc.parse(a,"");
 eva.evaluateResult(&root);
 node = root.getResult();
 finalResults = node->getResult();
+
+
 for(int q = 0 ; q< finalResults.size(); q++){
+	if(finalResults[q] == "none") break;
 	results.push_back(finalResults[q]);
+		
 }
 
 runner.addTest(suite);

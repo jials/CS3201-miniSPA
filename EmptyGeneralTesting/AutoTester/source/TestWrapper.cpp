@@ -79,9 +79,10 @@ void TestWrapper::evaluate(std::string query, std::list<std::string>& results){
 		results.push_back(finalResults[q]);
 		
 	}
+
 	}
 	catch(const exception& error){
-		cout << "error";
+		cout << error.what() << endl;
 	}
 
 
