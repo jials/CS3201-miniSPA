@@ -49,7 +49,7 @@ vector<int> Parent::getAllParent() {
     map<int,int>::iterator it;
     vector<int> result;
     for (it = _table.begin(); it != _table.end(); it++) {
-		result.push_back(it -> first);
+		result.push_back(it -> second);
     }
     return result;
 }

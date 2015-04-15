@@ -42,17 +42,18 @@ vector<int> DesignExtractor::getChildrenStar(int stmt) {
     
     vector<int> nextGen = Parent::getChildren(stmt);
     vector<int> result;
-    
+    vector<int> subresult;
+
     if (nextGen.empty()) {
         return result;
     }
-    
+
     vector<int>::iterator it;
     
-    for (it=result.begin(); it!=result.end(); it++) {
+    for (it=nextGen.begin(); it!=nextGen.end(); it++) {
         result.push_back(*it);
-        nextGen = DesignExtractor::getChildrenStar(*it);
-        result.insert(result.end(), nextGen.begin(), nextGen.end());
+        subresult = DesignExtractor::getChildrenStar(*it);
+        result.insert(result.end(), subresult.begin(), subresult.end());
     }
     
     return result;
