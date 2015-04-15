@@ -47,6 +47,13 @@ void QueryPreProcessorTest::testParse() {
 	QueryTreeRoot res2 = processor.parse(strs2,"");
 	CPPUNIT_ASSERT(res2.isValidQuery);
 	CPPUNIT_ASSERT_EQUAL(0,assignment.compare(res2.getSymbol("a")));
+
+	vector<string> strs3;
+	strs3.push_back("assign a;");
+	strs3.push_back("Select a such that Uses(_, \"x\")");
+	QueryTreeRoot res3 = processor.parse(strs3,"");
+	CPPUNIT_ASSERT(res3.isValidQuery); cout<< "assert res3 isValidQuery" <<endl;
+
 }
 
 void QueryPreProcessorTest::testIsValidName(){
