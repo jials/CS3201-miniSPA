@@ -7,7 +7,7 @@
 #include <fstream>
 #include <string>
 #include "VarTable.h"
-
+#include "Helpers.h"
 
 using namespace std;
 
@@ -58,13 +58,14 @@ void TestWrapper::evaluate(std::string query, std::list<std::string>& results){
 // call your evaluator to evaluate the query here
   // ...code to evaluate query...
 	PQLPreProcessor proc;
+	Helpers helper;
 	PQLEvaluator eva;
 	QueryTreeRoot root;
 	PQLResultNode* node;
 	vector<string> a ;
 	vector<string> finalResults;
-	string first_token = query.substr(0, query.find("Select"));
-	string second_token = query.substr(query.find("Select"));
+	string first_token = query.substr(0, helper.toLower(query).find("select"));
+	string second_token = query.substr(helper.toLower(query).find("select"));
 	a.push_back(first_token);
 	a.push_back(second_token);
 	root = proc.parse(a,"");

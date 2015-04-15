@@ -6,6 +6,7 @@
 #include "PQLEvaluator.h"
 #include "QueryTreeRoot.h"
 #include "PQLResultNode.h"
+#include "Helpers.h"
 
 
 using namespace std;
@@ -18,6 +19,7 @@ CppUnit::TextUi::TestRunner runner;
 
 //parse the SIMPLE soource code into the parser
 //Parse();
+Helpers helper;
 
 const char *test2 =
 		"procedure Example{ "
@@ -32,15 +34,15 @@ const char *test2 =
 SimpleParser parser;
 parser.parse(test2);
 vector<string> results;
-string query = "assign a; Select a such that Uses(4, \"y\")";
+string query = "assign a; Select a such that Uses(a, _) pattern a(\"z\", _)";
 PQLPreProcessor proc;
 PQLEvaluator eva;
 QueryTreeRoot root;
 PQLResultNode* node;
 vector<string> a ;
 vector<string> finalResults;
-string first_token = query.substr(0, query.find("Select"));
-string second_token = query.substr(query.find("Select"));
+string first_token = query.substr(0, helper.toLower(query).find("select"));
+string second_token = query.substr(helper.toLower(query).find("select"));
 a.push_back(first_token);
 a.push_back(second_token);
 root = proc.parse(a,"");
