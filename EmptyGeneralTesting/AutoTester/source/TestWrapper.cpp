@@ -34,7 +34,7 @@ void TestWrapper::parse(std::string filename) {
 
 	Helpers helper;
 	string path = helper.GetExePath();
-	path += "\\source.txt";
+	path += "\\" + filename;
 
 	std::ifstream file(path);
     std::string str; 

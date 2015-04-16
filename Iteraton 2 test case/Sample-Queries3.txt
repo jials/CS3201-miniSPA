@@ -40,7 +40,7 @@ Select a such that Follows*(3, a) pattern a("x", _)
 5000
 9 - v, fs(v,v), pt
 assign a1; assign a2;
-Select a2 such that Follows*(a1, a2) pattern a2(_, _"le"_)
+Select a2 such that Follows*(a1, a2) pattern a2(_, _"lee"_)
 7
 5000
 10 - v, p(c,c), pt
