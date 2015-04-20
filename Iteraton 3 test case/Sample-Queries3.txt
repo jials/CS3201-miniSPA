@@ -9,7 +9,7 @@ Select a such that Follows(2, a) pattern a("i", _)
 none
 5000
 3 - v, f(v,v), pt
-assign a1; assign a2;
+assign a1, a2;
 Select a1 such that Follows(a1, a2) pattern a("x", _)
 none
 5000
@@ -39,7 +39,7 @@ Select a such that Follows*(5, a) pattern a("w", _)
 20
 5000
 9 - v, fs(v,v), pt
-assign a1; assign a2;
+assign a1, a2;
 Select a2 such that Follows*(a1, a2) pattern a2(_, _"Rome"_)
 none
 5000
