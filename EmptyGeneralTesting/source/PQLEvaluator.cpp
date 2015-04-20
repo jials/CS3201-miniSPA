@@ -225,7 +225,7 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 							for(unsigned int i=0; i < suchThatResult.size(); i++) {
 								vector<string> pair = suchThatResult[i];
 								for(unsigned int j=0; j < patternResult.size(); j++) {
-									if(patternResult[j][0]==pair[0] && patternResult[j][1]==pair[1]) {
+									if(patternResult[j][0]==pair[0] && patternResult[j][1]==pair[1] && !isIn(pair[0], result)) {
 										result.push_back(pair[0]);
 										break;
 									}
@@ -254,7 +254,6 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 					}
 				}
 				else if(select==suchThatB) {
-					cout << "select = such that B" << endl;
 					if(indV==-1) {
 						for(unsigned int i=0; i < suchThatResult.size(); i++) {
 							if(!isIn(suchThatResult[i][1],result) && isIn(suchThatResult[i][0], patternResult[0])) {
@@ -268,11 +267,10 @@ void PQLEvaluator::evaluateResult(QueryTreeRoot* rootPtr) {
 					}
 					else {   //indB!=-1, indV!=-1
 						if(suchThatB==patternVar) {
-							cout << "select = such that b = pattern var" << endl;
 							for(unsigned int i=0; i < suchThatResult.size(); i++) {
 								vector<string> pair = suchThatResult[i];
 								for(unsigned int j=0; j < patternResult.size(); j++) {
-									if(patternResult[j][0]==pair[0] && patternResult[j][1]==pair[1]) {
+									if(patternResult[j][0]==pair[0] && patternResult[j][1]==pair[1] && !isIn(pair[1], result)) {
 										result.push_back(pair[1]);
 										break;
 									}
