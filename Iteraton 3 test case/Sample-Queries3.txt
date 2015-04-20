@@ -116,7 +116,7 @@ x, Romeo, c, w
 24
 assign a; variable v; 
 select v such that Modifies(a,v) pattern a(v,_)
-i, b, c, oScar, x, Romeo, b, c, w
+i, b, c, oScar, x, Romeo, w, a
 5000
 
 
