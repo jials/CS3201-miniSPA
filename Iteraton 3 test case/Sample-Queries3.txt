@@ -118,7 +118,16 @@ assign a; variable v;
 select v such that Modifies(a,v) pattern a(v,_)
 i, b, c, oScar, x, Romeo, w, a
 5000
-
+25
+while w; 
+select w such that Follows(_,_)
+4, 5, 7, 9, 11, 12, 16
+5000
+26
+while w; 
+select w such that Follows*(_,_)
+4, 5, 7, 9, 11, 12, 16
+5000
 
 
 
