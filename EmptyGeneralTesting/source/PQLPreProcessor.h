@@ -10,7 +10,7 @@ using namespace std;
 class PQLPreProcessor{
 friend class QueryPreProcessorTest;
 private:
-	vector<string> process(string str);
+	vector<vector<string>> process(string str);
 	string currentKeyword;
 	void processPattern(QueryTreeRoot* root,string str);
 	void processSuchThat(QueryTreeRoot* root,string str);

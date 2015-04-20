@@ -7,6 +7,7 @@
 using namespace std;
 
 const static string relations[] = {"follows","follows*","parent","parent*","modifies","uses"};
+const static string keyword[] = {"assign","stmt","while","variable","constant","prog_line"};
 
 PQLPreProcessor::PQLPreProcessor(){
 	PQLPreProcessor::currentKeyword = "";
@@ -115,7 +116,7 @@ void PQLPreProcessor::processPattern(QueryTreeRoot* root,string str){
 }
 
 QueryTreeRoot PQLPreProcessor::parse(vector<string> strs, string name){
-	string keyword[] = {"assign","stmt","while","variable","constant","prog_line"};
+	
 	QueryTreeRoot result(name);
 	if (strs.size()!=2){
 		result.setName("Error");
@@ -127,19 +128,22 @@ QueryTreeRoot PQLPreProcessor::parse(vector<string> strs, string name){
 	
 	int pos = current.find(";");
 	while (pos!=string::npos){
+
 		string token = current.substr(0,pos);
-		vector<string> toBeAdded = process(token);
-		if (toBeAdded.size()!=0){
-			result.insertSymbol(toBeAdded);
+		vector<vector<string>> toBeAdded = process(token);
+		for (unsigned int i=0; i<toBeAdded.size();i++){
+				result.insertSymbol(toBeAdded[i]);
 		}
 		current = trim(current.substr(pos+1));
 		pos = current.find(";");
 	}
 
 	if (current.compare("")!=0){
-		vector<string> toBeAdded = process(current);
+		vector<vector<string>> toBeAdded = process(current);
 		if (toBeAdded.size()!=0){
-			result.insertSymbol(toBeAdded);
+			for (unsigned int i=0; i<toBeAdded.size();i++){
+				result.insertSymbol(toBeAdded[i]);
+			}
 		}
 	}
 
@@ -182,18 +186,27 @@ QueryTreeRoot PQLPreProcessor::parse(vector<string> strs, string name){
 	return result;
 }
 
-vector<string> PQLPreProcessor::process(string str){;
-	vector<string> result;
-	if (str.size()==0) return result;
+vector<vector<string>> PQLPreProcessor::process(string str){;
+	vector<vector<string>> result;
+	if (str.size()==0||str.find(" ")==string::npos) return result;
 
-	if (str.find(' ')==string::npos){
-		result.push_back(trim(currentKeyword));
-		result.push_back(trim(str));
+	int index = findKeyword(str.substr(0,str.find(" ")));
+	if (index == -1) return result;
+	str = trim(str.substr(str.find(" ")));
+
+	while (str.find(",")!=string::npos){
+		vector<string> pair;
+		pair.push_back(keyword[index]);
+		pair.push_back(trim(str.substr(0,str.find(","))));
+		result.push_back(pair);
+		str = trim(str.substr(str.find(",")+1));
 	}
-	else{
-		result.push_back(trim(str.substr(0,str.find(' '))));
-		result.push_back(trim(str.substr(str.find(' ')+1)));
-	}
+
+	vector<string> pair;
+	pair.push_back(keyword[index]);
+	pair.push_back(trim(str));
+
+	result.push_back(pair);
 	return result;
 }
 
@@ -212,7 +225,6 @@ string PQLPreProcessor::trim(string str){
 }
 
 int PQLPreProcessor::findKeyword(string str){
-	string keyword[] = {"assign","stmt","while","variable","constant","prog_line"};
 	for (int i=0;i < sizeof(keyword);i++){
 		if (keyword[i].compare(str)==0)
 			return i;

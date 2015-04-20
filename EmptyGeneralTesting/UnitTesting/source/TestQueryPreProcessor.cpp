@@ -55,10 +55,12 @@ void QueryPreProcessorTest::testParse() {
 	CPPUNIT_ASSERT(res3.isValidQuery); cout<< "assert res3 isValidQuery" <<endl;
 
 	vector<string> strs4;
-	strs4.push_back("assign a;");
+	strs4.push_back("assign a, a1;");
 	strs4.push_back("Select a pattern a(_,_\"x + z\"_);");
 	QueryTreeRoot res4 = processor.parse(strs4,"");
+	CPPUNIT_ASSERT(res4.getSymbol("a")=="assign");
 	CPPUNIT_ASSERT(res4.isValidQuery); cout<< "assert res4 isValidQuery" <<endl;
+	CPPUNIT_ASSERT(res4.getSymbol("a1")=="assign");
 }
 
 void QueryPreProcessorTest::testIsValidName(){
